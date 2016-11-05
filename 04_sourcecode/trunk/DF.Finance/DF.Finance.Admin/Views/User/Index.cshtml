@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Users";
+}
+@section css{
+<link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5>会员列表</h5>
+        
+    </div>
+    <div class="panel-body">
+        <div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+        </div>
+        <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("Search", "User")" data-query="#btn_query" data-table="#tb_Users">
+            <div>
+                <div class="row">
+                    <label class="col-md-1 text-right" for="txt_UserName">姓名：</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="UserName" />
+                    </div>
+                    <label class="col-md-1 text-right" for="txt_Mobile">手机：</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="Mobile" />
+                    </div>
+                    <label class="col-md-1 text-right" for="txt_IDCard">身份证：</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="IDCard" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 10px;">
+                    <label class="col-md-1 text-right" for="txt_GroupId">用户类型：</label>
+                    <div class="col-md-3">
+                        <select class="form-control" name="GroupId" id="GroupId">
+                            <option value="0">--请选择--</option>
+                            @foreach (DF.Finance.Model.UserGroup item in ViewBag.Groups)
+                        {
+                        <option value="@item.Id">@item.Title</option>
+                        }
+                        </select>
+                    </div>
+                    <label class="col-md-1 text-right">审批日期：</label>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input name="S_Time" id="S_Time" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-md-6">
+                                <input name="E_Time" id="E_Time" class="laydate-icon form-control layer-date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-5">
+                            <button class="btn btn-primary" id="btn_query" type="button">查询</button>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                <div class="row row-lg" style="margin-top: 10px;">
+                    <div class="col-md-12">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <table id="tb_Users" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th data-checkbox="true"></th>
+                                            <th data-field="UserName" data-halign="center" data-align="center">姓名</th>
+                                            <th data-field="Mobile" data-halign="center" data-align="center">手机</th>
+                                            <th data-field="IDCard" data-halign="center" data-align="center">身份证</th>
+                                            <th data-field="Point" data-halign="center" data-align="center">积分</th>
+                                            <th data-field="RegTime" data-halign="center" data-align="center">注册日期</th>
+                                            <th data-field="UserGroup.Title" data-halign="center" data-align="center">用户类型</th>
+                                            <th data-field="action" data-formatter="fat_oper" data-halign="center" data-align="center">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section js{
+<script src="~/_R/js/content.js?v=1.0.0"></script>
+
+<!-- Bootstrap table -->
+<script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- Peity -->
+<script src="~/_R/js/demo/bootstrap-table-demo.js"></script>
+
+<!-- layerDate plugin javascript -->
+<script src="~/_R/js/plugins/layer/laydate/laydate.js"></script>
+}
+
+@section scripts{
+<script>
+    var tableInit = DFCommon.TableInit("#formSearch");
+    $(function () {
+        //1.初始化Table
+        tableInit.Init();
+
+        //2.初始化Button的点击事件
+        var oButtonInit = new ButtonInit(tableInit);
+        oButtonInit.Init();
+
+        //3.外部js调用
+        laydate({
+            elem: '#S_Time', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+        laydate({
+            elem: '#E_Time', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+    });
+
+    //4.绑定操作字符串
+    function fat_oper(value, row, index) {
+        return '<a href="/User/Edit?Id=' + row.Id + '" data-role="Edit">修改</a>';
+    }
+
+    //5.下拉事件
+    $('#GroupId').unbind('change').on('change', tableInit.refresh());
+
+    //6.按钮事件绑定
+    var ButtonInit = function (oTableObj) {
+        var oInit = new Object();
+        oInit.Init = function () {
+            //新增数据click事件注册
+            $("#btn_add").click(function () {
+                location.href = "@Url.Action("Edit", "User")" + "?Id=0";
+            });
+
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "User")");
+            });
+                
+        };
+        return oInit;
+    };
+
+</script>
+}

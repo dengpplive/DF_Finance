@@ -1,0 +1,452 @@
+﻿<div class="content page-sales-edit">
+    <form id="order">
+        <div class="list-block m-t-0">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">
+                            <img src="/_R/images/icon/clients_on.png"
+                                 style="height: 1.2rem;position: relative;top: 0.2rem"> 客户信息
+                        </div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label font-sm-media374">放款金融公司</div>
+                            <div class="item-input bg-icon-drowdown">
+
+                                <select class="text-center" name="LCName">
+                                    <option v-for="option in lendingCompanyList" v-bind:value="option.Name">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-input row no-gutter">
+                                <div class="col-33 border-right bg-icon-drowdown">
+
+                                    <select class="p-l-0" v-model="selectedArea" name="area" id="area" data-json="false">
+                                        <option v-for="option in areaList | filterBy ParentId=0 " v-bind:value="option.Id">{{option.Name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-33 border-right bg-icon-drowdown">
+
+                                    <select class=" " id="province" name="province" data-json="false"></select>
+                                </div>
+                                <div class="col-33 bg-icon-drowdown">
+
+                                    <select class=" " id="city" name="city" data-json="false"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">汽车类型</div>
+                            <div class="item-input bg-icon-drowdown ">
+
+                                <select name="OldCar">
+                                    <option>新车</option>
+                                    <option>二手车</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">收单日期</div>
+                            <div class="item-input bg-icon-drowdown">
+                                <input type="date" value="2016-06-30" name="AcquirerTime">
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">申请人姓名</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="申请人姓名" name="ApplicantName" data-empty-alt="申请人姓名不能为空">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">申请人手机</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="请输入申请人手机" name="ApplicantPhone" data-empty-alt="申请人手机不能为空" data-regex="mobile">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">身份证号码</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="申请人身份证" name="ApplicantIDCard" data-empty-alt="身份证号码不能为空">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">共申人姓名</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="请输入共申人姓名" name="CoApplicantName" data-empty-alt="共申人姓名不能为空">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">共申人手机</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="请输入共申人手机" name="CoApplicantPhone" data-empty-alt="共申人手机不能为空" data-regex="mobile">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">担保人姓名</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="请输入担保人姓名" name="GuarantorName" data-empty-alt="担保人姓名不能为空">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">担保人手机</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="请输入担保人手机" name="GuarantorPhone" data-empty-alt="担保人手机不能为空" data-regex="mobile">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">贷款产品</div>
+                            <div class="item-input bg-icon-drowdown">
+
+                                <select class="text-center" name="LoanProducts">
+                                    <option v-for="option in loanProductsList" v-bind:value="option.Name">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label font-sm-media374">贷款利息类型</div>
+                            <div class="item-input bg-icon-drowdown">
+
+                                <select class="text-center" name="LoanInterest">
+                                    <option v-for="option in rateTypeList" v-bind:value="option.Name">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <ul class="m-t-1">
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">
+                            <img src="/_R/images/icon/book_car_on.png"
+                                 style="height: 1.2rem;position: relative;top: 0.2rem"> 车行信息
+                        </div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">实际交易方</div>
+                            <div class="item-input bg-icon-drowdown">
+                              
+                                <select class="text-center" name="DealersId" id="DealersId">
+                                    <option v-for="option in cMList" v-bind:value="option.Id">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">放款环节</div>
+                            <div class="item-input bg-icon-drowdown">
+                             
+                                <select class="text-center" name="LoanLink">
+                                    <option v-for="option in lendingSegmentList" v-bind:value="option.Name">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">销售顾问</div>
+                            <div class="item-input bg-icon-drowdown">
+
+                                <select class="text-center" name="Sales" id="Sales" data-json="false"></select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!--<li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label font-sm-media374">销售顾问姓名</div>
+                            <div class="item-input">
+                                <input type="text" placeholder="车行销售顾问姓名">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label font-sm-media374">销售顾问手机</div>
+                            <div class="item-input">
+                                <input type="number" placeholder="车行销售顾问手机">
+                            </div>
+                        </div>
+                    </div>
+                </li>-->
+            </ul>
+            <ul class="m-t-1">
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">
+                            <img src="/_R/images/icon/book_car_on.png"
+                                 style="height: 1.2rem;position: relative;top: 0.2rem"> 车辆信息
+                        </div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">汽车品牌</div>
+                            <div class="item-input bg-icon-drowdown">
+
+
+                                <select class="p-l-0" v-model="selectedCarBrand" name="CarBrand" id="CarBrand">
+                                    <option v-for="option in carList | filterBy ParentId=0 " v-bind:value="option.Id">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">汽车车型</div>
+                            <div class="item-input bg-icon-drowdown">
+
+
+                                <select name="Models" id="Models">
+                                    <option v-for="option in carList " v-if="option.ParentId==selectedCarBrand" v-bind:value="option.Name">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label font-sm-media374">车身价</div>
+                            <div class="item-input">
+                                <!--todo: 确定单位-->
+                                <input type="number" placeholder="单位（元）" name="CarWorth" data-empty-alt="车身价不能为空" data-regex="/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/ig" data-regex-alt="车身价输入有误！">
+                            </div>
+                        </div>
+
+
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label font-sm-media374">贷款金额</div>
+                            <div class="item-input">
+                                <!--todo: 确定单位-->
+                                <input type="number" placeholder="单位（元）" name="LoanAmount" data-empty-alt="贷款金额不能为空" data-regex="/^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/ig" data-regex-alt="贷款金额输入有误！">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">贷款期限</div>
+                            <div class="item-input bg-icon-drowdown">
+
+                                <select class="text-center" name="LoanTerm">
+                                    <option v-for="option in loanTermList" v-bind:value="option.Name">{{option.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <a href="javascript:void(0)" @click="submit" class="button button-fill button-big bg-purple" id="btnSubmit">提交资料</a>
+        </div>
+    </form>
+</div>
+<script>
+    $(function () {
+        var pageId = "#" + template.PageId;
+
+        DFCommon.ajax({
+
+            type: 'get',
+            url: "/api/Order/InitData",
+            success: function (data) {
+                var vue = new Vue({
+                    el: pageId,
+                    data: {
+                        selectedArea: data.InitProvinceList[0].Id,
+                        selectedProvince: "",
+                        selectedCity: "",
+                        selectedCarBrand: data.CarList[0].Id,
+                        areaList: data.InitProvinceList,
+                        lendingCompanyList: data.LendingCompanyList,
+                        loanProductsList: data.LoanProductsList,
+                        rateTypeList: data.RateTypeList,
+                        lendingSegmentList: data.LendingSegmentList,
+                        loanTermList: data.LoanTermList,
+                        cMList: data.CMList,
+                        carList: data.CarList,
+                        userModel: DFCommon.Vue.$data.userModel
+                    },
+                    methods: {
+                        submit: function () {
+                            if ($(pageId).valide()) {
+                                var postData = $(pageId).find("#order").serializeObject();
+                                postData.DepartmentName = String.format("{0},{1},{2}", GetSelectText("area", vue.selectedArea), GetSelectText("province", vue.selectedProvince), GetSelectText("city", vue.selectedCity))
+                                var sales = $(pageId).find("#Sales").val();
+                                postData.DealersName = GetSelectText("DealersId", postData.DealersId);
+                                postData.CarBrand = GetSelectText("CarBrand", postData.CarBrand);
+                                if (!!sales) {
+                                    var salesArr = sales.split(",");
+                                    postData.UserSalesId = salesArr[0];
+                                    postData.SalesName = salesArr[1];
+                                    postData.SalesPhone = salesArr[2];
+                                }
+                                DFCommon.ajax({
+                                    type: 'post',
+                                    url: "/api/Order/EntryInformation",
+                                    isShowLoading: true,
+                                    data: postData,
+                                    success: function (data) {
+                                        $.toast("录入资料成功");
+                                        $(pageId).find("#order")[0].reset();
+                                    }
+                                });
+                            }
+
+                        }
+                    }, filters: {
+
+                    }
+
+
+                });
+
+                $(pageId).find("#area").bind("change", function () {
+                    vue.selectedProvince = SetSelectPacket(data.InitProvinceList, $(pageId).find("#area").val(), $(pageId).find("#province"));
+                    $(pageId).find('#province').trigger("change");
+                });
+                $(pageId).find("#province").bind("change", function () {
+                    vue.selectedCity = SetSelectPacket(data.InitProvinceList, $(pageId).find("#province").val(), $(pageId).find("#city"));
+                });
+                $(pageId).find('#area').trigger("change");
+                $(pageId).find('#province').trigger("change");
+                //实际交易方联动
+                $(pageId).find("#DealersId").bind("change", function () {
+                    SetUserSalesByDealersId($(this).val());
+                });
+                $(pageId).find('#DealersId').trigger("change");
+            }
+
+        });
+        //获取下拉文本
+        function GetSelectText(name, value) {
+            return $(pageId).find(String.format("select[name={0}] option[value='{1}']", name, value)).text();
+        }
+        //设置分组联动
+        function SetSelectPacket(initProvinceList, parentId, $obj) {
+            var html = "";
+            var retSelected = null;
+            $.each(initProvinceList, function (i, obj) {
+                if (obj.ParentId == parentId) {
+                    if (retSelected == null) {
+                        retSelected = obj.Id;
+                    }
+                    html += String.format('<option value="{0}">{1}</option>', obj.Id, obj.Name);
+                }
+            });
+            $obj.html(html);
+            return retSelected;
+        }
+        //设置销售代表信息
+        function SetUserSalesByDealersId(dealersId) {
+            DFCommon.ajax({
+                type: 'get',
+                url: "/api/FinancialBusiness/GetUserSalesByDealersId",
+                data: { DealersId: dealersId },
+                success: function (data) {
+                    var html = "";
+                    $.each(data, function (i, p) {
+                        html += String.format('<option value="{0},{1},{2}">{1}|{2}</option>', p.Id, p.UserName, p.Mobile);
+                    });
+                    $(pageId).find("#Sales").html(html);
+                }
+            });
+        }
+    });
+
+</script>

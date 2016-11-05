@@ -1,0 +1,282 @@
+﻿<div class="content page-sales-sigin">
+    <div class="list-block m-t-0">
+        <ul>
+            <li>
+                <div class="item-content">
+
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/phone.jpg" class="img-size-1"
+                                 alt="phone icon">
+                        </div>
+                        <div class="item-input ">
+                            <input type="number" v-model="mobile" placeholder="请输入您的手机号码" class="width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/volidCode.jpg" class="img-size-1"
+                                 alt="phone icon">
+                        </div>
+                        <div class="item-input row no-gutter">
+                            <input type="number" v-model="verCode" placeholder="请输入验证码" class=" col-50">
+                            <a href="javascript:void(0)" id="getsms" v-if="status==0" v-tap="getSmsVerCode" class="button button-fill button-big bg-purple col-50">获取验证码</a>
+                            <a href="javascript:void(0)" v-if="status==1" class="button button-fill button-big bg-purple col-50" v-text="validtime+'S'"></a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="item-content">
+
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg" class="img-size-1"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="password" v-model="pwd" placeholder="请设置您的登录密码" class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg" class="img-size-1"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="password" v-model="confirmPwd" placeholder="请再次输入您的登录密码" class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-inner">
+                        <div class="item-input row no-gutter">
+                            <div class="col-25 border-right bg-icon-drowdown">
+                             
+                                <select v-model="selectA">
+                                    <option v-for="option in optionsA" v-bind:value="option.value">
+                                        {{ option.text }}
+                                    </option>
+                                </select>
+
+                            </div>
+                            <div class="col-25 border-right bg-icon-drowdown">
+                              
+                                <select class="" v-model="selectB">
+                                    <option v-for="option in optionsB" v-bind:value="option.value">
+                                        {{ option.text }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-25 border-right bg-icon-drowdown">
+                              
+
+                                <select class=" " v-model="selectC">
+                                    <option v-for="option in optionsC" v-bind:value="option.value">
+                                        {{ option.text }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-25 bg-icon-drowdown">
+                               
+                                <select class=" " v-model="selectD">
+                                    <option v-for="option in optionsD" v-bind:value="option.value">
+                                        {{ option.text }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content-block">
+        <a href="javascript:void(0)" v-tap="submit" id="register" class="button button-fill button-big bg-purple">提交</a>
+    </div>
+</div>
+<script>
+    //begin-------------------
+    $(function () {
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                groupId: 1,
+                mobile: "",
+                verCode: "",
+                pwd: "",
+                confirmPwd: "",
+                area: "",
+                status: 0,//0启用 1禁用
+                validtime: 300,//默认5分钟 300秒
+                selectA: "",
+                selectB: "",
+                selectC: "",
+                selectD: "",
+                optionsA: [],
+                optionsB: [],
+                optionsC: [],
+                optionsD: []
+            },
+            methods: {
+                init: function () {
+                    this.getSmsValidTime();
+                },
+                //获取手机短信验证码
+                getSmsVerCode: function () {
+                    var This = this;
+                    if ($.trim(This.mobile) == "") { popMsg("请填写注册的手机号"); return; }
+                    var reg = /^1(3|4|5|7|8)\d{9}$/ig;
+                    if (!reg.test($.trim(This.mobile))) { popMsg("请填写正确的手机号"); return; }
+
+                    DFCommon.ajax({
+                        type: 'post',
+                        url: "/api/BaseWebApi/SendSmsCode",
+                        isShowLoading: true,
+                        data: { mobile: vue.mobile, sourceType: 1 },
+                        success: function (data) {
+                            if (data)
+                                This.openTime();
+                        }
+                    });
+                },
+                openTime: function () {
+                    var This = this;
+                    This.status = 1;
+                    var time = setInterval(function () {
+                        This.validtime -= 1;                      
+                        if (This.validtime <= 0) {
+                            clearInterval(time);
+                            This.status = 0;
+                        }
+                    }, 1000);
+                },
+                getSmsValidTime: function () {
+                    var This = this;
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/BaseWebApi/GetSmsValidTime",
+                        success: function (data) {
+                            if (data > 0) This.validtime = parseInt(data, 10) * 60;
+                        }
+                    });
+                },
+                getNodeList: function (id, callback) {
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/BaseWebApi/GetNodeList",
+                        data: { id: id },
+                        success: function (data) {
+                            if (callback != null) callback(data);
+                        }
+                    });
+                },
+                isValid: function () {
+                    var isvaid = false;
+                    var model = vue.$data;
+                    var reg = /^1(3|4|5|7|8)\d{9}$/ig;
+                    if ($.trim(model.mobile) == "") { popMsg("注册手机号不能为空"); return isvaid; }
+                    if (!reg.test($.trim(model.mobile))) { popMsg("请填写正确的手机号"); return isvaid; }
+                    if ($.trim(model.verCode) == "") { popMsg("手机号验证码不能为空"); return isvaid; }
+                    if ($.trim(model.pwd) == "") { popMsg("登录密码不能为空"); return isvaid; }
+                    if ($.trim(model.confirmPwd) == "") { popMsg("确认登录密码不能为空"); return isvaid; }
+                    if (model.pwd != model.confirmPwd) { popMsg("登录密码和确认登录密码不一致"); return isvaid; }
+                    if (model.selectA == "") { popMsg("请选择区域"); return isvaid; }
+                    return true;
+                },
+                getText: function (arr, val) {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i].value == val) return arr[i].text;
+                    }
+                    return '';
+                },
+                submit: function () {
+                    if (vue.isValid()) {
+                        //区域
+                        vue.$data.area = vue.getText(vue.optionsA, vue.selectA) + "," + vue.getText(vue.optionsB, vue.selectB) + "," + vue.getText(vue.optionsC, vue.selectC) + "," + vue.getText(vue.optionsD, vue.selectD);
+                        DFCommon.ajax({
+                            type: 'post',
+                            url: "/api/FinancialBusiness/UserRegister",
+                            isShowLoading: true,
+                            data: vue.$data,
+                            success: function (data) {
+                                $.router.load("#AgentLogin", true);
+                            }
+                        });
+                    }
+                }
+            },
+            created: function () {
+                var This = this;
+                this.init();
+                DFCommon.ajax({
+                    type: 'get',
+                    url: "/api/BaseWebApi/GetArea",
+                    isShowLoading: true,
+                    success: function (data) {
+                        var items = data;
+                        for (var i = 0; i < items.length; i++) {
+                            if (i == 0) This.selectA = items[i].Id;
+                            This.optionsA.push({ text: items[i].Name, value: items[i].Id });
+                        }
+                    }
+                });
+            }
+        });
+        vue.$watch('selectA', function (val, oldVal) {
+            if (val > 0) {
+                vue.getNodeList(val, function (data) {
+                    vue.optionsB = [];
+                    var items = data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) vue.selectB = items[i].Id;
+                        vue.optionsB.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                });
+            }
+        })
+        vue.$watch('selectB', function (val, oldVal) {
+            if (val > 0) {
+                vue.getNodeList(val, function (data) {
+                    vue.optionsC = [];
+                    var items = data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) vue.selectC = items[i].Id;
+                        vue.optionsC.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                });
+            }
+        })
+        vue.$watch('selectC', function (val, oldVal) {
+            if (val > 0) {
+                vue.getNodeList(val, function (data) {
+                    vue.optionsD = [];
+                    var items = data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) vue.selectD = items[i].Id;
+                        vue.optionsD.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                });
+            }
+        })
+        //end-------------------
+    });
+</script>
+
+
+
+
+

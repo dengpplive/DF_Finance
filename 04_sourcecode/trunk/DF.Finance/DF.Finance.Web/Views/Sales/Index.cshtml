@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "金融业代首页";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="swiper-container ad-top swiper-container-horizontal">
+    <div class="swiper-wrapper" data-bind="foreach:common().ads" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
+        <div class="swiper-slide text-center swiper-slide-active" style="width: 580px;">
+            <a data-bind="attr:{href:TargetUrl}" href="http://zt.xuecheyi.com/ggl/wenkao/index.html?type=1">
+                <img class="img-responsive center-block" data-bind="attr:{src:ImgUrl}" src="http://img.xuecheyi.com/Adv/Images/201603/01/app_wenkaopeifu.jpg">
+            </a>
+        </div>
+
+        <div class="swiper-slide text-center swiper-slide-next" style="width: 580px;">
+            <a data-bind="attr:{href:TargetUrl}" href="http://www.chezhan123.com/index_sga.html?channel=xcw&amp;action=125">
+                <img class="img-responsive center-block" data-bind="attr:{src:ImgUrl}" src="http://img.xuecheyi.com/Adv/Images/201603/01/sga_autoshow.jpg">
+            </a>
+        </div>
+    </div>
+    <div class="swiper-pagination swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span></div>
+</div>
+
+

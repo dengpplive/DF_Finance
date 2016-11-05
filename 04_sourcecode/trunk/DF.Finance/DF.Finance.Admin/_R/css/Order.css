@@ -1,0 +1,89 @@
+﻿/*订单状态样式*/
+    .order-flow {
+        margin: 0 auto;
+        padding: 0;
+        font-size: 12px;
+        font-weight: normal;
+        padding-bottom: 4px;
+    }
+
+    .order-flow-left, .order-flow-arrive, .order-flow-wait, .order-flow-right-arrive, .order-flow-right-wait {
+        margin: 0;
+        padding: 0;
+        background: url(../../_R//img/order_speed.gif) no-repeat scroll 0 0;
+        float: left;
+        font-family: Arial;
+        line-height: 16px;
+        text-align: center;
+        width: 120px;
+    }
+
+    .order-flow div span {
+        margin: 0;
+        padding: 0;
+        background: none repeat scroll 0 0 #fff;
+        display: block;
+    }
+
+    .order-flow div span p {
+            margin: 0;
+            padding: 0;
+     }
+
+    .order-flow .name {
+        margin: 0;
+        padding: 0 0 4px 0;
+    }
+
+    .order-flow-arrive {
+        background-position: 0 -40px;
+    }
+
+    .order-flow-wait {
+        background-position: 0 -20px;
+        color: #878787;
+    }
+
+    .order-flow-right-arrive {
+        background-position: 0 -80px;
+    }
+
+    .order-flow-right-wait {
+        background-position: 0 -60px;
+        color: #878787;
+    }
+
+    .order-flow-input {
+        display: block;
+        margin: 2px auto;
+        padding: 0;
+        width: 18px;
+        height: 18px;
+        text-indent: -999px;
+        cursor: inherit;
+        overflow: hidden;
+    }
+ .gray-bg {
+     background-color: #fff;
+ }
+ .bthclass {
+     float:right;
+     margin-top:140px
+}
+ .sweet-alert {
+      height:220px;
+      width:200px;
+      left:18%;
+}
+ .sweet-alert .sa-icon {
+      margin:0px 35px 10px 35px;
+      height:49px;
+}
+ .sweet-alert h2 {
+      margin:0px;
+ }
+ .sweet-alert .sa-icon.sa-error .sa-line {
+      top: 22px;
+      width: 48px;
+ }
+  

@@ -1,0 +1,2 @@
+sc delete DF_Task_Service
+pause

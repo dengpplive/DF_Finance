@@ -1,0 +1,189 @@
+﻿<style>
+    .title-banner span {
+        background-color: #ffb700;
+        color: #000;
+        display: inline-block;
+        height: 1.5rem;
+        line-height: 1.5rem;
+    }
+
+    #btn_playVideo {
+        display: block;
+        position: relative;
+        bottom: 60vw;
+        left: 20%;
+        width: 50%;
+        float: left;
+        height: 30%;
+        height: 40vw;
+        width: 50vw;
+        opacity: 0;
+    }
+
+    .bg-color-yellow {
+        background-color: #FFB700;
+    }
+
+    .bg-color-ligthOrange {
+        background-color: #FEF2E5;
+    }
+
+    .color-orange {
+        color: #8e5315;
+    }
+</style>
+
+<div class="content bg-color-ligthOrange">
+    <!--头部视频播放--begin-->
+    <img src="/_r/images/bg/bg_home.jpg" class="img-response">
+    <video class="hidden" id="video"  v-bind:src="pageData.activity.ActVideoSrc"></video>
+    <button id="btn_playVideo" onclick="document.getElementById('video').play()"></button>
+    <!--头部视频播放--end-->
+    <!--中奖名单公布--begin-->
+    <div class="content-padded absolute ">
+        <div class="" style="margin-left: 0;margin-right: -1px">
+            <img class="img-response" src="/_r/images/home/banner1.jpg">
+        </div>
+        <div class="color-white"
+             style="background-color:#f14400;height: 500px;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px ">
+            <div class="row" v-if="pageData.winners.length==0">
+                <div class="col-33" style="padding: 0.5rem">
+                    <img src="/_r/images/home/cry.png" class="img-response">
+                </div>
+                <div class="col-66">
+                    <p class="m-t-1">很遗憾！本次活动您没中奖！<br>感谢您对奇瑞金融的支持！</p>
+                </div>
+            </div>
+            <div class="content-padded ">
+                <div class="row">
+                    <div class="col-75 " style="background-color: white;padding: 0.5rem;border-radius: 4px">
+                        <input type="text"
+                               style="border: none;width: 100%;height: 1.5rem;line-height: 1.5rem; color: black"
+                               placeholder="输入手机号查询中奖结果" v-model="mobile">
+                    </div>
+                    <div class="col-5">
+                        <span style="visibility: hidden">1</span>
+                    </div>
+                    <div class="col-20 bg-color-yellow" id="btnquery"
+                         style="height: 2.5rem;line-height: 2.5rem;text-align: center;border-radius: 4px" v-tap="submit">
+                        搜索
+                    </div>
+                </div>
+                <div style="min-height: 30vh;border-radius: 4px" class="bg-color-ligthOrange mt-0-5">
+                    <div class="color-orange text-center p-y-0-5 row"
+                         style="background-color: #E4D9CD;border-top-left-radius: 4px;border-top-right-radius: 4px;margin-left: 0">
+                        <label class="col-20 ">
+                            序号
+                        </label>
+                        <label class="col-20">
+                            奖项
+                        </label>
+                        <label class="col-20">
+                            姓名
+                        </label>
+                        <label class="col-40">
+                            手机号码
+                        </label>
+                    </div>
+                    <div class="text-center m-t-1" v-if="pageData.winners.length>0">
+                        <template v-for="item in pageData.awardgrades">
+                            <div class="bg-color-yellow color-orange"
+                                 style="border-radius: 30px;display: inline-block;padding: 0.4rem 1rem;text-indent: 0.5rem">
+                                {{item.typeName}}（{{item.WinningCount}}名）
+                            </div>
+                            <template v-for="item1 in $parent.pageData.winners">
+                                <div class="row m-t-1 color-orange text-center" style="margin-left:0" v-if="item1.type==item.type">
+                                    <div class="col-20 ">
+                                        {{$index+1}}
+                                    </div>
+                                    <div class="col-20">
+                                        {{item1.typeName}}
+                                    </div>
+                                    <div class="col-20">
+                                        {{item1.name}}
+                                    </div>
+                                    <div class="col-40">
+                                        {{item1.tel}}
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--中奖名单公布--end-->
+        <!--活动说明--end-->
+        <div class="m-t-1" style="margin-left: 0;margin-right: -1px">
+            <img class="img-response" src="/_r/images/home/banner2.jpg">
+        </div>
+        <div style="background-color:#f14400; padding-bottom: 0.2rem; border-bottom-left-radius: 4px;border-bottom-right-radius: 4px">
+            <div style="height: 1rem"></div>
+            <div style="border-radius: 4px;padding:0.5rem;" class="bg-color-ligthOrange mt-0-5 content-padded" v-html="pageData.activity.Description">
+                <!--<p>
+            奇瑞金融五月钜惠大抽奖：凡在4月28日-5
+            月31日期间，申请奇瑞金融贷款业务，并且
+            通过审批流程的车主，均有机会参加钜惠大
+            抽奖活动。
+        </p>
+        <p>
+            特等奖：最新款苹果手机 IPHONE SE （8部）<br>
+            一等奖：冰箱（10台）<br>
+            二等奖：微波炉（20台）<br>
+            三等奖：土豪金车载手机支架（200份）
+        </p>
+        <p>
+            活动最终解释权归奇瑞金融所有 学车易提供技术支持
+        </p>-->
+            </div>
+        </div>
+        <!--活动说明--end-->
+        <div class="m-t-1 text-center" style="background-color:#f14400; height: 3rem; line-height: 3rem;border-radius: 4px">
+            <a class="color-white" href="#">点击查看&lt;活动详细页面&gt;</a>
+        </div>
+    </div>
+</div>
+<script>
+    //begin-------------------
+    $(function () {      
+        var vue = new Vue({
+            el: "#" + template.PageId,     
+            data:{
+                mobile:"",
+                pageData:null
+            },
+            methods: {
+                init: function () {
+                    $("#btnquery").on("tap", this.submit);                                     
+                    this.getPriceData();
+                },                
+                getPriceData: function () {
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/UserClient/GetPrizeResult",
+                        data:{mobile:this.mobile},
+                        success: function (data) {
+                            //console.log("data");
+                            //console.log(data);
+                            vue.$data.pageData = data;
+                            //vue.$data.mobile="";
+                        }
+                    });
+                },               
+                submit: function () {
+                    if ($.trim(this.mobile) == "") {
+                        if (!this.autoLogin) $.alert("请输入手机号码");
+                        return;
+                    }
+                    var reg = /^1(3|4|5|7|8)\d{9}$/ig;
+                    if (!reg.test($.trim(this.mobile))) { if (!this.autoLogin) $.alert("请填写正确的手机号"); return; }                  
+                    this.getPriceData();
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+    });   
+    //end-------------------
+</script>

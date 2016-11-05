@@ -1,0 +1,28 @@
+﻿{
+    "Code": 1,
+    "Msg": "OK",
+    "Data": {
+        "GlobalConfiguration": {
+            "Title": "",
+            "HomeId": "UserClientIndex"
+        },
+        "ListPage": [
+            {
+                "Id": "UserClientLogin",
+                "PageLinks": "/wx/UserClient/Login.html",
+                "Title": "登录",
+                "Preloading": "UserClientLogin",
+                "ClassName": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserClientIndex",
+                "PageLinks": "/wx/UserClient/Index.html",
+                "Title": "首页",
+                "Preloading": "",
+                "ClassName": "",
+                "AreReacquire": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../_R/js/jquery.min.js"></script>
+    <script src="../_R/js/Validform_v5.3.2_min.js"></script>
+</head>
+<body>
+    <form action="/" method="post" id="from1">
+        <input type="type" name="name" value="" datatype="*0-255" sucmsg=" " ajaxurl="/a/" />
+        <input  type="submit" value="aa"/>
+    </form>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $("#from1").Validform();  //就这一行代码！;
+
+       
+    })
+</script>
+
+</html>

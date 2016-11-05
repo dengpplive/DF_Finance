@@ -1,0 +1,1860 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DBFAF881-74DE-4BAE-AF8D-1B880116712B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DF.Finance.Admin</RootNamespace>
+    <AssemblyName>DF.Finance.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ActPrizeController.cs" />
+    <Compile Include="Controllers\ActRecordController.cs" />
+    <Compile Include="Controllers\AtcWinningController.cs" />
+    <Compile Include="Controllers\BillingManagementtController.cs" />
+    <Compile Include="Controllers\CustomerManagementController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MailTemplateController.cs" />
+    <Compile Include="Controllers\OrderRecordController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RemindController.cs" />
+    <Compile Include="Controllers\RemindRuleController.cs" />
+    <Compile Include="Controllers\ReportManagementController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SysAdminController.cs" />
+    <Compile Include="Controllers\SysDictionaryController.cs" />
+    <Compile Include="Controllers\SysDictionaryTypeController.cs" />
+    <Compile Include="Controllers\SysManagerLogController.cs" />
+    <Compile Include="Controllers\SysNavigationController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
+    <Compile Include="Controllers\UserLoginLogController.cs" />
+    <Compile Include="Controllers\UserPointLogController.cs" />
+    <Compile Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp.net\c#\Upload.aspx.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ueditor\net\App_Code\Config.cs" />
+    <Compile Include="ueditor\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\Handler.cs" />
+    <Compile Include="ueditor\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\PathFormater.cs" />
+    <Compile Include="ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Demo\Hplus-v.4.0.0\404.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\500.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\agile_board.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\article.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\badges_labels.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\basic_gallery.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\blog.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\blueimp.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\buttons.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\calendar.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\carousel.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\chat_view.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\clients.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\code_editor.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\contacts.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\animate.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\bootstrap-rtl.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\bootstrap.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\demo\webuploader-demo.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\font-awesome.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\font-awesome.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\login.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\patterns\header-profile-skin-1.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\patterns\header-profile-skin-3.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\patterns\header-profile.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\patterns\shattered.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\css\blueimp-gallery-indicator.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\css\blueimp-gallery-video.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\css\blueimp-gallery.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\css\blueimp-gallery.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\css\demo.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\error.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\error.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\loading.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\play-pause.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\play-pause.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\video-play.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\blueimp\img\video-play.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\bootstrap-table\bootstrap-table.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\chosen\chosen-sprite%402x.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\chosen\chosen-sprite.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\chosen\chosen.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\clockpicker\clockpicker.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\codemirror\ambiance.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\codemirror\codemirror.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\colorpicker\css\bootstrap-colorpicker.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\colorpicker\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\cropper\cropper.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\datapicker\datepicker3.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\dropzone\basic.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\dropzone\dropzone.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\duallistbox\bootstrap-duallistbox.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\footable\fonts\footable.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\footable\footable.core.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\iCheck\custom.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\iCheck\green%402x.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\iCheck\green.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\images\sort_asc.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\images\sort_desc.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\images\sprite-skin-flat.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\images\spritemap%402x.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\images\spritemap.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\ionRangeSlider\ion.rangeSlider.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\ionRangeSlider\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jasny\jasny-bootstrap.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jqgrid\ui.jqgrid.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jQueryUI\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jQueryUI\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jQueryUI\images\ui-icons_222222_256x240.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jQueryUI\images\ui-icons_454545_256x240.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jQueryUI\images\ui-icons_888888_256x240.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jQueryUI\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jsTree\32px.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jsTree\style.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\jsTree\throbber.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\markdown\bootstrap-markdown.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\morris\morris-0.4.3.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\multiselect\bootstrap-multiselect.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\nouslider\jquery.nouislider.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\plyr\plyr.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\plyr\sprite.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\simditor\simditor.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\steps\jquery.steps.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\summernote\summernote-bs3.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\summernote\summernote.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\sweetalert\sweetalert.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\switchery\switchery.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\toastr\toastr.min.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\treeview\bootstrap-treeview.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\webuploader\webuploader.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\style.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css_animation.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\diff.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\img\index_4.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\img\page.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\img\preview.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\img\rtl_support.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\js\prettify.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\js\prettify.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\draggable_panels.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\empty_page.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\faq.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\favicon.ico" />
+    <Content Include="Demo\Hplus-v.4.0.0\file_manager.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\fontawesome.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_advanced.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_avatar.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_basic.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_builder.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_editors.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_file_upload.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_markdown.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_simditor.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_validate.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_webuploader.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\form_wizard.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\forum_main.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\glyphicons.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_echarts.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_flot.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_metrics.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_morris.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_peity.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_rickshaw.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\graph_sparkline.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\grid_options.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\iconfont.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\ie.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a1.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a2.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a3.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a4.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a5.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a6.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a7.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a8.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\a9.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\bg.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\browser.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\iconfont-logo.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\icons.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\index.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\index_4.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\loading-upload.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\locked.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\login-background.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\p1.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\p2.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\p3.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\profile.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\profile_big.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\profile_small.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\progress.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\p_big1.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\p_big2.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\p_big3.jpg" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\qr_code.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\sprite-skin-flat.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\success.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\user.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\webuploader.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\wenku_logo.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\index_v1.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\index_v2.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\index_v3.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\index_v4.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\index_v5.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\invoice.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\invoice_print.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\jstree.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\bootstrap.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\contabs.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\content.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\bootstrap-table-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\echarts-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\flot-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\form-advanced-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\form-validate-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\layer-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\morris-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\peity-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\rickshaw-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\sparkline-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\treeview-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\webuploader-demo.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\hplus.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\jquery-ui-1.10.4.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\jquery-ui.custom.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\jquery.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\beautifyhtml\beautifyhtml.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\blueimp\jquery.blueimp-gallery.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\bootstrap-table\bootstrap-table-mobile.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\bootstrap-table\bootstrap-table.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\chartJs\Chart.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\chosen\chosen.jquery.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\clockpicker\clockpicker.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\codemirror.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\apl\apl.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\apl\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\asterisk\asterisk.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\asterisk\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\clike\clike.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\clike\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\clike\scala.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\clojure\clojure.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\clojure\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\cobol\cobol.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\cobol\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\coffeescript\coffeescript.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\coffeescript\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\commonlisp\commonlisp.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\commonlisp\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\css.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\less.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\less_test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\scss.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\scss_test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\css\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\cypher\cypher.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\cypher\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dart\dart.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dart\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\diff\diff.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\diff\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\django\django.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\django\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dockerfile\dockerfile.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dockerfile\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dtd\dtd.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dtd\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dylan\dylan.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\dylan\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\d\d.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\d\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ebnf\ebnf.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ebnf\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ecl\ecl.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ecl\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\eiffel\eiffel.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\eiffel\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\erlang\erlang.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\erlang\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\fortran\fortran.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\fortran\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gas\gas.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gas\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gfm\gfm.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gfm\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gfm\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gherkin\gherkin.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\gherkin\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\go\go.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\go\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\groovy\groovy.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\groovy\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haml\haml.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haml\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haml\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haskell\haskell.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haskell\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haxe\haxe.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\haxe\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\htmlembedded\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\htmlmixed\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\http\http.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\http\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\idl\idl.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\idl\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\jade\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\jade\jade.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\javascript\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\javascript\javascript.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\javascript\json-ld.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\javascript\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\javascript\typescript.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\jinja2\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\jinja2\jinja2.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\julia\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\julia\julia.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\kotlin\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\kotlin\kotlin.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\livescript\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\livescript\livescript.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\lua\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\lua\lua.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\markdown\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\markdown\markdown.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\markdown\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\meta.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\mirc\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\mirc\mirc.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\mllike\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\mllike\mllike.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\modelica\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\modelica\modelica.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\nginx\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\nginx\nginx.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ntriples\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ntriples\ntriples.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\octave\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\octave\octave.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\pascal\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\pascal\pascal.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\pegjs\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\pegjs\pegjs.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\perl\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\perl\perl.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\php\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\php\php.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\php\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\pig\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\pig\pig.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\properties\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\properties\properties.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\puppet\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\puppet\puppet.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\python\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\python\python.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\q\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\q\q.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rpm\changes\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rpm\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rpm\rpm.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rst\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rst\rst.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ruby\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ruby\ruby.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\ruby\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rust\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\rust\rust.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\r\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\r\r.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sass\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sass\sass.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\scheme\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\scheme\scheme.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\shell\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\shell\shell.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\shell\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sieve\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sieve\sieve.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\slim\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\slim\slim.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\slim\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\smalltalk\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\smalltalk\smalltalk.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\smartymixed\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\smartymixed\smartymixed.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\smarty\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\smarty\smarty.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\solr\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\solr\solr.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\soy\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\soy\soy.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sparql\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sparql\sparql.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\spreadsheet\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\spreadsheet\spreadsheet.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sql\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\sql\sql.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\stex\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\stex\stex.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\stex\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tcl\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tcl\tcl.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\textile\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\textile\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\textile\textile.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tiddlywiki\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tiki\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tiki\tiki.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tiki\tiki.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\toml\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\toml\toml.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tornado\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\tornado\tornado.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\turtle\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\turtle\turtle.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\vbscript\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\vbscript\vbscript.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\vb\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\vb\vb.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\velocity\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\velocity\velocity.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\verilog\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\verilog\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\verilog\verilog.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\xml\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\xml\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\xml\xml.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\xquery\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\xquery\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\xquery\xquery.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\yaml\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\yaml\yaml.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\z80\index.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\codemirror\mode\z80\z80.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\cropper\cropper.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\datapicker\bootstrap-datepicker.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\diff_match_patch\diff_match_patch.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\dropzone\dropzone.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\duallistbox\jquery.bootstrap-duallistbox.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\easypiechart\jquery.easypiechart.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\echarts\echarts-all.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\blank.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\fancybox_loading%402x.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\fancybox_loading.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\fancybox_overlay.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\fancybox_sprite%402x.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\fancybox_sprite.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\jquery.fancybox.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fancybox\jquery.fancybox.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\curvedLines.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\jquery.flot.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\jquery.flot.spline.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\jquery.flot.symbol.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\footable\footable.all.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\fullcalendar\moment.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\gritter\images\gritter-light.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\gritter\images\gritter.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\gritter\images\ie-spacer.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\gritter\jquery.gritter.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\gritter\jquery.gritter.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\iCheck\icheck.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\ionRangeSlider\ion.rangeSlider.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\ionRangeSlider\jasny\jasny-bootstrap.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jasny\jasny-bootstrap.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jeditable\jquery.jeditable.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jqgrid\i18n\grid.locale-cn.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jqgrid\jquery.jqGrid.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jsKnob\jquery.knob.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jsTree\jstree.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jsTree\jstree.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\extend\layer.ext.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\laydate\laydate.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\laydate\need\laydate.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\laydate\skins\default\icon.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\laydate\skins\default\laydate.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layer.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\layim.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\layim.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\loading.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\icon-ext.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\icon.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\icon_ext.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\loading-0.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\loading-1.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\loading-2.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\textbg.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\xubox_ico0.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\default\xubox_title0.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\layer.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\layer.ext.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\moon\default.png" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\skin\moon\style.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\markdown\bootstrap-markdown.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\markdown\bootstrap-markdown.zh.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\markdown\markdown.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\markdown\to-markdown.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\morris\morris.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\morris\raphael-2.1.0.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\multiselect\bootstrap-multiselect.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\nestable\jquery.nestable.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\nouslider\jquery.nouislider.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\pace\pace.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\peity\jquery.peity.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\plyr\plyr.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\preetyTextDiff\jquery.pretty-text-diff.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\prettyfile\bootstrap-prettyfile.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\rickshaw\rickshaw.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\rickshaw\vendor\d3.v3.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\hotkeys.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\hotkeys.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\jquery.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\module.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\module.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\simditor.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\simditor.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\uploader.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\simditor\uploader.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\staps\jquery.steps.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\suggest\bootstrap-suggest.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\summernote\summernote-zh-CN.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\summernote\summernote.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\sweetalert\sweetalert.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\switchery\switchery.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\toastr\toastr.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\treeview\bootstrap-treeview.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\validate\additional-methods.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\validate\jquery.validate.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\validate\messages_zh.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\Uploader.swf" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.custom.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.custom.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.fis.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.flashonly.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.html5only.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.html5only.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.noimage.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.noimage.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.nolog.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.nolog.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.withoutimage.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\welcome.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\layer.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\layerdate.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\layerphotos.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\layouts.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\lockscreen.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\login.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\login_v2.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\mailbox.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\mail_compose.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\mail_detail.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\modal_window.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\nestable_list.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\notifications.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\pin_board.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp.net\c#\bin\Newtonsoft.Json.dll" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp.net\c#\Upload.aspx" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp.net\vb\bin\Newtonsoft.Json.dll" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp.net\vb\Upload.aspx" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp.net\vb\Upload.aspx.vb" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp\Upload.asp" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\asp\Upload.asp.cls" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\crossdomain.xml" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\expressInstall.swf" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\fullAvatarEditor.swf" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\jsp\WEB-INF\lib\commons-fileupload-1.3.jar" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\jsp\WEB-INF\lib\fastjson-1.1.9.jar" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\fullAvatarEditor.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\jQuery.Cookie.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\jQuery.dialog.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\jQuery.Drag.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\jQuery.Resize.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\swfobject.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\scripts\test.js" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\simpleDemo.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\plyr.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\profile.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\projects.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\project_detail.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\register.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\search_results.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\social_feed.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\spinners.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\suggest.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\sweetalert.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\table_basic.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\table_bootstrap.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\table_data_tables.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\table_foo_table.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\table_jqgrid.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\tabs_panels.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\teams_board.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\timeline.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\timeline_v2.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\toastr_notifications.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\tree_view.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\typography.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\webim.html" />
+    <Content Include="Demo\Hplus-v.4.0.0\widgets.html" />
+    <Content Include="Demo\HtmlPage1.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\footable\fonts\footable.eot" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\footable\fonts\footable.ttf" />
+    <Content Include="Demo\Hplus-v.4.0.0\css\plugins\footable\fonts\footable.woff" />
+    <Content Include="Demo\Hplus-v.4.0.0\docs\img\Thumbs.db" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\FontAwesome.otf" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Demo\Hplus-v.4.0.0\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Demo\Hplus-v.4.0.0\img\browser.psd" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\bootstrap_table_test.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\bootstrap_table_test2.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\photos.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\demo\table_base.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\jquery.min.map" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\data\chatlog.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\data\friend.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\data\group.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\layer\layim\data\groups.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\js\plugins\suggest\data.json" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\jsp\upload.jsp" />
+    <Content Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\php\upload.php" />
+    <Content Include="ueditor\dialogs\anchor\anchor.html" />
+    <Content Include="ueditor\dialogs\attachment\attachment.css" />
+    <Content Include="ueditor\dialogs\attachment\attachment.html" />
+    <Content Include="ueditor\dialogs\attachment\attachment.js" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\alignicon.png" />
+    <Content Include="ueditor\dialogs\attachment\images\bg.png" />
+    <Content Include="ueditor\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\file-icons.png" />
+    <Content Include="ueditor\dialogs\attachment\images\icons.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\icons.png" />
+    <Content Include="ueditor\dialogs\attachment\images\image.png" />
+    <Content Include="ueditor\dialogs\attachment\images\progress.png" />
+    <Content Include="ueditor\dialogs\attachment\images\success.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\success.png" />
+    <Content Include="ueditor\dialogs\background\background.css" />
+    <Content Include="ueditor\dialogs\background\background.html" />
+    <Content Include="ueditor\dialogs\background\background.js" />
+    <Content Include="ueditor\dialogs\background\images\bg.png" />
+    <Content Include="ueditor\dialogs\background\images\success.png" />
+    <Content Include="ueditor\dialogs\charts\chart.config.js" />
+    <Content Include="ueditor\dialogs\charts\charts.css" />
+    <Content Include="ueditor\dialogs\charts\charts.html" />
+    <Content Include="ueditor\dialogs\charts\charts.js" />
+    <Content Include="ueditor\dialogs\charts\images\charts0.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts1.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts2.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts3.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts4.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts5.png" />
+    <Content Include="ueditor\dialogs\emotion\emotion.css" />
+    <Content Include="ueditor\dialogs\emotion\emotion.html" />
+    <Content Include="ueditor\dialogs\emotion\emotion.js" />
+    <Content Include="ueditor\dialogs\emotion\images\0.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="ueditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="ueditor\dialogs\gmap\gmap.html" />
+    <Content Include="ueditor\dialogs\help\help.css" />
+    <Content Include="ueditor\dialogs\help\help.html" />
+    <Content Include="ueditor\dialogs\help\help.js" />
+    <Content Include="ueditor\dialogs\image\image.css" />
+    <Content Include="ueditor\dialogs\image\image.html" />
+    <Content Include="ueditor\dialogs\image\image.js" />
+    <Content Include="ueditor\dialogs\image\images\alignicon.jpg" />
+    <Content Include="ueditor\dialogs\image\images\bg.png" />
+    <Content Include="ueditor\dialogs\image\images\icons.gif" />
+    <Content Include="ueditor\dialogs\image\images\icons.png" />
+    <Content Include="ueditor\dialogs\image\images\image.png" />
+    <Content Include="ueditor\dialogs\image\images\progress.png" />
+    <Content Include="ueditor\dialogs\image\images\success.gif" />
+    <Content Include="ueditor\dialogs\image\images\success.png" />
+    <Content Include="ueditor\dialogs\insertframe\insertframe.html" />
+    <Content Include="ueditor\dialogs\internal.js" />
+    <Content Include="ueditor\dialogs\link\link.html" />
+    <Content Include="ueditor\dialogs\map\map.html" />
+    <Content Include="ueditor\dialogs\map\show.html" />
+    <Content Include="ueditor\dialogs\music\music.css" />
+    <Content Include="ueditor\dialogs\music\music.html" />
+    <Content Include="ueditor\dialogs\music\music.js" />
+    <Content Include="ueditor\dialogs\preview\preview.html" />
+    <Content Include="ueditor\dialogs\scrawl\images\addimg.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\brush.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\delimg.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\empty.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\eraser.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\redo.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\redoH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\scale.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\size.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\undo.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\undoH.png" />
+    <Content Include="ueditor\dialogs\scrawl\scrawl.css" />
+    <Content Include="ueditor\dialogs\scrawl\scrawl.html" />
+    <Content Include="ueditor\dialogs\scrawl\scrawl.js" />
+    <Content Include="ueditor\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="ueditor\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="ueditor\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="ueditor\dialogs\table\dragicon.png" />
+    <Content Include="ueditor\dialogs\table\edittable.css" />
+    <Content Include="ueditor\dialogs\table\edittable.html" />
+    <Content Include="ueditor\dialogs\table\edittable.js" />
+    <Content Include="ueditor\dialogs\table\edittd.html" />
+    <Content Include="ueditor\dialogs\table\edittip.html" />
+    <Content Include="ueditor\dialogs\template\config.js" />
+    <Content Include="ueditor\dialogs\template\images\bg.gif" />
+    <Content Include="ueditor\dialogs\template\images\pre0.png" />
+    <Content Include="ueditor\dialogs\template\images\pre1.png" />
+    <Content Include="ueditor\dialogs\template\images\pre2.png" />
+    <Content Include="ueditor\dialogs\template\images\pre3.png" />
+    <Content Include="ueditor\dialogs\template\images\pre4.png" />
+    <Content Include="ueditor\dialogs\template\template.css" />
+    <Content Include="ueditor\dialogs\template\template.html" />
+    <Content Include="ueditor\dialogs\template\template.js" />
+    <Content Include="ueditor\dialogs\video\images\bg.png" />
+    <Content Include="ueditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\file-icons.gif" />
+    <Content Include="ueditor\dialogs\video\images\file-icons.png" />
+    <Content Include="ueditor\dialogs\video\images\icons.gif" />
+    <Content Include="ueditor\dialogs\video\images\icons.png" />
+    <Content Include="ueditor\dialogs\video\images\image.png" />
+    <Content Include="ueditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\progress.png" />
+    <Content Include="ueditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\success.gif" />
+    <Content Include="ueditor\dialogs\video\images\success.png" />
+    <Content Include="ueditor\dialogs\video\video.css" />
+    <Content Include="ueditor\dialogs\video\video.html" />
+    <Content Include="ueditor\dialogs\video\video.js" />
+    <Content Include="ueditor\dialogs\webapp\webapp.html" />
+    <Content Include="ueditor\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="ueditor\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="ueditor\dialogs\wordimage\tangram.js" />
+    <Content Include="ueditor\dialogs\wordimage\wordimage.html" />
+    <Content Include="ueditor\dialogs\wordimage\wordimage.js" />
+    <Content Include="ueditor\index.html" />
+    <Content Include="ueditor\lang\en\en.js" />
+    <Content Include="ueditor\lang\en\images\addimage.png" />
+    <Content Include="ueditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="ueditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="ueditor\lang\en\images\background.png" />
+    <Content Include="ueditor\lang\en\images\button.png" />
+    <Content Include="ueditor\lang\en\images\copy.png" />
+    <Content Include="ueditor\lang\en\images\deletedisable.png" />
+    <Content Include="ueditor\lang\en\images\deleteenable.png" />
+    <Content Include="ueditor\lang\en\images\listbackground.png" />
+    <Content Include="ueditor\lang\en\images\localimage.png" />
+    <Content Include="ueditor\lang\en\images\music.png" />
+    <Content Include="ueditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="ueditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="ueditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="ueditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="ueditor\lang\en\images\upload.png" />
+    <Content Include="ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="ueditor\net\Bin\Newtonsoft.Json.dll" />
+    <Content Include="ueditor\net\Bin\Newtonsoft.Json.pdb" />
+    <Content Include="ueditor\net\Bin\Newtonsoft.Json.xml" />
+    <Content Include="ueditor\net\net.sln" />
+    <Content Include="ueditor\themes\default\css\ueditor.css" />
+    <Content Include="ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="ueditor\themes\default\dialogbase.css" />
+    <Content Include="ueditor\themes\default\images\anchor.gif" />
+    <Content Include="ueditor\themes\default\images\arrow.png" />
+    <Content Include="ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="ueditor\themes\default\images\charts.png" />
+    <Content Include="ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="ueditor\themes\default\images\filescan.png" />
+    <Content Include="ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="ueditor\themes\default\images\icons.gif" />
+    <Content Include="ueditor\themes\default\images\icons.png" />
+    <Content Include="ueditor\themes\default\images\loaderror.png" />
+    <Content Include="ueditor\themes\default\images\loading.gif" />
+    <Content Include="ueditor\themes\default\images\lock.gif" />
+    <Content Include="ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="ueditor\themes\default\images\scale.png" />
+    <Content Include="ueditor\themes\default\images\sortable.png" />
+    <Content Include="ueditor\themes\default\images\spacer.gif" />
+    <Content Include="ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="ueditor\themes\default\images\upload.png" />
+    <Content Include="ueditor\themes\default\images\videologo.gif" />
+    <Content Include="ueditor\themes\default\images\word.gif" />
+    <Content Include="ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="ueditor\themes\iframe.css" />
+    <Content Include="ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts-more.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\annotations.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\data.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\data.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\exporting.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\funnel.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\map.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\map.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\gray.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\grid.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\skies.js" />
+    <Content Include="ueditor\third-party\jquery-1.10.2.js" />
+    <Content Include="ueditor\third-party\jquery-1.10.2.min.js" />
+    <Content Include="ueditor\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.svg" />
+    <Content Include="ueditor\third-party\video-js\video-js.css" />
+    <Content Include="ueditor\third-party\video-js\video-js.min.css" />
+    <Content Include="ueditor\third-party\video-js\video-js.swf" />
+    <Content Include="ueditor\third-party\video-js\video.dev.js" />
+    <Content Include="ueditor\third-party\video-js\video.js" />
+    <Content Include="ueditor\third-party\webuploader\Uploader.swf" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.css" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="ueditor\ueditor.all.js" />
+    <Content Include="ueditor\ueditor.all.min.js" />
+    <Content Include="ueditor\ueditor.config.js" />
+    <Content Include="ueditor\ueditor.parse.js" />
+    <Content Include="ueditor\ueditor.parse.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="_R\css\animate.css" />
+    <Content Include="_R\css\bootstrap-rtl.css" />
+    <Content Include="_R\css\bootstrap.min.css" />
+    <Content Include="_R\css\demo\webuploader-demo.css" />
+    <Content Include="_R\css\font-awesome.css" />
+    <Content Include="_R\css\font-awesome.min.css" />
+    <Content Include="_R\css\login.css" />
+    <Content Include="_R\css\Order.css" />
+    <Content Include="_R\css\patterns\header-profile-skin-1.png" />
+    <Content Include="_R\css\patterns\header-profile-skin-3.png" />
+    <Content Include="_R\css\patterns\header-profile.png" />
+    <Content Include="_R\css\patterns\shattered.png" />
+    <Content Include="_R\css\plugins\artdialog\ui-dialog.css" />
+    <Content Include="_R\css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
+    <Content Include="_R\css\plugins\blueimp\css\blueimp-gallery-indicator.css" />
+    <Content Include="_R\css\plugins\blueimp\css\blueimp-gallery-video.css" />
+    <Content Include="_R\css\plugins\blueimp\css\blueimp-gallery.css" />
+    <Content Include="_R\css\plugins\blueimp\css\blueimp-gallery.min.css" />
+    <Content Include="_R\css\plugins\blueimp\css\demo.css" />
+    <Content Include="_R\css\plugins\blueimp\img\error.png" />
+    <Content Include="_R\css\plugins\blueimp\img\error.svg" />
+    <Content Include="_R\css\plugins\blueimp\img\loading.gif" />
+    <Content Include="_R\css\plugins\blueimp\img\play-pause.png" />
+    <Content Include="_R\css\plugins\blueimp\img\play-pause.svg" />
+    <Content Include="_R\css\plugins\blueimp\img\video-play.png" />
+    <Content Include="_R\css\plugins\blueimp\img\video-play.svg" />
+    <Content Include="_R\css\plugins\bootstrap-table\bootstrap-table.min.css" />
+    <Content Include="_R\css\plugins\chosen\chosen-sprite%402x.png" />
+    <Content Include="_R\css\plugins\chosen\chosen-sprite.png" />
+    <Content Include="_R\css\plugins\chosen\chosen.css" />
+    <Content Include="_R\css\plugins\clockpicker\clockpicker.css" />
+    <Content Include="_R\css\plugins\codemirror\ambiance.css" />
+    <Content Include="_R\css\plugins\codemirror\codemirror.css" />
+    <Content Include="_R\css\plugins\colorpicker\css\bootstrap-colorpicker.min.css" />
+    <Content Include="_R\css\plugins\colorpicker\img\bootstrap-colorpicker\alpha-horizontal.png" />
+    <Content Include="_R\css\plugins\colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="_R\css\plugins\colorpicker\img\bootstrap-colorpicker\hue-horizontal.png" />
+    <Content Include="_R\css\plugins\colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="_R\css\plugins\colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="_R\css\plugins\cropper\cropper.min.css" />
+    <Content Include="_R\css\plugins\datapicker\datepicker3.css" />
+    <Content Include="_R\css\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="_R\css\plugins\dropzone\basic.css" />
+    <Content Include="_R\css\plugins\dropzone\dropzone.css" />
+    <Content Include="_R\css\plugins\duallistbox\bootstrap-duallistbox.css" />
+    <Content Include="_R\css\plugins\footable\fonts\footable.svg" />
+    <Content Include="_R\css\plugins\footable\footable.core.css" />
+    <Content Include="_R\css\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="_R\css\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="_R\css\plugins\iCheck\custom.css" />
+    <Content Include="_R\css\plugins\iCheck\green%402x.png" />
+    <Content Include="_R\css\plugins\iCheck\green.png" />
+    <Content Include="_R\css\plugins\images\sort_asc.png" />
+    <Content Include="_R\css\plugins\images\sort_desc.png" />
+    <Content Include="_R\css\plugins\images\sprite-skin-flat.png" />
+    <Content Include="_R\css\plugins\images\spritemap%402x.png" />
+    <Content Include="_R\css\plugins\images\spritemap.png" />
+    <Content Include="_R\css\plugins\ionRangeSlider\ion.rangeSlider.css" />
+    <Content Include="_R\css\plugins\ionRangeSlider\ion.rangeSlider.skinFlat.css" />
+    <Content Include="_R\css\plugins\jasny\jasny-bootstrap.min.css" />
+    <Content Include="_R\css\plugins\jqgrid\ui.jqgrid.css" />
+    <Content Include="_R\css\plugins\jQueryUI\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="_R\css\plugins\jQueryUI\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="_R\css\plugins\jQueryUI\images\ui-icons_222222_256x240.png" />
+    <Content Include="_R\css\plugins\jQueryUI\images\ui-icons_454545_256x240.png" />
+    <Content Include="_R\css\plugins\jQueryUI\images\ui-icons_888888_256x240.png" />
+    <Content Include="_R\css\plugins\jQueryUI\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="_R\css\plugins\jsTree\32px.png" />
+    <Content Include="_R\css\plugins\jsTree\style.min.css" />
+    <Content Include="_R\css\plugins\jsTree\throbber.gif" />
+    <Content Include="_R\css\plugins\markdown\bootstrap-markdown.min.css" />
+    <Content Include="_R\css\plugins\morris\morris-0.4.3.min.css" />
+    <Content Include="_R\css\plugins\multiselect\bootstrap-multiselect.css" />
+    <Content Include="_R\css\plugins\nouslider\jquery.nouislider.css" />
+    <Content Include="_R\css\plugins\plyr\plyr.css" />
+    <Content Include="_R\css\plugins\plyr\sprite.svg" />
+    <Content Include="_R\css\plugins\simditor\simditor.css" />
+    <Content Include="_R\css\plugins\steps\jquery.steps.css" />
+    <Content Include="_R\css\plugins\summernote\summernote-bs3.css" />
+    <Content Include="_R\css\plugins\summernote\summernote.css" />
+    <Content Include="_R\css\plugins\sweetalert\sweetalert.css" />
+    <Content Include="_R\css\plugins\switchery\switchery.css" />
+    <Content Include="_R\css\plugins\toastr\toastr.min.css" />
+    <Content Include="_R\css\plugins\treeview\bootstrap-treeview.css" />
+    <Content Include="_R\css\plugins\webuploader\webuploader.css" />
+    <Content Include="_R\css\style.css" />
+    <Content Include="_R\css\Validform.css" />
+    <Content Include="_R\css\valid_icons.png" />
+    <Content Include="_R\error\404.html" />
+    <Content Include="_R\error\500.html" />
+    <Content Include="_R\fonts\fontawesome-webfont.svg" />
+    <Content Include="_R\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="_R\img\a1.jpg" />
+    <Content Include="_R\img\a2.jpg" />
+    <Content Include="_R\img\a3.jpg" />
+    <Content Include="_R\img\a4.jpg" />
+    <Content Include="_R\img\a5.jpg" />
+    <Content Include="_R\img\a6.jpg" />
+    <Content Include="_R\img\a7.jpg" />
+    <Content Include="_R\img\a8.jpg" />
+    <Content Include="_R\img\a9.jpg" />
+    <Content Include="_R\img\bg.png" />
+    <Content Include="_R\img\browser.png" />
+    <Content Include="_R\img\clear.png" />
+    <Content Include="_R\img\cry.jpg" />
+    <Content Include="_R\img\iconfont-logo.png" />
+    <Content Include="_R\img\icons.png" />
+    <Content Include="_R\img\index.jpg" />
+    <Content Include="_R\img\index_4.jpg" />
+    <Content Include="_R\img\loading-upload.gif" />
+    <Content Include="_R\img\loading.gif" />
+    <Content Include="_R\img\locked.png" />
+    <Content Include="_R\img\login-background.jpg" />
+    <Content Include="_R\img\order_speed.gif" />
+    <Content Include="_R\img\p1.jpg" />
+    <Content Include="_R\img\p2.jpg" />
+    <Content Include="_R\img\p3.jpg" />
+    <Content Include="_R\img\profile.jpg" />
+    <Content Include="_R\img\profile_big.jpg" />
+    <Content Include="_R\img\profile_small.jpg" />
+    <Content Include="_R\img\progress.png" />
+    <Content Include="_R\img\p_big1.jpg" />
+    <Content Include="_R\img\p_big2.jpg" />
+    <Content Include="_R\img\p_big3.jpg" />
+    <Content Include="_R\img\qr_code.png" />
+    <Content Include="_R\img\skin_icons.png" />
+    <Content Include="_R\img\sprite-skin-flat.png" />
+    <Content Include="_R\img\success.png" />
+    <Content Include="_R\img\user.png" />
+    <Content Include="_R\img\valid_icons.png" />
+    <Content Include="_R\img\webuploader.png" />
+    <Content Include="_R\img\wenku_logo.png" />
+    <Content Include="_R\js\bootstrap.min.js" />
+    <Content Include="_R\js\contabs.js" />
+    <Content Include="_R\js\content.js" />
+    <Content Include="_R\js\demo\bootstrap-table-demo.js" />
+    <Content Include="_R\js\demo\echarts-demo.js" />
+    <Content Include="_R\js\demo\flot-demo.js" />
+    <Content Include="_R\js\demo\form-advanced-demo.js" />
+    <Content Include="_R\js\demo\form-validate-demo.js" />
+    <Content Include="_R\js\demo\layer-demo.js" />
+    <Content Include="_R\js\demo\morris-demo.js" />
+    <Content Include="_R\js\demo\peity-demo.js" />
+    <Content Include="_R\js\demo\rickshaw-demo.js" />
+    <Content Include="_R\js\demo\sparkline-demo.js" />
+    <Content Include="_R\js\demo\treeview-demo.js" />
+    <Content Include="_R\js\demo\webuploader-demo.js" />
+    <Content Include="_R\js\DFCommon.js" />
+    <Content Include="_R\js\hplus.js" />
+    <Content Include="_R\js\ifmcontabs.js" />
+    <Content Include="_R\js\jquery-ui-1.10.4.min.js" />
+    <Content Include="_R\js\jquery-ui.custom.min.js" />
+    <Content Include="_R\js\jQuery.dateformat.js" />
+    <Content Include="_R\js\jquery.min.js" />
+    <Content Include="_R\js\jQuery.Screenshot.js" />
+    <Content Include="_R\js\plugins\artdialog\dialog-min.js" />
+    <Content Include="_R\js\plugins\artdialog\dialog-plus-min.js" />
+    <Content Include="_R\js\plugins\beautifyhtml\beautifyhtml.js" />
+    <Content Include="_R\js\plugins\blueimp\jquery.blueimp-gallery.min.js" />
+    <Content Include="_R\js\plugins\bootstrap-table\bootstrap-table-mobile.min.js" />
+    <Content Include="_R\js\plugins\bootstrap-table\bootstrap-table.js" />
+    <Content Include="_R\js\plugins\bootstrap-table\bootstrap-table.min.js" />
+    <Content Include="_R\js\plugins\bootstrap-table\editTable.js" />
+    <Content Include="_R\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.js" />
+    <Content Include="_R\js\plugins\bootstrap-table\locale\bootstrap-table-zh-CN.min.js" />
+    <Content Include="_R\js\plugins\chartJs\Chart.min.js" />
+    <Content Include="_R\js\plugins\chosen\chosen.jquery.js" />
+    <Content Include="_R\js\plugins\clockpicker\clockpicker.js" />
+    <Content Include="_R\js\plugins\codemirror\codemirror.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\apl\apl.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\apl\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\asterisk\asterisk.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\asterisk\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\clike\clike.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\clike\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\clike\scala.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\clojure\clojure.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\clojure\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\cobol\cobol.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\cobol\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\coffeescript\coffeescript.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\coffeescript\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\commonlisp\commonlisp.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\commonlisp\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\css.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\less.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\less_test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\scss.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\scss_test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\css\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\cypher\cypher.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\cypher\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\dart\dart.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\dart\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\diff\diff.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\diff\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\django\django.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\django\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\dockerfile\dockerfile.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\dockerfile\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\dtd\dtd.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\dtd\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\dylan\dylan.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\dylan\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\d\d.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\d\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\ebnf\ebnf.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\ebnf\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\ecl\ecl.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\ecl\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\eiffel\eiffel.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\eiffel\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\erlang\erlang.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\erlang\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\fortran\fortran.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\fortran\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\gas\gas.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\gas\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\gfm\gfm.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\gfm\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\gfm\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\gherkin\gherkin.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\gherkin\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\go\go.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\go\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\groovy\groovy.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\groovy\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\haml\haml.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\haml\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\haml\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\haskell\haskell.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\haskell\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\haxe\haxe.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\haxe\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\htmlembedded\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\htmlmixed\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\http\http.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\http\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\idl\idl.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\idl\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\jade\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\jade\jade.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\javascript\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\javascript\javascript.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\javascript\json-ld.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\javascript\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\javascript\typescript.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\jinja2\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\jinja2\jinja2.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\julia\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\julia\julia.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\kotlin\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\kotlin\kotlin.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\livescript\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\livescript\livescript.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\lua\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\lua\lua.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\markdown\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\markdown\markdown.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\markdown\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\meta.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\mirc\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\mirc\mirc.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\mllike\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\mllike\mllike.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\modelica\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\modelica\modelica.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\nginx\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\nginx\nginx.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\ntriples\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\ntriples\ntriples.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\octave\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\octave\octave.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\pascal\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\pascal\pascal.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\pegjs\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\pegjs\pegjs.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\perl\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\perl\perl.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\php\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\php\php.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\php\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\pig\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\pig\pig.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\properties\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\properties\properties.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\puppet\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\puppet\puppet.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\python\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\python\python.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\q\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\q\q.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\rpm\changes\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\rpm\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\rpm\rpm.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\rst\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\rst\rst.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\ruby\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\ruby\ruby.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\ruby\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\rust\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\rust\rust.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\r\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\r\r.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\sass\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\sass\sass.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\scheme\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\scheme\scheme.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\shell\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\shell\shell.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\shell\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\sieve\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\sieve\sieve.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\slim\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\slim\slim.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\slim\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\smalltalk\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\smalltalk\smalltalk.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\smartymixed\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\smartymixed\smartymixed.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\smarty\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\smarty\smarty.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\solr\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\solr\solr.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\soy\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\soy\soy.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\sparql\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\sparql\sparql.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\spreadsheet\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\spreadsheet\spreadsheet.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\sql\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\sql\sql.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\stex\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\stex\stex.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\stex\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\tcl\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\tcl\tcl.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\textile\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\textile\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\textile\textile.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\tiddlywiki\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="_R\js\plugins\codemirror\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\tiki\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\tiki\tiki.css" />
+    <Content Include="_R\js\plugins\codemirror\mode\tiki\tiki.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\toml\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\toml\toml.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\tornado\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\tornado\tornado.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\turtle\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\turtle\turtle.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\vbscript\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\vbscript\vbscript.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\vb\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\vb\vb.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\velocity\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\velocity\velocity.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\verilog\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\verilog\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\verilog\verilog.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\xml\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\xml\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\xml\xml.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\xquery\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\xquery\test.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\xquery\xquery.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\yaml\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\yaml\yaml.js" />
+    <Content Include="_R\js\plugins\codemirror\mode\z80\index.html" />
+    <Content Include="_R\js\plugins\codemirror\mode\z80\z80.js" />
+    <Content Include="_R\js\plugins\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="_R\js\plugins\cropper\cropper.min.js" />
+    <Content Include="_R\js\plugins\datapicker\bootstrap-datepicker.js" />
+    <Content Include="_R\js\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="_R\js\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="_R\js\plugins\diff_match_patch\diff_match_patch.js" />
+    <Content Include="_R\js\plugins\dropzone\dropzone.js" />
+    <Content Include="_R\js\plugins\duallistbox\jquery.bootstrap-duallistbox.js" />
+    <Content Include="_R\js\plugins\easypiechart\jquery.easypiechart.js" />
+    <Content Include="_R\js\plugins\echarts\echarts-all.js" />
+    <Content Include="_R\js\plugins\editable\bootstrap-editable.css" />
+    <Content Include="_R\js\plugins\editable\bootstrap-editable.js" />
+    <Content Include="_R\js\plugins\editable\bootstrap-table-editable.js" />
+    <Content Include="_R\js\plugins\editable\bootstrap-table-editable.min.js" />
+    <Content Include="_R\js\plugins\export\bootstrap-table-export.js" />
+    <Content Include="_R\js\plugins\export\bootstrap-table-export.min.js" />
+    <Content Include="_R\js\plugins\export\tableExport.js" />
+    <Content Include="_R\js\plugins\fancybox\blank.gif" />
+    <Content Include="_R\js\plugins\fancybox\fancybox_loading%402x.gif" />
+    <Content Include="_R\js\plugins\fancybox\fancybox_loading.gif" />
+    <Content Include="_R\js\plugins\fancybox\fancybox_overlay.png" />
+    <Content Include="_R\js\plugins\fancybox\fancybox_sprite%402x.png" />
+    <Content Include="_R\js\plugins\fancybox\fancybox_sprite.png" />
+    <Content Include="_R\js\plugins\fancybox\jquery.fancybox.css" />
+    <Content Include="_R\js\plugins\fancybox\jquery.fancybox.js" />
+    <Content Include="_R\js\plugins\flot\curvedLines.js" />
+    <Content Include="_R\js\plugins\flot\jquery.flot.js" />
+    <Content Include="_R\js\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="_R\js\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="_R\js\plugins\flot\jquery.flot.spline.js" />
+    <Content Include="_R\js\plugins\flot\jquery.flot.symbol.js" />
+    <Content Include="_R\js\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="_R\js\plugins\footable\footable.all.min.js" />
+    <Content Include="_R\js\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="_R\js\plugins\fullcalendar\moment.min.js" />
+    <Content Include="_R\js\plugins\gritter\images\gritter-light.png" />
+    <Content Include="_R\js\plugins\gritter\images\gritter.png" />
+    <Content Include="_R\js\plugins\gritter\images\ie-spacer.gif" />
+    <Content Include="_R\js\plugins\gritter\jquery.gritter.css" />
+    <Content Include="_R\js\plugins\gritter\jquery.gritter.min.js" />
+    <Content Include="_R\js\plugins\iCheck\icheck.min.js" />
+    <Content Include="_R\js\plugins\ionRangeSlider\ion.rangeSlider.min.js" />
+    <Content Include="_R\js\plugins\ionRangeSlider\jasny\jasny-bootstrap.min.js" />
+    <Content Include="_R\js\plugins\jasny\jasny-bootstrap.min.js" />
+    <Content Include="_R\js\plugins\jeditable\jquery.jeditable.js" />
+    <Content Include="_R\js\plugins\jqgrid\i18n\grid.locale-cn.js" />
+    <Content Include="_R\js\plugins\jqgrid\jquery.jqGrid.min.js" />
+    <Content Include="_R\js\plugins\jquery-ui\jquery-ui.min.js" />
+    <Content Include="_R\js\plugins\jsKnob\jquery.knob.js" />
+    <Content Include="_R\js\plugins\jsTree\jstree.js" />
+    <Content Include="_R\js\plugins\jsTree\jstree.min.js" />
+    <Content Include="_R\js\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="_R\js\plugins\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="_R\js\plugins\layer\extend\layer.ext.js" />
+    <Content Include="_R\js\plugins\layer\laydate\laydate.js" />
+    <Content Include="_R\js\plugins\layer\laydate\need\laydate.css" />
+    <Content Include="_R\js\plugins\layer\laydate\skins\default\icon.png" />
+    <Content Include="_R\js\plugins\layer\laydate\skins\default\laydate.css" />
+    <Content Include="_R\js\plugins\layer\layer.min.js" />
+    <Content Include="_R\js\plugins\layer\layim\layim.css" />
+    <Content Include="_R\js\plugins\layer\layim\layim.js" />
+    <Content Include="_R\js\plugins\layer\layim\loading.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\icon-ext.png" />
+    <Content Include="_R\js\plugins\layer\skin\default\icon.png" />
+    <Content Include="_R\js\plugins\layer\skin\default\icon_ext.png" />
+    <Content Include="_R\js\plugins\layer\skin\default\loading-0.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\loading-1.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\loading-2.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\textbg.png" />
+    <Content Include="_R\js\plugins\layer\skin\default\xubox_ico0.png" />
+    <Content Include="_R\js\plugins\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="_R\js\plugins\layer\skin\default\xubox_title0.png" />
+    <Content Include="_R\js\plugins\layer\skin\layer.css" />
+    <Content Include="_R\js\plugins\layer\skin\layer.ext.css" />
+    <Content Include="_R\js\plugins\layer\skin\moon\default.png" />
+    <Content Include="_R\js\plugins\layer\skin\moon\style.css" />
+    <Content Include="_R\js\plugins\markdown\bootstrap-markdown.js" />
+    <Content Include="_R\js\plugins\markdown\bootstrap-markdown.zh.js" />
+    <Content Include="_R\js\plugins\markdown\markdown.js" />
+    <Content Include="_R\js\plugins\markdown\to-markdown.js" />
+    <Content Include="_R\js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="_R\js\plugins\morris\morris.js" />
+    <Content Include="_R\js\plugins\morris\raphael-2.1.0.min.js" />
+    <Content Include="_R\js\plugins\multiselect\bootstrap-multiselect.js" />
+    <Content Include="_R\js\plugins\nestable\jquery.nestable.js" />
+    <Content Include="_R\js\plugins\nouslider\jquery.nouislider.min.js" />
+    <Content Include="_R\js\plugins\pace\pace.min.js" />
+    <Content Include="_R\js\plugins\peity\jquery.peity.min.js" />
+    <Content Include="_R\js\plugins\plyr\plyr.js" />
+    <Content Include="_R\js\plugins\preetyTextDiff\jquery.pretty-text-diff.min.js" />
+    <Content Include="_R\js\plugins\prettyfile\bootstrap-prettyfile.js" />
+    <Content Include="_R\js\plugins\rickshaw\rickshaw.min.js" />
+    <Content Include="_R\js\plugins\rickshaw\vendor\d3.v3.js" />
+    <Content Include="_R\js\plugins\simditor\hotkeys.js" />
+    <Content Include="_R\js\plugins\simditor\hotkeys.min.js" />
+    <Content Include="_R\js\plugins\simditor\jquery.min.js" />
+    <Content Include="_R\js\plugins\simditor\module.js" />
+    <Content Include="_R\js\plugins\simditor\module.min.js" />
+    <Content Include="_R\js\plugins\simditor\simditor.js" />
+    <Content Include="_R\js\plugins\simditor\simditor.min.js" />
+    <Content Include="_R\js\plugins\simditor\uploader.js" />
+    <Content Include="_R\js\plugins\simditor\uploader.min.js" />
+    <Content Include="_R\js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="_R\js\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="_R\js\plugins\staps\jquery.steps.min.js" />
+    <Content Include="_R\js\plugins\suggest\bootstrap-suggest.min.js" />
+    <Content Include="_R\js\plugins\summernote\summernote-zh-CN.js" />
+    <Content Include="_R\js\plugins\summernote\summernote.min.js" />
+    <Content Include="_R\js\plugins\sweetalert\sweetalert.min.js" />
+    <Content Include="_R\js\plugins\switchery\switchery.js" />
+    <Content Include="_R\js\plugins\toastr\toastr.min.js" />
+    <Content Include="_R\js\plugins\treeview\bootstrap-treeview.js" />
+    <Content Include="_R\js\plugins\validate\additional-methods.min.js" />
+    <Content Include="_R\js\plugins\validate\jquery.validate.min.js" />
+    <Content Include="_R\js\plugins\validate\messages_zh.min.js" />
+    <Content Include="_R\js\plugins\webuploader\Uploader.swf" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.custom.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.custom.min.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.fis.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.flashonly.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.html5only.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.html5only.min.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.min.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.noimage.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.noimage.min.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.nolog.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.nolog.min.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.withoutimage.js" />
+    <Content Include="_R\js\plugins\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="_R\js\uploader.js" />
+    <Content Include="_R\js\Validform_v5.3.2_min.js" />
+    <Content Include="_R\js\webuploader\uploader.swf" />
+    <Content Include="_R\js\webuploader\webuploader.min.js" />
+    <Content Include="_R\js\welcome.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Start\App_Data\" />
+    <Folder Include="Demo\Hplus-v.4.0.0\plugins\fullavatareditor\upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="_R\css\plugins\footable\fonts\footable.eot" />
+    <Content Include="_R\css\plugins\footable\fonts\footable.ttf" />
+    <Content Include="_R\css\plugins\footable\fonts\footable.woff" />
+    <Content Include="_R\fonts\fontawesome-webfont.eot" />
+    <Content Include="_R\fonts\fontawesome-webfont.ttf" />
+    <Content Include="_R\fonts\fontawesome-webfont.woff" />
+    <Content Include="_R\fonts\fontawesome-webfont.woff2" />
+    <Content Include="_R\fonts\FontAwesome.otf" />
+    <Content Include="_R\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="_R\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="_R\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="_R\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="_R\img\browser.psd" />
+    <Content Include="_R\js\demo\bootstrap_table_test.json" />
+    <Content Include="_R\js\demo\bootstrap_table_test2.json" />
+    <Content Include="_R\js\demo\photos.json" />
+    <Content Include="_R\js\demo\table_base.json" />
+    <Content Include="_R\js\jquery.min.map" />
+    <Content Include="_R\js\plugins\layer\layim\data\chatlog.json" />
+    <Content Include="_R\js\plugins\layer\layim\data\friend.json" />
+    <Content Include="_R\js\plugins\layer\layim\data\group.json" />
+    <Content Include="_R\js\plugins\layer\layim\data\groups.json" />
+    <Content Include="_R\js\plugins\suggest\data.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DF.Finance.BLL\DF.Finance.BLL.csproj">
+      <Project>{769499c5-ccb9-4030-b281-f16adbdb53fd}</Project>
+      <Name>DF.Finance.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Finance.Common\DF.Finance.Common.csproj">
+      <Project>{4b138f90-ff32-4b88-bbef-1977268afb5a}</Project>
+      <Name>DF.Finance.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Finance.Model\DF.Finance.Model.csproj">
+      <Project>{b1d6e5c6-6c7f-4308-8873-e7ea71fbd116}</Project>
+      <Name>DF.Finance.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Finance.WebCommon\DF.Finance.WebCommon.csproj">
+      <Project>{16fa1f9e-3cbb-4a83-b09e-8080e30513ec}</Project>
+      <Name>DF.Finance.WebCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Test\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ueditor\net\config.json" />
+    <Content Include="ueditor\net\controller.ashx" />
+    <Content Include="ueditor\net\README.md" />
+    <Content Include="ueditor\net\Web.config" />
+    <Content Include="ueditor\third-party\jquery-1.10.2.min.map" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.eot" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.ttf" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XmlConfig\log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysNavigation\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysNavigation\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Role\EditRole.cshtml" />
+    <Content Include="Views\Role\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\SysAdmin\Edit.cshtml" />
+    <Content Include="Views\SysAdmin\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserPointLog\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserLoginLog\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserGroup\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserGroup\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Activity\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ActPrize\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ActRecord\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AtcWinning\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Activity\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ActPrize\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Upload.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysDictionary\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\NoAccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Center.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\UserProfile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysDictionaryType\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysDictionary\DicManageIndex.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysDictionary\DicManageEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SysManagerLog\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\Insurance.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CustomerManagement\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CustomerManagement\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BillingManagementt\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MailTemplate\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MailTemplate\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\CheckIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RemindRule\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ReportManagement\ActualTradingPartyDealDetailed.cshtml" />
+    <Content Include="Views\ReportManagement\CommSourceIndex.cshtml" />
+    <Content Include="Views\ReportManagement\FinancialResourceInfo.cshtml" />
+    <Content Include="Views\ReportManagement\LoanSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Remind\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\Rollback.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\OrderRecord\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\DF_Finance_Publish.pubxml" />
+    <Content Include="Views\Orders\Billing.cshtml" />
+    <Content Include="Views\SysNavigation\DialogIconClass.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50792</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://www.df.com</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>活动列表</title>
+		<meta name="keywords" content="活动列表">
+		<meta name="description" content="活动列表">
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.0.0" rel="stylesheet">
+		<base target="_blank">
+
+	</head>
+
+	<body class="gray-bg">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>活动列表</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="row row-lg">
+
+					<div class="col-sm-12">
+						<!-- Example Pagination -->
+						<div class="example-wrap">
+							<div class="example">
+								<table id="exampleTablePagination" data-toggle="table" data-url="js/demo/bootstrap_table_test.json" data-query-params="queryParams" data-mobile-responsive="true" data-height="400" data-pagination="true" data-icon-size="outline" data-search="false">
+									<thead>
+										<tr>
+											<th data-field="name" data-halign="center" data-align="center">活动名称</th>
+											<th data-field="1" data-halign="center" data-align="center">活动时间</th>
+											<th data-field="2">活动状态</th>
+											<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-halign="center" data-align="center">操作
+											</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+						<!-- End Example Pagination -->
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 全局js -->
+		<script src="js/jquery.min.js?v=2.1.4"></script>
+		<script src="js/bootstrap.min.js?v=3.3.5"></script>
+
+		<!-- 自定义js -->
+		<script src="js/content.js?v=1.0.0"></script>
+
+		<!-- Bootstrap table -->
+		<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+		<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+		<script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+		<!-- Peity -->
+		<script src="js/demo/bootstrap-table-demo.js"></script>
+
+		<script>
+			function actionFormatter(value, row, index) {
+				return [
+					'<a class="like" href="javascript:void(0)" title="Like">',
+					'<i class="glyphicon glyphicon-heart"></i>',
+					'</a>',
+					'<a class="edit m-l" href="javascript:void(0)" title="Edit">',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>',
+					'<a class="remove m-l" href="javascript:void(0)" title="Remove">',
+					'<i class="glyphicon glyphicon-remove"></i>',
+					'</a>'
+				].join('');
+			}
+			window.actionEvents = {
+				'click .like': function(e, value, row, index) {
+					alert('You click like icon, row: ' + JSON.stringify(row));
+					console.log(value, row, index);
+				},
+				'click .edit': function(e, value, row, index) {
+					alert('You click edit icon, row: ' + JSON.stringify(row));
+					console.log(value, row, index);
+				},
+				'click .remove': function(e, value, row, index) {
+					alert('You click remove icon, row: ' + JSON.stringify(row));
+					console.log(value, row, index);
+				}
+			};
+		</script>
+	</body>
+
+</html>

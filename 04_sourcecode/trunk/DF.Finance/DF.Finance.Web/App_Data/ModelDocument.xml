@@ -1,0 +1,2172 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DF.Finance.Model</name>
+    </assembly>
+    <members>
+        <member name="T:DF.Finance.Model.Enums.RemindTypeEnums">
+            <summary>
+            提醒类型枚举
+            2016-05-26 jim
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Enums.OrderStatusEnum">
+            <summary>
+            订单状态枚举
+            2016-05-23 jim
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Enums.OrderActionEnum">
+            <summary>
+            订单状态操作
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.资料不完整">
+            <summary>
+            资料不完整
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.资料完整">
+            <summary>
+            资料完整
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.审批不通过">
+            <summary>
+            审批不通过
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.审批通过">
+            <summary>
+            审批通过
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.录入合同资料">
+            <summary>
+            录入合同资料
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.放款资料录入">
+            <summary>
+            放款资料录入
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.登记证操作">
+            <summary>
+            登记证操作
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.资料回邮">
+            <summary>
+            资料回邮
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.保险信息录入">
+            <summary>
+            保险信息录入
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderActionEnum.订单提醒备注">
+            <summary>
+            订单提醒备注
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Enums.OrderStatusEnumExtension">
+            <summary>
+            订单枚举状态扩展方法
+            </summary>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToClientAuditString(DF.Finance.Model.Enums.OrderStatusEnum)">
+            <summary>
+            审核状态 3种 
+            </summary>
+            <param name="status">状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToClientString(DF.Finance.Model.Enums.OrderStatusEnum)">
+            <summary>
+            转换成客户端显示订单状态名称
+            </summary>
+            <param name="status">状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToAdminString(DF.Finance.Model.Enums.OrderStatusEnum)">
+            <summary>
+            转换成后台管理端显示订单状态名称
+            </summary>
+            <param name="status">状态</param>
+            <returns></returns>
+        </member>
+        <member name="F:DF.Finance.Model.Enums.OrderStatusEnumExtension.allowStatus">
+            <summary>
+            往下一步
+            </summary>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.CheckToStatus(DF.Finance.Model.Enums.OrderStatusEnum,DF.Finance.Model.Enums.OrderStatusEnum)">
+            <summary>
+            检测源状态是否允许转换到目标状态（当前状态到下一个状态）
+            </summary>
+            <param name="sourceStatus">源状态</param>
+            <param name="targetStatus">目标状态</param>
+            <returns></returns>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.GetNextStatus(DF.Finance.Model.Enums.OrderStatusEnum,DF.Finance.Model.Enums.OrderActionEnum)">
+            <summary>
+            获取下一个扭转的状态值
+            </summary>
+            <param name="sourceStatus"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToPreviousStatusEnum(DF.Finance.Model.Enums.OrderStatusEnum)">
+            <summary>
+            获取可扭转到上一步的订单状态的枚举数组
+            </summary>
+            <param name="status">当前订单状态枚举</param>
+            <returns></returns>
+        </member>
+        <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.CheckToPrevious(DF.Finance.Model.Enums.OrderStatusEnum,DF.Finance.Model.Enums.OrderStatusEnum)">
+            <summary>
+            判断是否可以往上回滚订单状态
+            </summary>
+            <param name="Current">当前订单状态枚举值</param>
+            <param name="Previous">要扭转的订单状态枚举值</param>
+            <returns></returns>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.UserName">
+            <summary>
+            参与用户名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.UserId">
+             <summary>
+            用户id
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.ActName">
+             <summary>
+            活动名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.ActId">
+             <summary>
+            活动编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.AddTime">
+             <summary>
+            参加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActRecord.UserIP">
+             <summary>
+            用户IP
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.UserName">
+            <summary>
+            中奖用户名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.Title">
+            <summary>
+            活动名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.PrizeClass">
+            <summary>
+            奖项
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.ActId">
+             <summary>
+            活动编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.PrizeId">
+             <summary>
+            奖品编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.PrizeName">
+             <summary>
+            奖品名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.IsAward">
+             <summary>
+            是否已领奖
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.AwardTime">
+             <summary>
+            领奖时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.AwardPhone">
+             <summary>
+            获奖人手机号码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.UpdateTime">
+             <summary>
+            更新时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.AtcWinning.UpdateUserName">
+            <summary>
+            更新人
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.User">
+            <summary>
+            金融业代用户
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.IssueOrderCount">
+            <summary>
+            出单数
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.TotalLoanAmount">
+            <summary>
+            总的贷款金额
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.UserName">
+            <summary>
+            金融业代的姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.UserSalesList">
+            <summary>
+             销售顾问列表
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.CompanyName">
+             <summary>
+            公司名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.Address">
+             <summary>
+            公司地址
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.CompanyPhone">
+             <summary>
+            公司联系电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.Contacts">
+             <summary>
+            联系人
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.UserAgentId">
+             <summary>
+            金融业代编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.DistributionTime">
+             <summary>
+            分配日期
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.LastLoanTime">
+             <summary>
+            最后放款时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.DeleteFlag">
+             <summary>
+            删除标识0.正常 1.删除
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.AddUserId">
+             <summary>
+            添加人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.AddName">
+             <summary>
+            添加人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.UpdateUserId">
+             <summary>
+            修改人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.UpdateName">
+             <summary>
+            修改人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.CustomerManagement.UpdateTime">
+             <summary>
+            修改时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.OrderId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.ApprovalAmount">
+             <summary>
+            审批金额
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.ApprovalTime">
+             <summary>
+            审批通过时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.ContractNumber">
+             <summary>
+            贷款合同号码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.ContractTime">
+             <summary>
+            合同签订时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.BillingUnit">
+             <summary>
+            开票单位
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.LoanTime">
+             <summary>
+            放款时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.CheckInTime">
+             <summary>
+            登记证时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.RecoveryTime">
+             <summary>
+            登记收回时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.CheckInStatus">
+             <summary>
+            登记证状态
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderExtAttribute.MailingTime">
+             <summary>
+            资料邮寄时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.photo_name">
+            <summary>
+            保单资料图片地址
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.photo_remark">
+            <summary>
+            保单资料图片备注
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.OrderId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.InsuranceName">
+             <summary>
+            保险公司名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.InsuranceTime">
+             <summary>
+            保险日期
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.MaturityTime">
+             <summary>
+            保险到期日期
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.AddUserId">
+             <summary>
+            添加人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.AddName">
+             <summary>
+            添加人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.UpdateUserId">
+             <summary>
+            修改人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.UpdateName">
+             <summary>
+            修改人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.UpdateTime">
+             <summary>
+            修改时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsurance.Remark">
+             <summary>
+            备注
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.Insurance">
+            <summary>
+            订单保险信息
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.OrderRemindRemarks">
+            <summary>
+            订单提醒备注
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.OrderExtAttribute">
+            <summary>
+            订单扩展属性
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.OrderRecords">
+            <summary>
+            订单操作记录
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.StatusAdminName">
+            <summary>
+            后台订单的状态
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.StatusClientAuditName">
+            <summary>
+            客户端 的审核状态显示
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.UserAgentName">
+            <summary>
+            所属金融业代姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.Point">
+            <summary>
+            积分
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.Id">
+             <summary>
+            系统编号 自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.OrderNo">
+             <summary>
+            订单编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.Status">
+             <summary>
+            订单状态
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.UserAgentId">
+             <summary>
+            所属业代编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.UserSalesId">
+             <summary>
+            所属销售顾问编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.LCName">
+             <summary>
+            放贷公司名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.OldCar">
+             <summary>
+            新车/二手车
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.DepartmentName">
+             <summary>
+            部门名称（包含：区域，省份，城市） 以,隔开
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.AcquirerTime">
+             <summary>
+            收单时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.ApplicantName">
+             <summary>
+            申请人姓名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.ApplicantPhone">
+             <summary>
+            申请人电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.ApplicantIDCard">
+             <summary>
+            申请人身份证号码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.GuarantorName">
+             <summary>
+            担保人姓名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.GuarantorPhone">
+             <summary>
+            担保人电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.CoApplicantName">
+             <summary>
+            共申人姓名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.CoApplicantPhone">
+             <summary>
+            共申人电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.LoanProducts">
+             <summary>
+            贷款产品
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.LoanInterest">
+             <summary>
+            贷款利息类型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.DealersId">
+             <summary>
+            实际交易方id
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.DealersName">
+             <summary>
+            实际交易方名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.LoanLink">
+             <summary>
+            放款环节
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.SalesName">
+             <summary>
+            销售顾问姓名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.SalesPhone">
+             <summary>
+            销售顾问电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.CarBrand">
+             <summary>
+            汽车品牌
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.Models">
+             <summary>
+            车型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.CarWorth">
+             <summary>
+            车身价
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.LoanAmount">
+             <summary>
+            贷款金额
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.LoanTerm">
+             <summary>
+            贷款期限
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.AddName">
+             <summary>
+            添加人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.UpdateUserId">
+             <summary>
+            修改人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.UpdateName">
+             <summary>
+            修改人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.UpdateTime">
+             <summary>
+            修改时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.Remark">
+             <summary>
+            备注
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Order.DeleteFlag">
+             <summary>
+            删除标识0.正常 1.删除
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.OriginalStatusAdmin">
+            <summary>
+            后台订单的状态
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.TargetStatusAdmin">
+            <summary>
+            目标状态
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.OrderId">
+             <summary>
+            订单编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.OriginalState">
+             <summary>
+            原始状态
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.TargetState">
+             <summary>
+            目标状态
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.UserId">
+             <summary>
+            操作人id
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.UserName">
+             <summary>
+            操作人用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.RealName">
+             <summary>
+            操作人昵称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.Ip">
+             <summary>
+            操作人ip
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRecord.Remark">
+             <summary>
+            记录信息
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRemindRemark.RemindTypeName">
+            <summary>
+            类型名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRemindRemark.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRemindRemark.OrderId">
+             <summary>
+            订单编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRemindRemark.RemindType">
+             <summary>
+            提醒类型 1.未放款提醒 21.未收回提醒 22.未邮寄提醒 3.保险到期提醒 4.未放款提醒5.金融业代提醒 61.放款成功前端提醒 62.放款成功邮件提醒
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderRemindRemark.Remark">
+             <summary>
+            备注内容
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.PrizeCount">
+            <summary>
+            中奖人数
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.Level">
+            <summary>
+            层级
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.OldParentId">
+            <summary>
+            旧父级菜单
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.OperType">
+            <summary>
+            1添加 0修改
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.ChildList">
+            <summary>
+            子集
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.Name">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.Val">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.ParentId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.DicType">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.TypeCode">
+             <summary>
+            TypeCode标识
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.Remark">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.SortId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.IsHide">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionary.DeleteFlag">
+             <summary>
+            删除标识0.正常 1.删除
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.RemindTypeName">
+            <summary>
+            类型名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.ViewId">
+             <summary>
+            所属编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.RemindType">
+             <summary>
+            提醒类型 1.未放款提醒 21.未收回提醒 22.未邮寄提醒 3.保险到期提醒 4.未放款提醒5.金融业代提醒 61.放款成功前端提醒 62.放款成功邮件提醒
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.Reminder">
+             <summary>
+            提醒内容
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.UserId">
+             <summary>
+            通知用户
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.IsLock">
+             <summary>
+            是否隐藏
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.IsNoticeAdmin">
+             <summary>
+            是否通知管理员
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.SourceType">
+             <summary>
+            来源类型 1.订单 2.实际交易方
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.DeleteFlag">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Remind.IHaveRead">
+             <summary>
+            是否已读
+             </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.DictionaryManageView">
+            <summary>
+            后台字典显示
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.DictionaryManageView.SysDictionaryList">
+            <summary>
+            系统字典数据列表
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.DictionaryManageView.Total">
+            <summary>
+            数据总条数
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.DictionaryView">
+            <summary>
+            字典分类下面的字典数据
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.Item">
+            <summary>
+            字典数据
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.LoanDetailView">
+            <summary>
+            客户贷款详情
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.LoanDetailView.Order">
+            <summary>
+            订单
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.LoanDetailView.OrderRecord">
+            <summary>
+            订单记录
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.LoanDetailView.OpenTicketConpanyName">
+            <summary>
+            开票单位
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.MyAchievementView">
+            <summary>
+            金融业代 -我的业绩数据
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyAchievementView.LoanTotalAmount">
+            <summary>
+            贷款总金额
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyAchievementView.LoanTotalOrderCount">
+            <summary>
+            贷款总单数
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyAchievementView.UserAgentName">
+            <summary>
+            金融业代姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyAchievementView.OrderList">
+            <summary>
+            我的订单列表
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.MyPointView">
+            <summary>
+            销售顾问-我的积分
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyPointView.TotalPoint">
+            <summary>
+            总积分
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyPointView.SaleName">
+            <summary>
+            销售顾问姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyPointView.OrderList">
+            <summary>
+            我的订单列表
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.MyFinanceView">
+            <summary>
+            销售顾问-我的金融业代
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyFinanceView.UserAgentId">
+            <summary>
+            金融业代用户Id
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyFinanceView.UserName">
+            <summary>
+            金融业代用户姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyFinanceView.Mobile">
+            <summary>
+            金融业代手机
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyFinanceView.OrderCount">
+            <summary>
+            金融业代贷款订单数
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyFinanceView.OrderList">
+            <summary>
+            我的订单列表
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.PrizeView">
+            <summary>
+            抽奖结果页面结果数据
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Views.PrizeView.tels">
+            <summary>
+            参与抽奖的用户手机号
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Views.PrizeView.winners">
+            <summary>
+            中奖信息
+            </summary>
+        </member>
+        <member name="F:DF.Finance.Model.Views.PrizeView.awardgrades">
+            <summary>
+            奖项信息
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.PrizeView.activity">
+            <summary>
+            抽奖活动
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.AwardGrade.type">
+            <summary>
+            奖项 
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.AwardGrade.typeName">
+            <summary>
+            奖项名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.AwardGrade.WinningCount">
+            <summary>
+            中奖数
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ActWinning.name">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ActWinning.tel">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ActWinning.type">
+            <summary>
+            奖项 
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ActWinning.typeName">
+            <summary>
+            奖项名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.Tels.userId">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.Tels.UserName">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.Tels.Mobile">
+            <summary>
+            用户手机号码
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.Tels.PrizeClass">
+            <summary>
+            奖项类型
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.Role">
+            <summary>
+            用户所属的角色
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.RoleId">
+             <summary>
+            角色ID
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.RoleType">
+             <summary>
+            管理员类型 1超管2系统管理员
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.UserName">
+             <summary>
+            用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.PassWord">
+             <summary>
+            登录密码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.Salt">
+             <summary>
+            6位随机字符串,加密用到
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.RealName">
+             <summary>
+            用户昵称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.TelePhone">
+             <summary>
+            联系电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.Email">
+             <summary>
+            电子邮箱
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.IsLock">
+             <summary>
+            是否锁定
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.AddTime">
+            <summary>
+            添加时间
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManage.UserName2">
+             <summary>
+            用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRole.RoleValueList">
+            <summary>
+            权限集合
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRole.ActionTypeList">
+            <summary>
+            权限类型集合
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRole.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRole.RoleName">
+             <summary>
+            角色名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRole.RoleType">
+             <summary>
+            角色类型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRole.IsSys">
+             <summary>
+            是否系统默认
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.ClassLayer">
+            <summary>
+            层级样式
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.OldParentId">
+            <summary>
+            旧父级菜单
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.ProcType">
+            <summary>
+            操作类型
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.NavigationList">
+            <summary>
+            二级导航，因模板只支持二级
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.ParentId">
+             <summary>
+            所属父导航ID
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.ActionType">
+             <summary>
+            权限资源
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.Name">
+             <summary>
+            导航名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.Title">
+             <summary>
+            标题
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.SubTitle">
+             <summary>
+            副标题
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.IconUrl">
+             <summary>
+            图片地址
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.LinkUrl">
+             <summary>
+            链接地址
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.SortId">
+             <summary>
+            排序数字
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.IsLock">
+             <summary>
+            是否隐藏0显示1隐藏
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.IsSys">
+             <summary>
+            系统默认
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.Remark">
+             <summary>
+            备注说明
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysNavigation.IconClass">
+             <summary>
+            导航图标样式
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserLoginLog.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserLoginLog.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserLoginLog.UserName">
+             <summary>
+            用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserLoginLog.LoginTime">
+            <summary>
+            登录时间
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserLoginLog.LoginIP">
+            <summary>
+            登录IP
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserLoginLog.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.UserName">
+             <summary>
+            用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.Value">
+             <summary>
+            增减积分
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.AddTime">
+             <summary>
+            操作时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.SourceType">
+             <summary>
+            来源类型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserPointLog.SourceId">
+             <summary>
+            来源编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsuranceImg.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsuranceImg.InsuranceId">
+             <summary>
+            保险编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsuranceImg.ImgPath">
+             <summary>
+            图片路径
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.OrderInsuranceImg.Remark">
+             <summary>
+            备注
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionaryType.Id">
+             <summary>
+            自动增长
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionaryType.TypeName">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionaryType.TypeCode">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysDictionaryType.IsSys">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.ActId">
+             <summary>
+            活动编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.PrizeName">
+             <summary>
+            奖品名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.Quantity">
+             <summary>
+            奖品数量
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.AddUserName">
+             <summary>
+            添加人
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.WQuantity">
+             <summary>
+            已中数量
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.ErnienNum">
+            <summary>
+            每次摇奖数量
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.PrizeClass">
+             <summary>
+            奖项类别
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.NumberOfAwards">
+             <summary>
+            设奖名额
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.ActPrize.PrizeImg">
+             <summary>
+            奖品图片
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SmsCode.Id">
+             <summary>
+            自动增长
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SmsCode.Mobile">
+             <summary>
+            用户手机号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SmsCode.VerCode">
+             <summary>
+            短信验证码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SmsCode.SourceType">
+             <summary>
+            验证码来源 1.注册 2.绑定手机号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SmsCode.FailTime">
+             <summary>
+            失效时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.UserName">
+             <summary>
+            用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.ActionType">
+             <summary>
+            操作类型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.Remark">
+             <summary>
+            备注
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.UserIP">
+             <summary>
+            用户IP
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerLog.AddTime">
+             <summary>
+            操作时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.GroupId">
+            <summary>
+            用户组ID
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.UserName">
+             <summary>
+            用户名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Salt">
+             <summary>
+            6位随机字符串,加密用到
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.PassWord">
+             <summary>
+            用户密码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Mobile">
+             <summary>
+            用户手机
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Email">
+             <summary>
+            电子邮箱
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Avatar">
+             <summary>
+            用户头像
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Sex">
+             <summary>
+            性别
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Birthday">
+             <summary>
+            生日
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.TelPhone">
+             <summary>
+            电话
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.IDCard">
+             <summary>
+            身份证
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Area">
+             <summary>
+            所属地区逗号分隔
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Address">
+             <summary>
+            详细地址
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.QQ">
+             <summary>
+            QQ号码
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Point">
+             <summary>
+            账户积分
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.Status">
+             <summary>
+            账户状态,0正常,1待验证,2待审核,3锁定
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.RegTime">
+             <summary>
+            注册时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.RegIp">
+             <summary>
+            注册
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.User.RemindCount">
+            <summary>
+            提醒的消息数量
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.Title">
+             <summary>
+            活动名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.Address">
+             <summary>
+            活动地址
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.ActType">
+             <summary>
+            活动类型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.StartTime">
+             <summary>
+            开始时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.EndTime">
+             <summary>
+            结束时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.AddUserName">
+             <summary>
+            添加人
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.UpdateTime">
+             <summary>
+            更新时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.UpdateUserName">
+             <summary>
+            更新人
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.DeleteFlag">
+             <summary>
+            删除标识 0.正常 1.删除
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.Description">
+             <summary>
+            活动细则
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.ActLink">
+             <summary>
+            活动链接
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.IsLock">
+             <summary>
+            是否锁定
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.ActVideoSrc">
+             <summary>
+            活动视频连接地址
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.ActImg">
+             <summary>
+            活动图片
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.SortId">
+             <summary>
+            排序
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Activity.Remark">
+             <summary>
+            备注
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRoleValue.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRoleValue.RoleId">
+             <summary>
+            角色Id
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRoleValue.NavName">
+             <summary>
+            导航名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.SysManagerRoleValue.ActionType">
+             <summary>
+            权限类型
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.Start">
+             <summary>
+            开始
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.End">
+             <summary>
+            结束
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.UnitTyep">
+             <summary>
+            单位类型 1.天 2.月
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.FirstDay">
+             <summary>
+            多少天一次
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.RemindType">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.Remark">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.ReplaceText">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.ForOrderState">
+             <summary>
+            针对订单状态
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.RemindRule.AnalyzingField">
+             <summary>
+            对比字段
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserAgent.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserAgent.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserAgent.Department">
+             <summary>
+            部门 以,隔开
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.CompanyName">
+             <summary>
+            公司名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.DeleteFlag">
+             <summary>
+            删除标识0.正常 1.删除
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.AddTime">
+             <summary>
+            添加时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.AddUserId">
+             <summary>
+            添加人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.AddName">
+             <summary>
+            添加人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.UpdateUserId">
+             <summary>
+            修改人编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.UpdateName">
+             <summary>
+            修改人名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.BillingManagementt.UpdateTime">
+             <summary>
+            修改时间
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserClient.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserClient.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserClient.ApprovedTime">
+             <summary>
+            审批通过日期
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserClient.PrizeCount">
+            <summary>
+            抽奖次数
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserGroup.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserGroup.Title">
+             <summary>
+            组别名称
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserGroup.Point">
+             <summary>
+            默认积分
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserGroup.IsLock">
+             <summary>
+            是否禁用
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserGroup.IsSys">
+             <summary>
+            是否系统默认认组别，不可删除
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.DBOrderNum">
+             <summary>
+            兑吧订单号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.UsreId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.Status">
+             <summary>
+            处理状态：0 未处理 1已处理
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.DBJson">
+             <summary>
+            返回参数序列化成json格式存储在此参数
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.Remark">
+             <summary>
+            备注内容
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.DBOrder.DBCredits">
+             <summary>
+            兑吧扣除积分
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserSale.Id">
+             <summary>
+            编号自增
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserSale.UserId">
+             <summary>
+            用户编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserSale.DealersId">
+             <summary>
+            车行编号
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.Id">
+             <summary>
+            自动增长
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.IsSys">
+             <summary>
+            是否系统默认
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.Code">
+             <summary>
+            调用别名
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.MailTitle">
+             <summary>
+            邮件标题
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.Title">
+             <summary>
+            模板标题
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.Content">
+             <summary>
+            邮件内容
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.MailTemplate.Description">
+             <summary>
+            替换关键词描述
+             </summary>
+        </member>
+        <member name="P:DF.Finance.Model.UserSales.OrderList">
+            <summary>
+             销售订单列表
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.ReportDealDetailsView">
+            <summary>
+            实际交易方成交清单 报表详情
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanTime">
+            <summary>
+            放款日期
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.AgentUserName">
+            <summary>
+            金融业代姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.DealersName">
+            <summary>
+            实际交易方名称
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApprovalAmount">
+            <summary>
+            贷款金额 审批通过的金额
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LCName">
+            <summary>
+            放款金融公司
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.OldCar">
+            <summary>
+            新车/二手车
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.AcquirerTime">
+            <summary>
+            收单日期
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApplicantName">
+            <summary>
+            贷款人姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApplicantPhone">
+            <summary>
+            贷款人电话
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApplicantIDCard">
+            <summary>
+            贷款人身份证号码
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.GuarantorName">
+            <summary>
+            担保人姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.GuarantorPhone">
+            <summary>
+            担保人电话
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CoApplicantName">
+            <summary>
+            共申人姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CoApplicantPhone">
+            <summary>
+            共申人电话
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanProducts">
+            <summary>
+            贷款产品
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanInterest">
+            <summary>
+            贷款利息类型
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanLink">
+            <summary>
+            放款环节
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.SalesName">
+            <summary>
+            销售顾问姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.SalesPhone">
+            <summary>
+            销售顾问电话
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CarBrand">
+            <summary>
+            汽车品牌
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.Models">
+            <summary>
+            车型
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CarWorth">
+            <summary>
+            车身价
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanAmount">
+            <summary>
+            贷款金额 未审批的金额
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanTerm">
+            <summary>
+            贷款期限
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.OrderId">
+            <summary>
+            订单Id
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.UserSaleView">
+            <summary>
+            app端销售顾问列表
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.UserSaleView.UserId">
+            <summary>
+            销售顾问Id
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.UserSaleView.UserName">
+            <summary>
+            销售顾问姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.UserSaleView.Mobile">
+            <summary>
+            销售顾问手机
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.UserSaleView.OrderCount">
+            <summary>
+            销售顾问单数
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.SendSmsCode">
+            <summary>
+            发送短信验证码信息
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.UserRegister">
+            <summary>
+            注册用户信息
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.PersonCenterView">
+            <summary>
+            金融业代-个人中心
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.PersonCenterView.UserName">
+            <summary>
+            金融业代姓名
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.PersonCenterView.HeaderSrc">
+            <summary>
+            金融业代头像路径
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.PersonCenterView.Address">
+            <summary>
+            金融业代区域地址
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.PersonCenterView.RemindCount">
+            <summary>
+            提醒的消息数量
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.PersonCenterView.Mobile">
+            <summary>
+            绑定手机号
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.CustomerManagementView">
+            <summary>
+            实际交易方
+            </summary>
+        </member>
+        <member name="T:DF.Finance.Model.Views.MyPoint">
+            <summary>
+            我的积分
+            </summary>
+        </member>
+        <member name="P:DF.Finance.Model.Views.MyPoint.PointList">
+            <summary>
+            积分列表
+            </summary>
+        </member>
+    </members>
+</doc>

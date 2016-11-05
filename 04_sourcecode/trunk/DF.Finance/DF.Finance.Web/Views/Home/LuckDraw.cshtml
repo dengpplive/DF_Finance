@@ -1,0 +1,203 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <link href="~/_R/css/raffle.css" rel="stylesheet" />
+    <title>
+        抽奖
+    </title>
+</head>
+<body>
+    <div class="main">
+        <div class="top">
+            <div data-bind="text:currenNum()" id="winning_num">
+                00000000000
+            </div>
+            <a href="javascript:void(0)" data-bind="click:start" type="button" id="btn_start">
+            </a>
+        </div>
+        <div class="md1">
+            <div data-bind="foreach:prizes,css:{'pt105':prizes().length<5,'pt80':prizes().length>4,'text-center':prizes().length<4}" style="padding-left: 25px; padding-right: 25px; height: 211px; ">
+                <a href="javascript:void(0)" style="margin-left:10px;margin-top:10px" data-bind="css:{'on':$data==$root.currentPrize()[0]},click:$root.setCurrentPrize,text:Name+'（'+PrizeCount+'）'" class="btn_raffle_type">特等奖 </a>
+            </div>
+
+            <div class="tb_header">
+                <span style="margin-left:25px">序号</span>
+                <span style="margin-left:40px">奖项</span>
+                <span style="margin-left:120px">姓名</span>
+                <span style="margin-left:312px">手机号码</span>
+            </div>
+            <ul class="color-orange" id="winnerList">
+                <!-- ko if: currentPrize().length>0&&currentPrize()[0].hasOwnProperty("Id") -->
+                <!-- ko foreach: currentPrize()[0].winners -->
+                <li style="margin-top:10px">
+                    <span style="margin-left:14px;width:32px;text-align:right" data-bind="text:$index()+1+'.'"></span>
+                    <span style="margin-left:45px" data-bind="text:$root.currentPrize()[0].Name"></span>
+                    <span style="margin-left:110px" data-bind=" text:name"></span>
+                    <span style="margin-left:312px" data-bind=" text:tel"></span>
+                </li>
+                <!-- /ko-->
+                <!-- /ko-->
+            </ul>
+        </div>
+
+        <div class="md2 " >
+            <div class="color-orange" data-bind="html:rulehtml">
+            </div>
+        </div>
+        <div class="foot">
+            <div>
+                Copyright© 2014-2015学车易版权所有   All Rights Reserved  粤ICP备14080704号-1
+            </div>
+        </div>
+    </div>    
+    <script src="/_R/js/lib/jquery-1.12.2.js"></script>
+    <script src="/_R/js/lib/knockout-3.4.0.min.js"></script>
+    <script type="text/javascript">
+        var viewModel = function () {
+            window.viewModel = this;
+            var self = this;
+            //单击事件
+            self.setCurrentPrize = function (prize) {
+                if (!self.isRunning) {
+                    self.currentPrize.replace(self.currentPrize()[0], prize);
+                    if (!self.currentPrize()[0].isOver)
+                        self.telArrIndex(0);
+                }
+            }
+            //初始化基本的属性
+            self.prizes = ko.observableArray();
+            self.currentPrize = ko.observableArray();
+            self.telArr = ko.observableArray();
+            self.currenNum = ko.observable("00000000000");
+            self.luckyArr = ko.observableArray();
+            self.winners = ko.observableArray();
+            self.rulehtml = ko.observable('');
+            //索引
+            self.telArrIndex = ko.observable(0);
+            self.isRunning = false;
+            //清零
+            self.resetProperty = function () {
+                self.prizes.removeAll();
+                self.currentPrize.removeAll();
+                self.telArr.removeAll();
+                self.currenNum("00000000000");
+                self.luckyArr.removeAll();
+                self.winners.removeAll();
+                self.isRunning = false;
+                self.telArrIndex(0);
+            }
+
+            //返回数据设置显示的数据
+            self.setData = function (data, prizes, activity) {
+                self.rulehtml(activity.Description);
+                for (var i = 0; i < prizes.length; i++) {
+                    prizes[i].winners = ko.observableArray();
+                    prizes[i].isOver = false;
+                }
+                self.prizes(prizes);
+                self.currentPrize.push(prizes[0]);
+                self.winners(data.winners);
+                self.telArr(data.tels);
+                //中奖数组
+                var _luckyArr = [];
+                var c = self.winners().length;
+                for (var i = 0; i < c; i++) {
+                    _luckyArr.push(self.winners()[i].tel);
+                }
+                self.luckyArr(_luckyArr);
+                self.isRunning = false;
+            }
+            //初始化中奖数据
+            self.initData = function () {
+                if (self.isRunning) {
+                    return
+                }
+                //重置
+                //self.resetProperty();
+                self.isRunning = true;
+                $.ajax({
+                    type: 'GET',
+                    url: "@Url.Action("GetData", "Home")",
+                    dataType: "json",
+                    success: function (res) {
+                        var prizes = res.prizes;
+                        var data = res.data;
+                        var activity = res.activity;
+                        //填充数据
+                        self.setData(data, prizes, activity);
+                    },
+                    error: function (res) {
+                        //console.log(res);
+                    }
+                });
+            }
+            var runTime = 50;//抽取每个号码的时间间隔
+            var prizeTime = 500;//抽取每个奖项的时间间隔
+            self.start = function () {
+                var prize = self.currentPrize()[0];
+                if (self.isRunning || (prize != null && prize.isOver)) {
+                    return;
+                }
+                self.isRunning = true;
+                var intev = setInterval(function () {
+                    try {
+                        var curIndex = self.telArrIndex();
+                        var curNum = self.telArr()[curIndex];
+                        self.currenNum(curNum);
+                        var isclear = "A";
+                        //console.log(curIndex + ":" + curNum);
+                        if (self.luckyArr().indexOf(self.currenNum()) > -1) {
+                            var index = self.luckyArr().indexOf(self.currenNum());
+                            var winner = self.winners()[index];
+                            if (winner && (self.currentPrize().length > 0 && winner.type == self.currentPrize()[0].Id)) {
+                                prize = self.currentPrize()[0];
+                                prize.winners().push(winner);
+                                self.currentPrize(self.currentPrize());
+                                document.getElementById('winnerList').scrollTop = document.getElementById('winnerList').scrollHeight;
+
+                                clearInterval(intev);
+                                isclear = "B";
+                                if (prize.winners().length >= parseInt(prize.PrizeCount)) {
+                                    self.isRunning = false;
+                                    prize.isOver = true;
+                                } else {
+                                    setTimeout(function () {
+                                        self.isRunning = false;
+                                        self.start();
+                                    }, prizeTime);
+                                }
+
+                            }
+                        }
+                        self.telArrIndex(self.telArrIndex() + 1);
+                        //console.log(curIndex + ":" + curNum + " --telArrIndex:" + self.telArrIndex() + " clear:" + isclear);
+                        if (self.telArrIndex() > self.telArr().length - 1) {
+                            clearInterval(intev);
+                            if (prize != null) {
+                                prize.isOver = true;
+                                self.isRunning = false;
+                            }
+                        }
+                    } catch (e) {
+                        //console.log("exception:" + e.message);
+                    }
+                }, runTime);
+            }
+        }
+        $(function () {
+            var vm = new viewModel();
+            vm.initData();
+            ko.applyBindings(vm);
+        })
+
+    </script>
+</body>
+</html>

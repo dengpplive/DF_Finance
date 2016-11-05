@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "金融业代-客户管理";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no" />
+    <title>客户管理</title>
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/_R/css/sui.css">
+    <link href="http://cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
+    <link href="~/_R/css/main.css" rel="stylesheet">
+    <style>
+        .col-40 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-left: 0.25rem;
+        }
+    </style>
+</head>
+<body class="page">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav theme-dark">
+        <a class="icon icon-left pull-left back color-white"></a>
+        <h1 class="title">客户管理</h1>
+    </header>
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab">
+        <a class="tab-item external active" href="index.html">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item external" href="edit.html">
+            <span class="icon icon-edit"></span>
+            <span class="tab-label">录入资料</span>
+        </a>
+        <a class="tab-item external" href="check.html">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">审查核实</span>
+        </a>
+        <a class="tab-item external" href="#">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+            <span class="badge">2</span>
+        </a>
+    </nav>
+    <!-- 这里是页面内容区 -->
+    <div class="content text-center">
+        <div class="row p-y-1 bg-white color-content">
+            <div class="col-33">公司名称</div>
+            <div class="col-33">联系人</div>
+            <div class="col-33">联系电话</div>
+        </div>
+        <div class="list-block m-t-0">
+            <ul class="bg-color">
+                <li class="item-content item-link p-l-0">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner m-l-0">
+                        <a href="clientDetail.html" class="row width-full  no-gutter color-content font-sm">
+                            <div class="col-40 text-left">
+                                东莞市奇瑞4S店
+                            </div>
+                            <div class="col-20 text-right">
+                                李先生
+                            </div>
+                            <div class="col-40 word-break-all text-right">
+                                13928498865
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="item-content item-link p-l-0">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner m-l-0">
+                        <a href="clientDetail.html" class="row width-full  no-gutter color-content font-sm">
+                            <div class="col-40 text-left ">
+                                东莞市dddddd奇瑞4S店
+                            </div>
+                            <div class="col-20 text-right">
+                                李先生
+                            </div>
+                            <div class="col-40 word-break-all text-right">
+                                13928498865
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>  
+
+    <script src="~/_R/js/lib/zepto.js"></script>
+    <script src="~/_R/js/lib/sm.js"></script>
+    <script src="~/_R/js/lib/knockout-3.4.0.js"></script>
+    <script src="http://cdn.bootcss.com/Swiper/3.3.1/js/swiper.min.js"></script>
+    <script src="~/_R/js/app.js"></script>
+
+    <script>
+        ko.applyBindings(new SalesLoginViewModel());
+    </script>
+
+</body>
+</html>
+

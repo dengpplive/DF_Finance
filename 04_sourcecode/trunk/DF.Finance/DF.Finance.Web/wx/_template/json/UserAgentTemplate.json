@@ -1,0 +1,117 @@
+﻿{
+    "Code": 1,
+    "Msg": "OK",
+    "Data": {
+        "GlobalConfiguration": {
+            "Title": "",
+            "HomeId": "AgentIndex"
+        },
+        "ListPage": [
+            {
+                "Id": "AgentLogin",
+                "PageLinks": "/wx/UserAgent/Login.html",
+                "Title": "登录",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentSignin",
+                "PageLinks": "/wx/UserAgent/Signin.html",
+                "Title": "注册",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentIndex",
+                "PageLinks": "/wx/UserAgent/Index.html",
+                "Title": "首页",
+                "Preloading": "AgentEntry",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentEntry",
+                "PageLinks": "/wx/UserAgent/Entry.html",
+                "Title": "录入资料",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentClientManage",
+                "PageLinks": "/wx/UserAgent/ClientManage.html",
+                "Title": "客户管理",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentClientDetail",
+                "PageLinks": "/wx/UserAgent/ClientDetail.html",
+                "Title": "客户详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentSalesCounselorDetail",
+                "PageLinks": "/wx/UserAgent/SalesCounselorDetail.html",
+                "Title": "销售顾问详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentLoanDetail",
+                "PageLinks": "/wx/UserAgent/LoanDetail.html",
+                "Title": "贷款详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentApprovalList",
+                "PageLinks": "/wx/UserAgent/ApprovalList.html",
+                "Title": "审核查询",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentMe",
+                "PageLinks": "/wx/UserAgent/Me.html",
+                "Title": "个人中心",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentMessageList",
+                "PageLinks": "/wx/UserAgent/MessageList.html",
+                "Title": "提醒消息",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentMessageDetail",
+                "PageLinks": "/wx/UserAgent/LoanDetail.html",
+                "Title": "提醒详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentAccomplish",
+                "PageLinks": "/wx/UserAgent/Accomplish.html",
+                "Title": "我的业绩",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "AgentChangeMobile",
+                "PageLinks": "/wx/UserAgent/ChangeMobile.html",
+                "Title": "绑定手机",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "AgentChangePwd",
+                "PageLinks": "/wx/UserAgent/ChangePwd.html",
+                "Title": "修改密码",
+                "Preloading": "",
+                "AreReacquire": false
+            }
+        ]
+    }
+}

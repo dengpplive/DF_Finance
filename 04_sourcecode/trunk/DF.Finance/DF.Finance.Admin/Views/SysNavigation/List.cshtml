@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch", successCallback, false, false);
+            oTableObj.Init();
+            //2.初始化Button的点击事件
+            var oButtonInit = new ButtonInit(oTableObj);
+            oButtonInit.Init();
+
+
+        });
+        var ButtonInit = function (oTableObj) {
+            var oInit = new Object();
+            oInit.Init = function () {
+                //新增数据click事件注册
+                $("#btn_add").click(function () {
+                    location.href = "@Url.Action("Edit", "SysNavigation")" + "?Id=0&procType=add";
+                });
+
+                //删除数据click事件注册
+                $("#btn_delete").click(function () {
+                    oTableObj.Delete("@Url.Action("Delete", "SysNavigation")");
+                });
+
+            };
+            return oInit;
+        };
+
+        //显示
+        function fat_islock(value, row, index) {
+            return (value == 0 ? "√" : "×");
+        }
+        //操作
+        function fat_oper(value, row, index) {
+            return String.format('<a href="/SysNavigation/Edit/{0}?procType=add">添加子级</a>&nbsp;&nbsp;&nbsp;<a href="/SysNavigation/Edit/{1}">修改</a>', row.Id, row.Id);
+        }
+        //处理排序
+        function fat_sortid(value, row, index) {
+            return String.format('<input id="SortId" name="SortId" class="form-control" data-id="{1}" data-value="{0}" style="width:100px;display:inherit;" type="text" value="{0}"    >', row.SortId, row.Id);
+        }
+        //处理标题
+        function fat_title(value, row, index) {
+            var litStyle = "<span style=\"display:inline-block;width:{0}px;\"></span>{1}{2}";
+            var litImg1 = "<span class=\"folder-open\"></span>";
+            var litImg2 = "<span class=\"folder-line\"></span>";
+            var html = String.format('<a href="/SysNavigation/Edit/{0}">{1}</a>', row.Id, row.Title);
+            if (row.ClassLayer == 1) {
+                return litImg1 + html;
+            }
+            return String.format(litStyle, (row.ClassLayer - 1) * 24, litImg1, litImg2) + html + (row.LinkUrl == "" ? "" : String.format("&nbsp;&nbsp;( 链接：{0} )", row.LinkUrl));
+        }
+        //修改排序
+        function successCallback() {
+            $("input[name=SortId]").change(function () {
+                //设置只能输入数字
+                console.log($(this).val().length);
+                if (!isPInt($(this).val()) || $(this).val().length > 6) {
+                    $(this).val($(this).attr("data-value"));
+                    MsgBox.Timer("请输入正确的排序值", " ", 1000, "error", false);
+                } else {
+                    DFCommon.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("UpdateSortId", "SysNavigation")",
+                        data: { Id: $(this).attr("data-id"), SortId: $(this).val() },
+                        dataType: "json",
+                        success: function (data, res) {
+                            if (res.Code == 1)
+                                $("#tb_roles").bootstrapTable('refresh');
+                            else {
+                                MsgBox.Error("错误", res);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        //验证是否是正整数
+        function isPInt(str) {
+            var g = /^[1-9]*[1-9][0-9]*$/;
+            return g.test(str);
+        }
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+
+    <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetAjaxList", "SysNavigation")" data-query="#btn_query" data-table="#tb_roles"></form>
+
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+
+        <button id="btn_delete" type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="tb_roles" data-filter-control="false">
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="Name" data-halign="center" data-align="center" data-filter-control="input">调用名称</th>
+                <th data-field="Title" data-halign="left" data-align="left" data-formatter="fat_title">标题</th>
+                <th data-field="IsLock" data-halign="center" data-align="center" data-formatter="fat_islock">显示</th>
+                <th data-field="SortId" data-halign="center" data-align="center" data-formatter="fat_sortid">排序</th>
+                <th data-field="Id" data-formatter="fat_oper" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>

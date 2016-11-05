@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = ViewBag.title;
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Activity";
+}
+@using DF.Finance.Model
+@section css
+{
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/ueditor/ueditor.config.js"></script>
+    <script src="~/ueditor/ueditor.all.min.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function submits() {
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            postData = $("#form1").serializeObject(postData);
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEdit", "Activity")",
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1)
+                        MsgBox.Success("保存成功", "");
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            //上传图片
+            $(".upload-img").InitUploader({});
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            //日期框
+            laydate({
+                elem: '#aty_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#aty_endtime',
+                event: 'focus'
+            });
+            //初始化表单验证
+            $("#form1").initValidform(submits);
+            //初始化编辑器
+            DFCommon.UELoad();
+        });
+    </script>
+}
+<form class="form-horizontal" id="form1">
+    <div class="panel-body" style="padding:0px;margin:5px;">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">@(ViewBag.title)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动名称：</label>
+                            <div class="col-sm-3">
+                                <input id="txtTitle" name="Title" class="form-control" type="text" value="@Model.Title" ajaxurl="@Url.Action("Exist", "Activity", new  { Id=Model.Id})" datatype="*1-150">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label">活动时间：</label>
+                            <div class="col-sm-4">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <input name="StartTime" id="aty_starttime" class="laydate-icon form-control layer-date" value="@Model.StartTime.ToString("yyyy-MM-dd")">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <input name="EndTime" id="aty_endtime" class="laydate-icon form-control layer-date" value="@Model.EndTime.ToString("yyyy-MM-dd")">
+                                    </div>
+                                    <div class="col-sm-2"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label">活动类型：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="ActType" id="ActType" datatype="*" nullmsg="请选择活动类型" data-selval="@Model.ActType">
+                                    <option value="">--活动类型--</option>
+                                    @{
+                                        foreach (SysDictionary item in ViewBag.dicModel)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动状态：</label>
+                            <div class="col-sm-2  radio i-checks">
+                                <label>
+                                    <input type="radio" value="0" name="IsLock" @(Model.IsLock == 0 || Model.Id == 0 ? "checked=checked" : "")> <i></i>开启
+                                    <input type="radio" value="1" name="IsLock" @(Model.IsLock == 1 ? "checked=checked" : "")> <i></i>关闭
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动链接：</label>
+                            <div class="col-sm-3">
+                                <input id="txtActLink" name="ActLink" class="form-control" type="text" value="@Model.ActLink" datatype="url" maxlength="255">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动视频链接：</label>
+                            <div class="col-sm-3">
+                                <input id="txtActVideoSrc" name="ActVideoSrc" class="form-control" type="text" value="@Model.ActVideoSrc" datatype="url" maxlength="255">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动图片：</label>
+                            <div class="col-sm-3">
+                                <input id="txtActImg" name="ActImg" class="form-control upload-path" type="text" value="@Model.ActImg" datatype="*1-255" nullmsg="请上传活动图片">
+                            </div>
+                            <span class="upload-img"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动地址：</label>
+                            <div class="col-sm-3">
+                                <input id="txtAddress" name="Address" class="form-control" type="text" datatype="*1-255" maxlength="255" value="@Model.Address">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动备注：</label>
+                            <div class="col-sm-3">
+                                <textarea id="txtRemark" name="Remark" class="form-control" datatype="*1-255" maxlength="255">@Model.Remark</textarea>
+                            </div>
+                        </div><div class="form-group">
+                            <label class="col-sm-2 control-label">排序：</label>
+                            <div class="col-sm-3">
+                                <input id="txtSortId" name="SortId" class="form-control" type="text" value="@Model.SortId" datatype="n">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动细则：</label>
+                            <div class="col-sm-8">
+                                @*<textarea class="form-control" name="Description" id="txtDescription" datatype="*1-2000" maxlength="2000">@Model.Description</textarea>*@
+                                <script id="Content" name="Description" type="text/plain">
+                                    @Html.Raw(Model.Description)
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+        </div>
+    </div>
+</form>
+

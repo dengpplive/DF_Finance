@@ -1,0 +1,110 @@
+﻿{
+    "Code": 1,
+    "Msg": "OK",
+    "Data": {
+        "GlobalConfiguration": {
+            "Title": "",
+            "HomeId": "UserSaleIndex"
+        },
+        "ListPage": [
+            {
+                "Id": "UserSaleLogin",
+                "PageLinks": "/wx/UserSales/Login.html",
+                "Title": "登录",
+                "Preloading": "UserSaleLogin",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserSaleSignin",
+                "PageLinks": "/wx/UserSales/Signin.html",
+                "Title": "注册",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserSaleIndex",
+                "PageLinks": "/wx/UserSales/Index.html",
+                "Title": "首页",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserSaleMe",
+                "PageLinks": "/wx/UserSales/Me.html",
+                "Title": "个人中心",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSaleMessageList",
+                "PageLinks": "/wx/UserSales/MessageList.html",
+                "Title": "消息提醒",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSaleAccomplish",
+                "PageLinks": "/wx/UserSales/Accomplish.html",
+                "Title": "我的积分",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSalePointsDetail",
+                "PageLinks": "/wx/UserSales/PointsDetail.html",
+                "Title": "积分详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserSaleMessageDetail",
+                "PageLinks": "/wx/UserSales/LoanDetail.html",
+                "Title": "消息详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserSaleLoadDetail",
+                "PageLinks": "/wx/UserSales/LoanDetail.html",
+                "Title": "贷款详情",
+                "Preloading": "",
+                "AreReacquire": true
+            },
+            {
+                "Id": "UserSaleChangeMobile",
+                "PageLinks": "/wx/UserSales/ChangeMobile.html",
+                "Title": "绑定手机",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSaleChangePwd",
+                "PageLinks": "/wx/UserSales/ChangePwd.html",
+                "Title": "修改密码",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSaleChangeEmail",
+                "PageLinks": "/wx/UserSales/ChangeEmail.html",
+                "Title": "修改邮箱",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSaleMyFinancialBusiness",
+                "PageLinks": "/wx/UserSales/MyFinancialBusiness.html",
+                "Title": "我的金融业代",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "UserSaleMyFinancialBusinessDeatil",
+                "PageLinks": "/wx/UserSales/MyFinancialBusinessDeatil.html",
+                "Title": "金融业代详情",
+                "Preloading": "",
+                "AreReacquire": true
+            }
+        ]
+    }
+}

@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "导航编辑";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "sysNavigation";
+}
+@using DF.Finance.Model
+@model DF.Finance.Model.SysNavigation
+<form class="form-horizontal m-t" id="form1">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true"> 基本信息</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">上级导航：</label>
+                                <div class="col-sm-3">
+
+                                    <select class="form-control m-b" name="ParentId" id="ParentId" data-selval="@Model.Id">
+                                        @{
+                                            foreach (var item in ViewBag.NavDic.Keys)
+                                            {
+                                                <option value="@item">@ViewBag.NavDic[item]</option>
+                                            }
+                                        }
+                                    </select>
+                                    <input name="OldParentId" value="@Model.ParentId" type="hidden" data-noval="false" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序数字：</label>
+                                <div class="col-sm-1">
+                                    <input id="SortId" name="SortId" class="form-control" type="text" datatype="n">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"> *数字，越小越向前</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">是否隐藏：</label>
+                                <div class="col-sm-2  radio i-checks">
+                                    <label>
+                                        <input type="radio" value="0" name="IsLock"> <i></i>显示
+                                        <input type="radio" value="1" name="IsLock"> <i></i>隐藏
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">调用别名：</label>
+                                <div class="col-sm-3">
+                                    <input id="Name" name="Name" class="form-control" type="text" datatype="/^[a-zA-Z0-9\-\_]{2,50}$/" errormsg="请填写正确的ID" sucmsg=" " ajaxurl="/SysNavigation/ExistName?oldName=@Model.Name">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"> 权限控制名称，只允许字母、数字、下划线</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">导航标题：</label>
+                                <div class="col-sm-3">
+                                    <input id="Title" name="Title" class="form-control" type="text" datatype="*1-100">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"> *导航中文标题，100字符内</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">副标题：</label>
+                                <div class="col-sm-3">
+                                    <input id="SubTitle" name="SubTitle" class="form-control" type="text" datatype="*0-100">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"> 非必填，当导航拥有两个名称时使用</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">图标样式：</label>
+                                <div class="col-sm-3">
+                                    @*<input id="IconClass" name="IconClass" class="form-control" type="text" datatype="*0-100">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary">
+                                                选择
+                                            </button>
+                                        </span>*@
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="IconClass" name="IconClass"> <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" id="btnIconClass">
+                                                选择
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"> 非必填，一级菜单有效</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">链接地址：</label>
+                                <div class="col-sm-3">
+                                    <input id="LinkUrl" name="LinkUrl" class="form-control" maxlength="255" type="text">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip">当前管理目录，有子导航不用填</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">备注说明：</label>
+                                <div class="col-sm-3">
+                                    <textarea id="Remark" class="form-control" rows="3" name="Remark"></textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group ">
+                                <label class="col-sm-2 control-label">权限资源</label>
+                                <div class="col-sm-8">
+                                    <div class="rule-multi-porp multi-porp">
+                                        <ul>
+                                            @{
+                                                var dicActionType = DF.Finance.Common.Utils.ActionType();
+                                                foreach (var item in dicActionType.Keys)
+                                                {
+                                                    <li data-value="@item"><a href="javascript:;">@dicActionType[item] (@item)</a><i></i></li>
+                                                }
+                                            }
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+        </div>
+    </div>
+</form>
+@section css{
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section scripts{
+    <!-- iCheck -->
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var formObj = $("#form1").initValidform(submits);
+            //赋值
+            $("#form1").initValue(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model)));
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            //设置权限按钮点击事件
+            $('.rule-multi-porp>ul>li').click(function () {
+                if ($(this).hasClass("selected")) {
+                    $(this).removeClass("selected");
+                } else {
+                    $(this).addClass("selected");
+                }
+            });
+            //设置权限按钮
+            SetActionTypeClass();
+            $("#btnIconClass").click(function () {
+                var url = '/SysNavigation/DialogIconClass';
+                var d = top.dialog({
+                    width: 1000,
+                    title: "选择图标样式",
+                    url: url,
+                    content: null,
+                    data: window,
+                    onclose: function () {
+                    }
+                }).showModal();
+            });
+        });
+
+        //设置默认选中的权限按钮
+        function SetActionTypeClass() {
+            var actionType = "@Html.Raw(!string.IsNullOrEmpty(Model.ActionType) ? Model.ActionType : "1")";
+            if (actionType != 1) {
+                var actionArr = actionType.split(",");
+                $.each(actionArr, function (i, value) {
+                    $("li[data-value=" + value + "]").addClass("selected");
+                });
+            }
+        }
+
+        //提交数据
+        function submits() {
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            postData = $("#form1").serializeObject(postData);
+            var actionArr = [];
+            $('.rule-multi-porp>ul>li[class="selected"]').each(function () {
+                actionArr.push($.trim($(this).attr("data-value")));
+            });
+            if (actionArr) {
+                postData["ActionType"] = actionArr.join(",");
+            }
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEdit", "SysNavigation")",
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1)
+                        MsgBox.Success("操作成功", "", "/SysNavigation/List");
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+
+        }
+
+    </script>
+}

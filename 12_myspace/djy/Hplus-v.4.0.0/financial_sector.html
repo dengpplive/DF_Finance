@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>资源归属分配</title>
+		<meta name="keywords" content="资源归属分配">
+		<meta name="description" content="资源归属分配">
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.0.0" rel="stylesheet">
+		<base target="_blank">
+	</head>
+
+	<body class="gray-bg">
+		<div class="ibox float-e-margins m-l m-r">
+			<div class="ibox-title">
+				<h5>实际交易方管理</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+			</div>
+
+			<div class="ibox-content">
+				<div class="row row-lg">
+					<div class="col-sm-12">
+						<!-- Example Pagination -->
+						<div class="example-wrap">
+							<div class="example">
+								<table 
+									id="exampleTablePagination" 
+									data-toggle="table" 
+									data-url="js/demo/bootstrap_table_test.json" 
+									data-click-to-select="true" 
+									data-query-params="queryParams" 
+									data-mobile-responsive="true" 
+									data-height="400" 
+									data-pagination="true" 
+									data-icon-size="outline"
+									data-search="false" 
+									data-detail-view="true"
+									class="table"													
+									>
+									<thead>
+										<tr>
+											<th data-field="name" data-halign="center" data-align="center">公司名称</th>
+											<th data-field="1" data-halign="center" data-align="center">公司地址</th>
+											<th data-field="2" data-halign="center" data-align="center">公司联系电话</th>
+											<th data-field="3" data-halign="center" data-align="center">公司联系人</th>
+											<th data-field="4" data-halign="center" data-align="center">金融业代姓名</th>
+											<th data-field="5" data-halign="center" data-align="center">金融业代手机</th>
+											<th data-field="6" data-halign="center" data-align="center">分配日期</th>
+											<th data-field="7" data-halign="center" data-align="center">最后一次放款日期</th>
+											<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-halign="center" data-align="center">操作
+											</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+						<!-- End Example Pagination -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h5>资源归属分配</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+
+							<label class="control-label col-md-3">金融业代姓名</label>
+							<div class="col-md-9">
+								<select class="form-control m-b" name="financial">
+                                        <option>张三</option>
+                                        <option>李四</option>
+                                        <option>王五</option>
+										<option>周六</option>                                    
+									</select>
+							</div>
+
+						</div>
+						<div class="row">
+
+							<label class="control-label col-md-3">金融业代手机</label>
+							<div class="col-md-9">
+								<input type="text" class="form-control" readonly="readonly" required="">
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" id="btnsave">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- 全局js -->
+			<script src="js/jquery.min.js?v=2.1.4"></script>
+			<script src="js/bootstrap.min.js?v=3.3.5"></script>
+
+			<!-- 自定义js -->
+			<script src="js/content.js?v=1.0.0"></script>
+
+			<!-- Bootstrap table -->
+			<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+			<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+			<script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+			<!-- Peity -->
+			<script src="js/demo/bootstrap-table-demo.js"></script>
+
+			<script>
+				function actionFormatter(value, row, index) {
+					return [
+						'<a data-toggle="modal" data-target="#myModal">分配金融业代</a>&nbsp;|&nbsp;',
+						'<a href="#">详情</a>'
+					].join('');
+				}
+				window.actionEvents = {
+					'click .like': function(e, value, row, index) {
+						alert('You click like icon, row: ' + JSON.stringify(row));
+						console.log(value, row, index);
+					},
+					'click .edit': function(e, value, row, index) {
+						alert('You click edit icon, row: ' + JSON.stringify(row));
+						console.log(value, row, index);
+					},
+					'click .remove': function(e, value, row, index) {
+						alert('You click remove icon, row: ' + JSON.stringify(row));
+						console.log(value, row, index);
+					}
+				};
+				$("#btnsave").click(function() {
+					alert("保存成功");
+					$("#myModal").modal("hide");
+				});				
+			</script>
+	</body>
+
+</html>

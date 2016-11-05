@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<!--测试 编辑器-->
+@*<script id="Content" name="Content" type="text/plain">
+    </script>
+    <script id="Content1" name="Content1" type="text/plain">
+    </script>*@
+<!--测试-->
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="ibox-title">
+            <h5>编辑后台导航</h5>
+
+        </div>
+        <div class="ibox-content">
+
+            <form class="form-horizontal m-t" id="testValid" style=" width:50%">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">姓氏：</label>
+                    <div class="col-sm-8">
+                        <input id="firstname" name="firstname" class="form-control" type="text">
+                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 这里写点提示的内容</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">名字：</label>
+                    <div class="col-sm-8">
+                        <input id="lastname" name="lastname" class="form-control" type="text" aria-required="true" aria-invalid="false" class="valid">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">用户名：</label>
+                    <div class="col-sm-8">
+                        <input id="username" name="username" class="form-control" type="text" aria-required="true" aria-invalid="true" class="error">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">密码：</label>
+                    <div class="col-sm-8">
+                        <input id="password" name="password" class="form-control" type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">确认密码：</label>
+                    <div class="col-sm-8">
+                        <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">E-mail：</label>
+                    <div class="col-sm-8">
+                        <input id="email" name="email" class="form-control" type="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">测试上传：</label>
+                    <div class="col-sm-8">
+                        <input id="Title" name="Title" class="form-control upload-path" type="text">
+
+                    </div>
+
+                    <span class="upload-box upload-img"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="checkbox" id="agree" name="agree"> 我已经认真阅读并同意《H+使用协议》
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--测试弹出框-->
+<input id="btnTestAlert" type="button" value="button" />
+
+
+@section scripts{
+    <script src="~/ueditor/ueditor.config.js"></script>
+    <script src="~/ueditor/ueditor.all.min.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        $(function () {
+            // DFCommon.UELoad();
+            //初始化上传
+            $(".upload-img").InitUploader({});
+            $("#btnTestAlert").click(function () {
+                //MsgBox.Prompt("测试普通消息");
+                //MsgBox.Success("成功啦");
+                //MsgBox.Warning("测试删除", "我是标题哦", Warningcallback);
+                MsgBox.Error("错误");
+
+            })
+            function Warningcallback() {
+                MsgBox.Timer("自动消失", "回调成功啦");
+            }
+        })
+    </script>
+}
+

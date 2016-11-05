@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WeiXinSetting>
+  <!--微信登录参数设置-->
+  <wxlogin
+    enabled="true"
+    appid="wx5b1a1410a5e18a06"  
+    appsecret="af5b364c3721b1da312d9fd3d3a3631f"
+    callbackurl="http://120.24.1.47/test.aspx"
+    token="88963abc"
+    ></wxlogin>
+</WeiXinSetting>

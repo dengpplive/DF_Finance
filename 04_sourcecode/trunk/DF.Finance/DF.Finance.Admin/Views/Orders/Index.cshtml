@@ -1,0 +1,333 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Orders";
+}
+@using DF.Finance.Model.Enums;
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5>数据列表</h5>
+        </div>
+        <div class="panel-body">
+
+
+            <form id="formsearch" class="form-horizontal" method="post" action="@Url.Action("Search", "Orders")" data-query="#btn_query" data-table="#Table">
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_AddName">金融业代</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="AddName" placeholder="金融业代">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_ApplicantName">申请人姓名</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="ApplicantName" placeholder="申请人姓名">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_ApplicantPhone">申请人电话</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="ApplicantPhone" placeholder="申请人电话">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_LoanProducts">贷款产品</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="LoanProducts">
+                            <option value="">--所有贷款产品--</option>
+                            @foreach (DF.Finance.Model.SysDictionary item in ViewBag.loan_products)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_DealersId">实际交易方</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="DealersId">
+                            <option value="0">--所有交易方---</option>
+                            @foreach (DF.Finance.Model.CustomerManagement item in ViewBag.CustomerManagements)
+                            {
+                                <option value="@item.Id">@item.CompanyName</option>
+                            }
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_CarBrand">汽车品牌</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="CarBrand">
+                            <option value="">--所有品牌---</option>
+                            <option value="宝马">宝马</option>
+                            <option value="奥迪">奥迪</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_Models">汽车车型</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="Models">
+                            <option value="">--所有车型---</option>
+                            <option value="X5">X5</option>
+                            <option value="X6">X6</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_state">节点状态</label>
+                    <div class="col-sm-2">
+                        <input type="hidden" name="status2" value="@ViewBag.status" />
+                        <select class="form-control" name="status" data-selval="@ViewBag.status" @(ViewBag.status == 0 ? "" : "disabled")>
+                            <option value="0">--所有状态---</option>
+                            @{
+                                Dictionary<int, string> dic = Enum<OrderStatusEnum>.AsEnumerable().ToDictionary(y => (int)y, r => r.ToAdminString());
+                                foreach (var item in dic.Keys)
+                                {
+                                    <option value="@item">@dic[item]</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_telphone">区域</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="SelRegion" id="SelRegion">
+                            <option value="">--大区--</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="SelProvince" id="SelProvince">
+                            <option value="">--省份--</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="SelCity" id="SelCity">
+                            <option value="">--市--</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="SelQu" id="SelQu">
+                            <option value="">--分组--</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_telphone">收单时间</label>
+                    <div class="col-sm-2">
+                        <input name="starttime" id="starttime" class="laydate-icon form-control layer-date" placeholder="时间区间1">
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="endtime" id="endtime" class="laydate-icon form-control layer-date" placeholder="时间区间2">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="Table" data-show-columns="true"
+           data-click-to-select="true"
+           data-pagination="true"
+           data-id-field="Id"
+           data-icon-size="outline"
+           class="table">
+        <thead>
+            <tr>
+                @*<th data-field="Id">ID</th>*@
+                <th data-checkbox="true"></th>
+                <th data-field="OrderNo">订单编号</th>
+                <th data-field="AddName">金融业代</th>
+                <th data-field="LCName">放款金融公司</th>
+                <th data-field="OldCar">新车/二手车</th>
+                <th data-field="DepartmentName">区域</th>
+                <th data-field="AcquirerTime">收单日期</th>
+                <th data-field="ApplicantName">申请人姓名</th>
+                <th data-field="ApplicantPhone">申请人电话</th>
+                <th data-field="ApplicantIDCard">身份证号码</th>
+                <th data-field="GuarantorName">担保人姓名</th>
+                <th data-field="GuarantorPhone">担保人电话</th>
+                <th data-field="CoApplicantName">共申人姓名</th>
+                <th data-field="CoApplicantPhone">共申人电话</th>
+                <th data-field="LoanProducts">贷款产品</th>
+                <th data-field="LoanInterest">贷款利息类型</th>
+                <th data-field="DealersName">实际交易方</th>
+                <th data-field="LoanLink">放款环节</th>
+                <th data-field="SalesName">销售顾问姓名</th>
+                <th data-field="SalesPhone">销售顾问电话</th>
+                <th data-field="CarBrand">汽车品牌</th>
+                <th data-field="Models">车型</th>
+                <th data-field="CarWorth">车身价</th>
+                <th data-field="LoanAmount">贷款金额</th>
+                <th data-field="LoanTerm">贷款期限</th>
+                <th data-field="Remark">备注信息</th>
+                <th data-field="StatusAdminName">状态</th>
+                <th data-field="action" data-formatter="fat_oper" data-halign="center" data-align="center" data-field="id">
+                    操作
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var otableobj = DFCommon.TableInit("#formsearch");
+        $(function () {
+            //1.初始化table
+            otableobj.Init();
+
+            //2.日期框
+            laydate({
+                elem: '#starttime',
+                event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+            });
+            laydate({
+                elem: '#endtime',
+                event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+            });
+
+            //3.隐藏某些列
+            var array = new Array("AcquirerTime", "GuarantorName", "GuarantorPhone", "CoApplicantName", "CoApplicantPhone", "LoanInterest", "LoanLink", "SalesName", "SalesPhone", "CarBrand", "Models", "CarWorth", "LoanTerm", "Remark");
+            otableobj.hideColumn(array);
+
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                otableobj.Delete("@Url.Action("Delete", "Orders")");
+            });
+
+            //4.下拉数据绑定和事件绑定
+            initSelects();
+        });
+
+        function fat_oper(value, row, index) {
+            return '<a href="/Orders/Edit?Id=' + row.Id + '" data-role="Edit">修改</a>';
+        }
+
+        function initSelects() {
+
+            var InitRegion = function () {
+                DFCommon.ajax({
+                    type: 'Get',
+                    url: '/SysDictionary/GetDicByTypeCode?TypeCode=area_city',
+                    dataType: "json",
+                    success: function (data, res) {
+                        if (res.Code == 1) {
+                            $(res.Data).each(function (idx, ele) {
+                                var opt = $('<option>').attr('value', ele.Name).text(ele.Name).attr('data-Id', ele.Id);
+                                $('#SelRegion').append(opt);
+                            });
+                        }
+                        else {
+                            MsgBox.Error("错误", res);
+                        }
+                    }
+                });
+            }
+            InitRegion();
+
+
+            var InitProvince = function () {
+                var RegionId = $('#SelRegion').find('option[value=' + $('#SelRegion').val() + ']').attr('data-id');
+                DFCommon.ajax({
+                    type: 'Get',
+                    url: '/SysDictionary/GetDictByParentId?ParentId=' + RegionId,
+                    dataType: "json",
+                    success: function (data, res) {
+                        if (res.Code == 1) {
+                            $(res.Data).each(function (idx, ele) {
+                                var opt = $('<option>').attr('value', ele.Name).text(ele.Name).attr('data-Id', ele.Id);
+                                $('#SelProvince').append(opt);
+                            });
+                        }
+                        else {
+                            MsgBox.Error("错误", res);
+                        }
+                    }
+                });
+            }
+
+            var InitCity = function () {
+                var ProvinceId = $('#SelProvince').find('option[value=' + $('#SelProvince').val() + ']').attr('data-id');
+                DFCommon.ajax({
+                    type: 'Get',
+                    url: '/SysDictionary/GetDictByParentId?ParentId=' + ProvinceId,
+                    dataType: "json",
+                    success: function (data, res) {
+                        if (res.Code == 1) {
+                            $(res.Data).each(function (idx, ele) {
+                                var opt = $('<option>').attr('value', ele.Name).text(ele.Name).attr('data-Id', ele.Id);
+                                $('#SelCity').append(opt);
+                            });
+                        }
+                        else {
+                            MsgBox.Error("错误", res);
+                        }
+                    }
+                });
+            }
+
+            var InitQu = function () {
+                var CityId = $('#SelCity').find('option[value=' + $('#SelCity').val() + ']').attr('data-id');
+                DFCommon.ajax({
+                    type: 'Get',
+                    url: '/SysDictionary/GetDictByParentId?ParentId=' + CityId,
+                    dataType: "json",
+                    success: function (data, res) {
+                        if (res.Code == 1) {
+                            $(res.Data).each(function (idx, ele) {
+                                var opt = $('<option>').attr('value', ele.Name).text(ele.Name).attr('data-Id', ele.Id);
+                                $('#SelQu').append(opt);
+                            });
+                        }
+                        else {
+                            MsgBox.Error("错误", res);
+                        }
+                    }
+                });
+            }
+
+            $('#SelRegion').unbind('change').on('change', function () {
+                $('#SelProvince option').not(':first').remove();
+                $('#SelCity option').not(':first').remove();
+                $('#SelQu option').not(':first').remove();
+                InitProvince();
+                otableobj.refresh();
+            });
+
+            $('#SelProvince').unbind('change').on('change', function () {
+                $('#SelCity option').not(':first').remove();
+                $('#SelQu option').not(':first').remove();
+                InitCity();
+                otableobj.refresh();
+            });
+
+            $('#SelCity').unbind('change').on('change', function () {
+                $('#SelQu option').not(':first').remove();
+                InitQu();
+                otableobj.refresh();
+            });
+
+            $('#SelQu').unbind('change').on('change', function () {
+                otableobj.refresh();
+            })
+        }
+    </script>
+}

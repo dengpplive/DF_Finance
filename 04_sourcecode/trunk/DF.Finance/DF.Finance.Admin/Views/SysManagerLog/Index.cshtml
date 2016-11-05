@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "SysManagerLog";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table//bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var dicData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dicModel))
+        $(function () {
+            //初始化类型
+            initSelect();
+            //1.初始化Table
+            DFCommon.TableInit("#formSearch").Init();           
+            //外部js调用
+            laydate({
+                elem: '#starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#endtime',
+                event: 'focus'
+            });
+        });
+        function initSelect() {
+            var html = '<option value="">--请选择类型---</option>';
+            for (var i in dicData) {
+                html += "<option value=" + dicData[i].Key + ">" + dicData[i].Value + "</option>";
+            }
+            $("#sel_search_ActionType").html(html);
+        }
+        function fat_ActionType(value, row, index) {
+            for (var i in dicData) {
+                if (dicData[i].Key == value) return dicData[i].Value;
+            }
+            return '';
+        }
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetSysLogList", "SysManagerLog")" data-query="#btn_query" data-table="#tb_syslog">
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_UserName">用户名</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_UserName" name="UserName">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_ip">IP</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_ip" name="UserIP">
+                    </div>
+                    <label class="control-label col-sm-1" for="sel_search_ActionType">操作类型</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="sel_search_ActionType" name="ActionType"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_UserId">编号</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txt_search_UserId" name="UserId">
+                    </div>
+
+                    <label class="control-label col-sm-1">日期</label>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="starttime" name="starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-md-6">
+                                <input id="endtime" name="endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 ">
+
+                    </div>
+                    <div class="col-sm-3 ">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                    <div class="col-sm-4 ">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table id="tb_syslog" data-filter-control="false">
+        <thead>
+            <tr>
+                <th data-field="UserId" data-halign="center" data-align="center" data-filter-control="input">用户ID</th>
+                <th data-field="UserName" data-halign="center" data-align="center" data-filter-control="select">用户名</th>
+                <th data-field="UserIP" data-halign="center" data-align="center">用户IP</th>
+                <th data-field="ActionType" data-formatter="fat_ActionType" data-halign="center" data-align="center">操作类型</th>
+                <th data-field="AddTime" data-halign="center" data-align="center">添加时间</th>
+                <th data-field="Remark" data-halign="center" data-align="center">备注</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+

@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "DicManageIndex";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init();
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "SysDictionary")");
+            });
+        });
+        //处理标题
+        function fat_title(value, row, index) {
+            var litStyle = "<span style=\"display:inline-block;width:{0}px;\"></span>{1}{2}";
+            var litImg1 = "<span class=\"folder-open\"></span>";
+            var litImg2 = "<span class=\"folder-line\"></span>";
+            var html = '';
+            if (row.Id > 0) {
+                html = String.format('<a href="/SysDictionary/DicManageEdit?Id={0}&typeId=' + row.DicType + '&OperType=0" >{1}</a>', row.Id, row.Name);
+            } else {
+                html = row.Name;
+            }
+            if (row.Level == 1) {
+                return litImg1 + html;
+            }          
+            var rehtml = String.format(litStyle, (row.Level) * 24, litImg1, litImg2) + html;         
+            return rehtml;
+        }
+        //显示
+        function fat_IsHide(value, row, index) {
+            return (value == 0 ? "√" : "×");
+        }
+        //处理排序
+        function fat_sortid(value, row, index) {
+            return String.format('<input id="SortId" name="SortId" class="form-control" data-id="{1}" data-value="{0}" style="width:100px;display:inherit;" type="text" value="{0}"    >', row.SortId, row.Id);
+        }
+        function fat_oper(value, row, index) {
+            var html = '<a href="/SysDictionary/DicManageEdit?Id=' + row.Id + '&typeId=' + row.DicType + '&OperType=1" >添加下级</a>';
+            if (value > 0)
+                html += '&nbsp;&nbsp;|<a href="/SysDictionary/DicManageEdit?Id=' + row.Id + '&typeId=' + row.DicType + '&OperType=0" >修改</a>';
+            return html;
+        }
+        function fat_ck(value, row, index) {
+            if (index == 0) {
+                return {
+                    disabled: true,
+                    checked: false
+                };
+            }
+            return value;
+        }
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetDicManageList", "SysDictionary")" data-table="#tb_dicmanage">
+        <input name="Id" value="@Model.Id" type="hidden" />
+    </form>
+    <div id="toolbar" class="btn-group">
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+    <table id="tb_dicmanage" data-filter-control="false">
+        <thead>
+            <tr>
+                <th data-checkbox="true" data-formatter="fat_ck"></th>
+                <th data-field="Name" data-formatter="fat_title" data-halign="center" data-align="left" data-filter-control="input">标题</th>
+                <th data-field="Val" data-halign="center" data-align="center" data-filter-control="select">调用名称</th>
+                <th data-field="IsHide" data-halign="center" data-align="center" data-formatter="fat_IsHide">显示</th>
+                <th data-field="SortId" data-halign="center" data-align="center">排序</th>
+                <th data-field="Remark" data-halign="center" data-align="center">备注</th>
+                <th data-field="Id" data-formatter="fat_oper" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div class="page-footer">
+    <div class="btn-wrap" style="position: fixed;">
+        &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+    </div>
+</div>
+

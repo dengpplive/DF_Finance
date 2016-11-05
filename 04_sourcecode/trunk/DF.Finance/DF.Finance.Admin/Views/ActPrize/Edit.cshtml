@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = ViewBag.title;
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "ActPrize";
+}
+@using DF.Finance.Model
+@section css
+{
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function submits() {
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            postData = $("#form1").serializeObject(postData);
+            if (postData.NumberOfAwards <= postData.Quantity) {
+                DFCommon.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("AddOrEdit", "ActPrize")",
+                    data: postData,
+                    dataType: "json",
+                    success: function (data, res) {
+                        if (res.Code == 1)
+                            MsgBox.Success("保存成功", "");
+                        else {
+                            MsgBox.Error("错误", res);
+                        }
+                    }
+                });
+            } else {
+                MsgBox.Error("错误", "设奖名额不能超出奖品数量");
+            }
+        }
+        $(document).ready(function () {
+            //上传图片
+            $(".upload-img").InitUploader({});
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            //初始化表单验证
+            $("#form1").initValidform(submits);
+        });
+    </script>
+}
+<form class="form-horizontal" id="form1">
+    <div class="panel-body" style="padding:0px;margin:5px;">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">@(ViewBag.title)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">活动名称：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="ActId" id="ActId" datatype="*" nullmsg="请选择活动的名称" data-selval="@Model.ActId">
+                                    @{
+                                        foreach (Activity item in ViewBag.ActivityList)
+                                        {
+                                            <option value="@item.Id">@item.Title</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">奖项：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="PrizeClass" id="PrizeClass" datatype="*" nullmsg="请选择活动奖项" data-selval="@Model.PrizeClass">
+                                    <option value="">--奖项--</option>
+                                    @foreach (SysDictionary item in ViewBag.dicModel)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">奖品名称：</label>
+                            <div class="col-sm-3">
+                                <input id="txtPrizeName" name="PrizeName" class="form-control" type="text" value="@Model.PrizeName" ajaxurl="@Url.Action("Exist", "ActPrize",new  { Id=Model.Id})" datatype="*1-100" maxlength="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">奖品图片：</label>
+                            <div class="col-sm-3">
+                                <input id="txtPrizeImg" name="PrizeImg" class="form-control upload-path" type="text" value="@Model.PrizeImg" datatype="*1-255" nullmsg="请上传奖品图片">
+                            </div>
+                            <span class="upload-img"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">奖品数量：</label>
+                            <div class="col-sm-3">
+                                <input id="txtQuantity" name="Quantity" class="form-control" type="text" value="@Model.Quantity" datatype="n">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">设奖名额：</label>
+                            <div class="col-sm-3">
+                                <input id="txtNumberOfAwards" name="NumberOfAwards" class="form-control" type="text" value="@Model.NumberOfAwards" datatype="n">
+                            </div>
+                        </div>
+                        <div class="form-group hidden">
+                            <label class="col-sm-2 control-label">每次摇奖数量：</label>
+                            <div class="col-sm-3">
+                                <input id="txtErnienNum" name="ErnienNum" class="form-control" type="text" value="@Model.ErnienNum" datatype="n">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+        </div>
+    </div>
+</form>
+
+
+

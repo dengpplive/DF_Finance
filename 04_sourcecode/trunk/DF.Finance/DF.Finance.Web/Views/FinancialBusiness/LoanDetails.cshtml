@@ -1,0 +1,280 @@
+﻿
+@{
+    ViewBag.Title = "金融业代-贷款详情";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>贷款详情</title>
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/_R/css/sui.css">
+    <link href="~/_R/css/main.css" rel="stylesheet">
+    <style>
+        .success, .fail {
+            width: 5rem;
+            height: 5rem;
+        }
+
+        .success {
+            background-color: #8ed58c;
+        }
+
+        .fail {
+            background-color: #8ed58c;
+        }
+
+            .success i, .fail i {
+                font-size: 3.5rem;
+                width: 3.5rem;
+                height: 3.5rem;
+                margin-left: 0.75rem;
+                margin-top: 0.75rem;
+            }
+    </style>
+</head>
+<body class="page">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav theme-dark">
+        <a class="icon icon-left pull-left back color-white"></a>
+        <h1 class="title">贷款详情</h1>
+    </header>
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab">
+        <a class="tab-item external " href="index.html">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item external" href="edit.html">
+            <span class="icon icon-edit"></span>
+            <span class="tab-label">录入资料</span>
+        </a>
+        <a class="tab-item external" href="check.html">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">审查核实</span>
+        </a>
+        <a class="tab-item external active" href="me.html">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+            <span class="badge">2</span>
+        </a>
+    </nav>
+    <!-- 这里是页面内容区 -->
+    <div class="content">
+        <!--审核通过-->
+        <div class="text-center mt-0-5">
+            <i class="fa fa-check-circle color-success" style="font-size: 5rem" aria-hidden="true"></i>
+        </div>
+        <p class="text-center color-red mt-0-5">审核已通过</p>
+        <!--审核未通过-->
+        <!--<div class="text-center mt-0-5">-->
+        <!--<i class="fa  fa-times-circle color-red " style="font-size: 5rem" aria-hidden="true"></i>-->
+        <!--</div>-->
+        <!--<p class="text-center color-red mt-0-5">审核未通过</p>-->
+        <div class="list-block mt-0-5">
+            <ul>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title">通过原因</div>
+                        <div class="item-after color-purple">你的条件符合贷款标准</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title">销售顾问</div>
+                        <div class="item-after color-purple">李先生</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title">提交日期</div>
+                        <div class="item-after color-purple">2016-01-29</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><img src="~/_R/images/icon/clients_on.png" style="height: 1.2rem;position: relative;top: 0.2rem"> 客户信息</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">放款金融公司</div>
+                        <div class="item-after color-purple">奇瑞金融4S店</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">汽车类型</div>
+                        <div class="item-after color-purple">奇瑞</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">收单日期</div>
+                        <div class="item-after color-purple">2016-01-29</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">区域</div>
+                        <div class="item-after color-purple">南区广东东莞1区</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">申请人姓名</div>
+                        <div class="item-after color-purple">李四</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">申请人手机</div>
+                        <div class="item-after color-purple">13800003333</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">申请人身份证号码</div>
+                        <div class="item-after color-purple">432152198201020018</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">共申人姓名</div>
+                        <div class="item-after color-purple">张三</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">共申人手机</div>
+                        <div class="item-after color-purple">13800003333</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">担保人姓名</div>
+                        <div class="item-after color-purple">王五</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">担保人手机</div>
+                        <div class="item-after color-purple">13800003333</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">贷款类型</div>
+                        <div class="item-after color-purple">贷款类型</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">贷款利息类型</div>
+                        <div class="item-after color-purple">贷款利息类型</div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><img src="~/_R/images/icon/book_car_on.png" style="height: 1.2rem;position: relative;top: 0.2rem"> 车行信息</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">开票单位</div>
+                        <div class="item-after color-purple">奇瑞金融</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">实际交易方</div>
+                        <div class="item-after color-purple">奇瑞金融</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">车行销售顾问姓名</div>
+                        <div class="item-after color-purple">李先生</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">车行销售顾问手机</div>
+                        <div class="item-after color-purple">13800003333</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><img src="~/_R/images/icon/book_car_on.png" style="height: 1.2rem;position: relative;top: 0.2rem"> 车行信息</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">汽车品牌</div>
+                        <div class="item-after color-purple">奇瑞</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">汽车车型</div>
+                        <div class="item-after color-purple">奇瑞QQ</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">车身价</div>
+                        <div class="item-after color-purple">50.00万</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">贷款金额</div>
+                        <div class="item-after color-purple">49.00万</div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">贷款期限</div>
+                        <div class="item-after color-purple">100年</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="~/_R/js/lib/zepto.js"></script>
+    <script src="~/_R/js/lib/sm.js"></script>
+    <script src="~/_R/js/lib/knockout-3.4.0.js"></script>
+    <script src="~/_R/js/app.js"></script>
+
+    <script>
+    ko.applyBindings(new SalesLoginViewModel());
+    </script>
+
+</body>
+</html>
+

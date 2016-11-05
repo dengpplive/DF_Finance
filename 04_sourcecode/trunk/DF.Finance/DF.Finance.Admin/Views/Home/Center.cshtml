@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "欢迎页";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-2">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>审批通过未放款提醒</h3>
+                        <ul class="sortable-list connectList agile-list" id="ul1">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>放款后未收回登记证</h3>
+                        <ul class="sortable-list connectList agile-list" id="ul21">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>放款后未邮寄登记证</h3>
+                        <ul class="sortable-list connectList agile-list" id="ul22">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>保险快到期提醒</h3>
+                        <ul class="sortable-list connectList agile-list" id="ul3">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>周期内放款0的交易方</h3>
+                        <ul class="sortable-list connectList agile-list" id="ul4"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+    </div>
+  
+
+</body>
+@section css{
+    <style type="text/css">
+    </style>
+}
+@section scripts{
+    <script src="~/_R/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/_R/js/content.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".sortable-list").sortable({
+                connectWith: ".connectList"
+            }).disableSelection();
+            loadRemind(1, "success-element");
+            loadRemind(21, "info-element");
+            loadRemind(22, "danger-element");
+            loadRemind(3, "success-element");
+            loadRemind(4, "warning-element");
+            //DFCommon.OpenUrl("/RemindRule/List", "测试");
+        });
+        //remindTyep 提醒类型 ，className 样式名称  operationEvent 操作事件
+        function loadRemind(remindTyep, className) {
+            DFCommon.ajax({
+                type: 'GET',
+                url: "@Url.Action("GetAjaxRemindListByRemindType", "Home")",
+                data: { RemindType: remindTyep },
+                dataType: "json",
+                success: function (data) {
+                    if (data==null) {
+                        $("#ul" + remindTyep).parent().remove();
+                        return;
+                    }
+                    var html = "";
+                    $.each(data, function (i, item) {
+                        html += String.format('<li class="{0}">{1}<div class="agile-detail"><i class="fa fa-clock-o"></i> {2}</div></li>', className, item.Reminder, (new Date(item.AddTime)).format("yyyy.MM.dd"));
+                    });
+                    html += String.format('<a data-href="/Remind/List?RemindType={0}" class="J_menuItem"  data-name="提醒记录"> <li style="text-align:center;"> 【处理】</li></a>', remindTyep);
+                    $("#ul" + remindTyep).html(html);
+                    //重新注册
+                    $('.J_menuItem').on('click', menuItem);
+                }
+            });
+        }
+    </script>
+}

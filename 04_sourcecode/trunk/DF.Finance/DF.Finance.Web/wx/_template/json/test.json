@@ -1,0 +1,47 @@
+﻿{
+    "Code": 1,
+    "Msg": "OK",
+    "Data": {
+        "GlobalConfiguration": {
+            "Title": "-金融业代",
+            "HomeId": "a"
+        },
+        "ListPage": [
+            {
+                "Id": "a",
+                "PageLinks": "/wx/test/a.html",
+                "Title": "测试a页面",
+                "Preloading": "b,c",
+                "AreReacquire": false
+            },
+            {
+                "Id": "b",
+                "PageLinks": "/wx/test/b.html",
+                "Title": "测试b页面",
+                "Preloading": "f",
+                "AreReacquire": false
+            },
+            {
+                "Id": "c",
+                "PageLinks": "/wx/test/c.html",
+                "Title": "测试c页面",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "f",
+                "PageLinks": "/wx/test/f.html",
+                "Title": "测试f页面",
+                "Preloading": "",
+                "AreReacquire": false
+            },
+            {
+                "Id": "d",
+                "PageLinks": "/wx/test/d.html",
+                "Title": "测试d页面",
+                "Preloading": "",
+                "AreReacquire": false
+            }
+        ]
+    }
+}

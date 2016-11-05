@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>登录-销售顾问</title>
+    <link rel="stylesheet" href="/_R/css/font-awesome.css">
+    <link rel="stylesheet" href="/_R/css/sui.css">
+    <link rel="stylesheet" href="/_R/css/main.css">
+</head>
+<body class="page">
+<!-- 标题栏 -->
+<header class="bar bar-nav theme-dark">
+    <a class="icon icon-left pull-left back color-white"></a>
+    <h1 class="title">登录-销售顾问</h1>
+</header>
+<!-- 工具栏 -->
+<nav class="bar bar-tab">
+    <a class="tab-item external " href="index.html">
+        <span class="icon icon-home"></span> 
+        <span class="tab-label">商城首页</span>
+    </a>
+    <a class="tab-item external" href="edit.html">
+        <span class="icon"> 
+<!--            <img src="/_R/images/icon/diamond_on.jpg" alt="diamond">-->
+            <img src="/_R/images/icon/diamond.jpg" alt="diamond">
+        </span>
+        <span class="tab-label">我的积分</span>
+    </a>
+    <a class="tab-item external" href="approvalList.html">
+        <span class="icon ">
+<!--            <img src="/_R/images/icon/log_on.jpg" alt="log">-->
+            <img src="/_R/images/icon/log.jpg" alt="log">
+        
+        </span>
+        <span class="tab-label">兑换记录</span>
+    </a>
+    <a class="tab-item external active" href="#">
+        <span class="icon icon-me"></span>
+        <span class="tab-label">个人中心</span>
+        <span class="badge">2</span>
+    </a>
+</nav>
+<!-- 这里是页面内容区 -->
+<div class="content">
+    <!-- 这里是页面内容区 -->
+    <h3 class="text-center">欢迎回来</h3>
+    <div class="list-block">
+        <ul>
+            <!-- Text inputs -->
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/phone.jpg" class="img-size-1"
+                                 alt="phone icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="number" data-bind="value:phone" placeholder="请输入您的手机号码" class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg" class="img-size-1"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="text" data-bind="value:pwd" placeholder="请输入您的六位密码" class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <div class="content-block">
+        <p><a href="javascript:void(0)" data-bind="click:submit"  class="button button-fill button-big bg-purple">登录</a></p>
+        <label class="label-checkbox color-content">
+            <!--<i class="fa fa-check-square-o"  aria-hidden="true"></i>-->
+            <i class="fa fa-square-o"  aria-hidden="true"></i>
+            <input style="font-size: large" data-bind="checked:remember" type="checkbox">
+            记住密码
+        </label>
+        <a href="signin.html" class="button-link pull-right color-content" title="注册">马上注册</a>
+    </div>
+</div>
+<script src="/_R/js/lib/zepto.js"></script>
+<script src="/_R/js/lib/sm.js"></script>
+<script src="/_R/js/app.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,92 @@
+﻿@model DF.Finance.Model.OrderExtAttribute
+@using DF.Finance.Model
+@{
+    ViewBag.Title = "放款资料录入";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Orders";
+}
+@section css{
+    <link href="~/_R/css/plugins/multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/_R/css/Order.css" rel="stylesheet" />
+}
+<div class="row">
+    <form class="form-horizontal" id="form1">
+        <div class="form-group col-sm-10">
+            <label class="control-label col-sm-5" for="txt_Node4kpdw">开票单位</label>
+            <div class="col-sm-7">
+                <select class="form-control m-b" name="BillingUnit" id="BillingUnit" data-selval="@Model.BillingUnit">
+                    <option value="">--开票单位--</option>
+                    @{
+                        foreach (BillingManagementt item in ViewBag.BillingManagementts)
+                        {
+                            <option value="@item.CompanyName">@item.CompanyName</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-10">
+            <label class="control-label col-sm-5" for="txt_Node4fkrq">放款日期</label>
+            <div class="col-sm-7">
+                <input type="text" value="@(Model.LoanTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.LoanTime.ToString())" class="laydate-icon form-control layer-date" id="LoanTime" onclick="laydate()">
+            </div>
+        </div>
+        <div class="form-group col-sm-10">
+            <div class="col-sm-3" style="float:right;margin-top:64px;">
+                <button type="submit" class="btn btn-primary" data-role="Edit">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section js{
+    <script src="~/_R/js/plugins/multiselect/bootstrap-multiselect.js"></script>
+}
+@section scripts{
+  <script>
+      var api = top.dialog.get(window); //获取父窗体对象
+      var W = api.data;
+      $(document).ready(function () {
+          //初始化表单验证
+          $("#form1").initValidform(submits);
+          $('#BillingUnit').multiselect({
+              includeSelectAllOption: true,
+              enableCaseInsensitiveFiltering: true
+          });
+      });
+
+      function submits() {
+          if ($("#BillingUnit").val() == ""||$("#LoanTime").val()=="") {
+              MsgBox.Error('对不起，请输入开票单位和放款日期')
+          }
+          else{
+              //更新订单，保存开票单位和放款日期
+              Remark='录入放款资料,开票单位：'+$("#BillingUnit").val()+',放款日期：'+$("#LoanTime").val();
+              PostUrl = '/Orders/UpdateOrderExtAttribute';
+              var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+              postData.BillingUnit=$("#BillingUnit").val();
+              postData.LoanTime=$("#LoanTime").val();
+
+              DFCommon.ajax({
+                  type: 'POST',
+                  url: PostUrl,
+                  dataType: "json",
+                  data:postData,
+                  success: function (data, res) {
+                      if (res.Code == 1) {
+                          MsgBox.Success('操作成功', '', '');
+                      }
+                      else {
+                          MsgBox.Error("错误", res);
+                      }
+                  }
+              });
+
+              //给父类窗体元素赋值
+              $("#kpdw", W.document).html($("#BillingUnit").val());
+              $("#fkrq", W.document).html($("#LoanTime").val())
+          }
+      }
+   </script>
+
+}

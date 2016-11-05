@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "DicManageEdit";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@using DF.Finance.Model
+<form class="form-horizontal" id="form1">
+    <input name="OldParentId" value="@Model.ParentId" type="hidden" />
+    <div class="row">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">@(ViewBag.type.TypeName)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label">上级标题：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="ParentId" id="ParentId" data-selval="@(Model.OperType == 0 ? Model.ParentId : Model.Id)" @(Model.OperType == 1 ? "disabled" : "")>
+                                    @{
+                                        foreach (var item in ViewBag.NavDic.Keys)
+                                        {
+                                            <option value="@item">@ViewBag.NavDic[item]</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序数字：</label>
+                            <div class="col-sm-1">
+                                <input id="SortId" name="SortId" class="form-control" type="text" datatype="n">
+                            </div>
+                            <span class="help-block m-b-none Validform_checktip"> *数字，越小越向前</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否隐藏：</label>
+                            <div class="col-sm-2  radio i-checks">
+                                <label>
+                                    <input type="radio" value="0" name="IsHide"> <i></i>显示
+                                    <input type="radio" value="1" name="IsHide"> <i></i>隐藏
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标题：</label>
+                            <div class="col-sm-3">
+                                <input id="Name" name="Name" class="form-control" type="text" datatype="*1-100">
+                            </div>
+                            <span class="help-block m-b-none Validform_checktip"></span>
+                        </div>
+                        <div class="form-group @(DF.Finance.WebCommon.WebRunTime.IsDebug==1?"":"hidden")">
+                            <label class="col-sm-2 control-label">数据值：</label>
+                            <div class="col-sm-3">
+                                <input id="Val" name="Val" class="form-control" type="text" datatype="*0-100">
+                            </div>
+                            <span class="help-block m-b-none Validform_checktip"> </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注说明：</label>
+                            <div class="col-sm-3">
+                                <textarea id="Remark" class="form-control" rows="3" name="Remark"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <input type="hidden" name="TypeCode" value="@(ViewBag.type.TypeCode)" />
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+        </div>
+    </div>
+</form>
+@section css{
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section js{
+    <!-- iCheck -->
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var formObj = $("#form1").initValidform(submits);
+            //赋值
+            $("#form1").initValue(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model)));
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+        //提交数据
+        function submits() {
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))              
+            postData = $("#form1").serializeObject(postData);           
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEditDicManage", "SysDictionary")",
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1)
+                        MsgBox.Success("操作成功", "", true);
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+    </script>
+}
+

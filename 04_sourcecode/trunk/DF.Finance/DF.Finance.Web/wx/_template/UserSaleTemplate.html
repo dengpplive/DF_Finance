@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+    <link href="../../_R/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../_R/css/sui.css" rel="stylesheet" />
+    <link href="../../_R/css/swiper.min.css" rel="stylesheet" />
+    <link href="../../_R/css/main.css" rel="stylesheet" />
+    <script src="../../_R/js/lib/zepto.min.js"></script>
+</head>
+
+<body id="body">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav theme-dark">
+        <a class="icon icon-left pull-left back color-white"></a>
+        <h1 class="title" id="title"></h1>
+    </header>
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab" style="display:none;" id="LoginBar">
+        <a class="tab-item external " data-url="#UserSaleIndex">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">商城首页</span>
+
+        </a>
+        <a class="tab-item external" data-url="#UserSaleAccomplish">
+            <img src="http://www.duiba.com.cn/images/201604/6k8m5mg2gk.jpg" >
+
+            <span class="icon">
+                <!--            <img src="/_R/images/icon/diamond_on.jpg" alt="diamond">-->
+                <img src="/_R/images/icon/diamond.jpg" alt="diamond">
+            </span>
+            <span class="tab-label">我的积分</span>
+        </a>
+        <!--<a class="tab-item external" data-url="#UserSaleExchangeLog">
+            <span class="icon ">
+                            <img src="/_R/images/icon/log_on.jpg" alt="log">
+                <img src="/_R/images/icon/log.jpg" alt="log">
+
+            </span>
+            <span class="tab-label">兑换记录</span>
+        </a>-->
+        <a class="tab-item external active" data-url="#UserSaleMe">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+            <span class="badge" v-if="userModel.RemindCount>0">{{userModel.RemindCount}}</span>
+        </a>
+    </nav>
+    <div class="page-group" id="pageGroup">
+
+    </div>
+    <script src="../../_R/js/lib/json2.js"></script>
+    <script src="../../_R/js/lib/sm.js"></script>
+    <script src="../../_R/js/lib/touch.js"></script>
+    <script src="../../_R/js/lib/vue.min.js"></script>
+    <script src="../../_R/js/lib/vue-tap-click.js"></script>
+    <script src="../../_R/js/lib/swiper.min.js"></script>
+    <script src="../../_R/js/lib/storage.js"></script>
+    <script src="../../_R/js/Common.js"></script>
+    <script src="../../_R/js/template.js"></script>
+    <script src="../../_R/js/ComData.js"></script>
+
+
+    <script type="text/javascript">
+        DFCommon.getUserInfo();
+        if (DFCommon.Vue) {
+            template.Init("json/UserSaleTemplate.json");
+        } else {
+            template.Init("json/UserSaleTemplate.json", "UserSaleLogin");
+        }
+        $.init();
+        $(function () {
+            $(document).on("pageInit", function (e, pageId, $page) {
+                PageLoad();
+            });
+        });
+        window.onload = function () {
+            PageLoad();
+        }
+        //页面加载完成后处理
+        function PageLoad() {
+            if (DFCommon.Vue) {
+                if (DFCommon.Vue.userModel.GroupId != 2) {
+                    location.href = "/wx/selectUserType.html";
+                    return;
+                }
+            }
+            var pageId = $(".page-current").attr("id");
+            //登录 注册 首页不需要底部
+            if (pageId == "UserSaleLogin" || pageId == "UserSaleSignin") {
+                $("#LoginBar").hide();
+            } else {
+                $("#LoginBar").show();
+                //开始移除css
+                var $bar = $("#LoginBar").find("a");
+                var index = 2;
+                switch (pageId) {
+                    case "UserSaleIndex":
+                        index = 0;
+                        break;
+                    case "UserSaleAccomplish":
+                    case "UserSalePointsDetail":
+                        index = 1;
+                        break;
+                     
+                }
+                $(".active").removeClass("active");
+                $bar.eq(index).addClass("active");
+            }
+        }
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿@using DF.Finance.Model.Enums;
+@using System;
+@model DF.Finance.Model.Order
+@{
+    ViewBag.Title = "订单回滚";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Orders";
+}
+@section css{
+<link href="~/_R/css/Order.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <form class="form-horizontal" id="form1">
+        <div class="form-group col-sm-12">
+            <div class="col-sm-9">
+                <select class="form-control" id="OrderStatus">
+                    <option value="">---请选择订单状态---</option>
+                    @{
+                        foreach (var m in (IList<OrderStatusEnum>)ViewBag.OrderStatusEnums)
+                        {
+                            <option value="@m.ToString()">@m.ToString()</option>
+                        }
+                       
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3 bthclass">
+                <button type="submit" class="btn btn-primary" data-role="RollBack">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section js{
+    
+}
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        //初始化表单验证
+        $("#form1").initValidform(submits);
+    });
+
+    function submits() {
+        //var freshUrl='/Orders/Edit?Id='+@Model.Id;
+        var ActionEnum = $('#OrderStatus option:selected').val();//要回滚的状态
+        if (ActionEnum == "") {
+            MsgBox.Error('错误提示', '请选择订单状态', '');
+        }
+        else
+        {
+            $.ajax({
+                type: 'POST',
+                url: "/Orders/RollBack",
+                data: {orderId:@Model.Id,PreviousEnum:ActionEnum},
+                dataType: "json",
+                success: function (data) {
+                    if (data.Code == 1) {
+                        MsgBox.Success("操作成功", "",'');
+                        parent.location.reload();
+                    }
+                    else {
+                        MsgBox.Error("错误", data.Msg);
+                    }
+                }
+            });
+        }
+    }
+</script>
+}

@@ -1,0 +1,227 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "CustomerManagement";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+    <script src="~/_R/js/jQuery.dateformat.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");            
+            oTableObj.Init({ expandRow: expandRow });
+            //新增数据click事件注册
+            $("#btn_add").click(function () {
+                location.href = "@Url.Action("Edit", "CustomerManagement")" + "?Id=0";
+            });
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "CustomerManagement")");
+            });
+            //日期框
+            laydate({
+                elem: '#starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#endtime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#dis_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#dis_endtime',
+                event: 'focus'
+            });
+        });
+        //展开行事件
+        function expandRow(index, row, $detail) {
+            //$detail 展开的详情容器
+            if (row.UserAgentId > 0) {
+                var cur_table = $detail.html("<table></table>").find('table');
+                $(cur_table).bootstrapTable({
+                    url: '@Url.Action("GetUser", "CustomerManagement")' + "?Id=" + row.UserAgentId,
+                    method: 'get',
+                    striped: false,
+                    cache: false,
+                    pagination: false,
+                    sortable: false,
+                    detailView: false,//父子表
+                    sidePagination: "server",
+                    pageSize: 5,
+                    pageList: [10, 25, 50, 100],
+                    columns: [{
+                        field: 'UserName',
+                        title: '金融业代用户名',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'Mobile',
+                        title: '手机',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'Email',
+                        title: '邮箱',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'TelPhone',
+                        title: '电话',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'Birthday',
+                        title: '生日',
+                        align: "center",
+                        halign: "center",
+                        formatter: function (value, row, index) {                           
+                            return $.formatDate("yyyy-MM-dd",value);
+                        }
+                    }, {
+                        field: 'QQ',
+                        title: 'QQ号码',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'Address',
+                        title: '详细地址',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'IDCard',
+                        title: '身份证',
+                        align: "center",
+                        halign: "center"
+                    }]
+                });
+            } else {
+                $detail.html('<div class="row"><div class="col-sm-12 text-center">未查到分配的金融业代信息</div></div>');
+            }
+        }
+        function fat_FilterTime(value, row, index) {
+            return value.indexOf("1900-01-01") != -1 ? '' : value;
+        }
+        function fat_State(value, row, index) {
+            return (value == 0 ? "正常" : "锁定");
+        }
+        function fat_oper(value, row, index) {
+            return '<a href="/CustomerManagement/Edit?Id=' + row.Id + '" >修改</a>';
+        }
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetCustomerList", "CustomerManagement")" data-query="#btn_query" data-table="#tb_roles">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">公司名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="companyname">
+                    </div>
+
+                    <label class="control-label col-sm-1">联系电话</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="companyphone">
+                    </div>
+                    <label class="control-label col-sm-1">分配日期</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="dis_starttime" id="dis_starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="dis_starttime" id="dis_endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-1">公司地址</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="companyaddress">
+                    </div>
+                    <label class="control-label col-sm-1">联系人</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="contacts">
+                    </div>
+
+                    <label class="control-label col-sm-1">放款日期</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="starttime" id="starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="endtime" id="endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @*<label class="control-label col-sm-1">状态</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="state">
+                                <option value="">--所有状态---</option>
+                                <option value="0">正常</option>
+                                <option value="1">锁定</option>
+                            </select>
+                        </div>*@
+                    <div class="control-label col-sm-1"></div>
+                    <div class="col-sm-1">
+                        <input type="hidden" name="state" value="0" />
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="tb_roles" data-filter-control="false" data-detail-view="true">
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="CompanyName" data-halign="center" data-align="center" data-filter-control="input">公司名称</th>
+                <th data-field="Address" data-halign="center" data-align="center" data-filter-control="select">公司地址</th>
+                <th data-field="CompanyPhone" data-halign="center" data-align="center">公司联系电话</th>
+                <th data-field="Contacts" data-halign="center" data-align="center">联系人</th>
+                @*<th data-field="DeleteFlag" data-formatter="fat_State" data-halign="center" data-align="center">状态</th>*@
+                <th data-field="DistributionTime" data-formatter="fat_FilterTime" data-halign="center" data-align="center">分配日期</th>
+                <th data-field="LastLoanTime" data-formatter="fat_FilterTime" data-halign="center" data-align="center">最后一次放款日期</th>
+
+                <th data-field="Id" data-formatter="fat_oper" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

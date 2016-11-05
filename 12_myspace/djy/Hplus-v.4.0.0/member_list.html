@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>会员列表</title>
+		<meta name="keywords" content="会员列表">
+		<meta name="description" content="会员列表">
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.0.0" rel="stylesheet">
+		<link href="css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<base target="_blank">
+	</head>
+
+	<body class="gray-bg">
+
+		<div class="ibox float-e-margins m-l m-r">
+			<div class="ibox-title">
+				<h5>会员列表</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="row">
+					<label class="col-md-1 text-right">姓名：</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" />
+					</div>
+					<label class="col-md-1 text-right">手机：</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" />
+					</div>
+					<label class="col-md-1 text-right">身份证：</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" />
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<label class="col-md-1 text-right">审批日期：</label>
+					<div class="col-md-3">
+						<div class="row">
+							<div class="col-md-6">
+								<input id="starttime" class="laydate-icon form-control layer-date">
+							</div>
+							<div class="col-md-6">
+								<input id="endtime" class="laydate-icon form-control layer-date">
+							</div>
+						</div>
+					</div>
+					<label class="col-md-1 text-right">用户类型：</label>
+					<div class="col-md-3">
+						<select class="form-control">
+						<option value="0">金融业代</option>
+						<option value="1">销售顾问</option>
+						<option value="2">贷款客户</option>						
+						</select>
+					</div>
+					<div class="col-md-4">
+						<div class="col-md-1">
+
+						</div>
+						<div class="col-md-3">
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-2"></div>
+					<div class="col-md-1">
+						<button class="btn btn-primary">查询</button>
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-2"></div>
+					<div class="col-md-2"></div>
+					<div class="col-md-2"></div>
+					<div class="col-md-2"></div>
+				</div>
+
+				<div class="row row-lg" style="margin-top: 10px;">
+					<div class="col-md-12">
+						<div class="example-wrap">
+							<div class="example">
+								<table data-toggle="table" data-url="js/demo/bootstrap_table_test.json" data-click-to-select="true" data-query-params="queryParams" data-mobile-responsive="true" ata-height="400" data-pagination="true" data-icon-size="outline" data-search="false" class="table">
+									<thead>
+										<tr>
+											<th data-field="name" data-halign="center" data-align="center">姓名</th>
+											<th data-field="1" data-halign="center" data-align="center">手机</th>
+											<th data-field="2" data-halign="center" data-align="center">身份证</th>
+											<th data-field="3" data-halign="center" data-align="center">审批通过日期</th>
+											<th data-field="4" data-halign="center" data-align="center">用户类型</th>
+											<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents" data-halign="center" data-align="center">操作
+											</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h1>会员信息</h1>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-2">姓名</div>
+							<div class="col-md-4" id="xingming"></div>
+							<div class="col-md-2">手机</div>
+							<div class="col-md-4" id="smobile"></div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">身份证</div>
+							<div class="col-md-4" id="cardid"></div>
+							<div class="col-md-2">用户类型</div>
+							<div class="col-md-4">
+								金融业代
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">审核通过日期</div>
+							<div class="col-md-4" id="adultdate"></div>
+							<div class="col-md-2"></div>
+							<div class="col-md-4"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary">保存</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 全局js -->
+		<script src="js/jquery.min.js?v=2.1.4"></script>
+		<script src="js/bootstrap.min.js?v=3.3.5"></script>
+		<!-- 自定义js -->
+		<script src="js/content.js?v=1.0.0"></script>
+
+		<!-- Bootstrap table -->
+		<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+		<script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+		<script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+		<!-- Peity -->
+		<script src="js/demo/bootstrap-table-demo.js"></script>
+
+		<script>
+			function actionFormatter(value, row, index) {
+				return [
+					'<a class="edit m-l" title="Edit"  >',
+					'<i class="glyphicon glyphicon-edit"></i>',
+					'</a>'
+				].join('');
+			}
+			window.actionEvents = {
+				'click .edit': function(e, value, row, index) {
+					//alert('You click edit icon, row: ' + JSON.stringify(row));
+					$("#xingming").html(row.name);
+					//....
+					$("#myModal6").modal();
+					console.log(value, row, index);
+				}
+			};
+		</script>
+		<!-- layerDate plugin javascript -->
+		<script src="js/plugins/layer/laydate/laydate.js"></script>
+		<script>
+			//外部js调用
+			laydate({
+				elem: '#starttime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+				event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
+			laydate({
+				elem: '#endtime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+				event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "UserGroup";
+}
+
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table//bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            DFCommon.TableInit("#formSearch").Init();
+            //2.初始化Button的点击事件
+            var oButtonInit = new ButtonInit();
+            oButtonInit.Init();
+        });
+
+        var ButtonInit = function () {
+            var oInit = new Object();
+            oInit.Init = function () {
+                //新增数据click事件注册
+                $("#btn_add").click(function () {
+                    location.href = "@Url.Action("Edit", "UserGroup")" + "?Id=0";
+                });
+
+                //删除数据click事件注册
+                $("#btn_delete").click(function () {
+                    var arrselections = $("#tb_UserGroups").bootstrapTable('getSelections');
+                    if (arrselections.length <= 0) {
+                        MsgBox.Prompt("错误", "请选择需要删除的数据");
+                        return;
+                    }
+                    MsgBox.Confirm("您确定要删除这条信息吗?", "确认要删除选择的数据",
+                    function () {
+                        var ids = [];
+                        for (var i = 0; i < arrselections.length; i++) {
+                            ids.push(arrselections[i].Id);
+                        }
+                        DFCommon.ajax({
+                            type: 'POST',
+                            url: "@Url.Action("Delete", "UserGroup")",
+                            data: { ids: ids.join(",") },
+                            dataType: "json",
+                            success: function (data, res) {
+                                if (res.Code == 1) {
+                                    MsgBox.Success("删除成功", "您已经永久删除了这条信息");
+                                    $("#tb_UserGroups").bootstrapTable('refresh');
+                                }
+                                else {
+                                    MsgBox.Error("错误", res);
+                                }
+                            }
+                        });
+                    });
+                });
+                
+            };
+            return oInit;
+        };
+        function fat_islock(value, row, index) {
+            return (value == 0 ? "否" : "是");
+        }
+        function fat_issys(value, row, index) {
+            return (value == 0 ? "否" : "是");
+        }
+        function fat_oper(value, row, index) {
+            return '<a href="/UserGroup/Edit?Id=' + row.Id + '" data-role="Edit">修改</a>';
+        }
+    </script>
+}
+<div class="panel panel-default" style=" padding:0px;margin:5px;">
+    <div class="panel-heading">
+        <h5>会员组别列表</h5>
+    </div>
+    <div class="panel-body">
+        <div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+        </div>
+    
+        <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("Search", "UserGroup")" data-query="#btn_query" data-table="#tb_UserGroups">
+            <div>
+                <table id="tb_UserGroups" data-filter-control="false">
+                    <thead>
+                        <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="Title" data-halign="center" data-align="center" data-filter-control="input">组别名称</th>
+                            <th data-field="Point" data-halign="center" data-align="center" data-filter-control="select">默认积分</th>
+                            <th data-field="IsLock" data-formatter="fat_islock" data-halign="center" data-align="center">是否禁用</th>
+                            <th data-field="Id" data-formatter="fat_oper" data-halign="center" data-align="center">操作</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+﻿@model DF.Finance.Model.OrderInsurance
+@{
+    ViewBag.Title = "保险信息录入";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Orders";
+}
+@section css{
+    <link href="~/_R/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+    <style>
+    .lightBoxGallery img {
+            margin: 5px;
+            width: 160px;
+     }
+    </style>
+}
+<div class="row">
+    <div class="panel panel-default" style="border:1px solid #fff">
+        <div class="panel-body">
+            <form class="form-horizontal m-t" id="form1">
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">保险公司:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" placeholder="保险公司" required="" id="InsuranceName" name="InsuranceName" value="@Model.InsuranceName">
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">保险日期:</label>
+                    <div class="col-sm-8">
+                        <input id="MaturityTime" value="@(Model.InsuranceTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.InsuranceTime.ToString())" class="laydate-icon form-control layer-date" placeholder="保险日期" required="" name="MaturityTime">
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">保险到期日期:</label>
+                    <div class="col-sm-8">
+                        <input id="InsuranceTime" value="@(Model.MaturityTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.MaturityTime.ToString())" class="laydate-icon form-control layer-date" placeholder="保险到期日期" required="" name="InsuranceTime">
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">备注信息：</label>
+                    <div class="col-sm-8">
+                        <textarea name="Remark" id="Remark" class="form-control" rows="3">@Model.Remark</textarea>
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">上传资料:</label>
+                    <div class="upload-box upload-album col-sm-2">
+                        <input type="hidden" name="hidFocusPhoto" id="hidFocusPhoto" class="focus-photo" />
+                    </div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <div class="col-sm-2"></div>
+                    <div class="lightBoxGallery col-sm-10">
+                        <div class="photo-list">
+                            <ul>
+                                @if (Model.OrderInsuranceImgs.Count != 0)
+                                {
+                                    foreach (var item in Model.OrderInsuranceImgs)
+                                    {
+                                        <li>
+                                            <input type="hidden" value="@item.ImgPath" name="hid_photo_name">
+                                            <input type="hidden" value="@item.Remark" name="hid_photo_remark">
+                                            <div onclick="setFocusImg(this);" class="img-box">
+                                                <a href="@item.ImgPath" data-gallery="" title="@item.Remark"><img style="width:112px;height:112px" bigsrc="" src="@item.ImgPath"></a>
+                                                <span class="remark"><i>@item.Remark</i></span>
+                                            </div>
+                                            <a onclick="setRemark(this);" href="javascript:;">描述</a>
+                                            <a onclick="delImg(this);" href="javascript:;">删除</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                            <div id="blueimp-gallery" class="blueimp-gallery">
+                                <div class="slides"></div>
+                                <h3 class="title"></h3>
+                                <a class="prev">‹</a>
+                                <a class="next">›</a>
+                                <a class="close">×</a>
+                                <a class="play-pause"></a>
+                                <ol class="indicator"></ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <div class="col-sm-10">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary block full-width m-b" data-role="Edit">录入</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+@section js{
+      <!-- blueimp gallery -->
+    <script src="~/_R/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+}
+@section scripts{
+    <script>
+        var api = top.dialog.get(window); //获取父窗体对象
+        var W = api.data;
+        $(function () {
+            //1、初始化上传$(".upload-img").InitUploader({});
+            $(".upload-album").InitUploader({ btntext: '上传图集', multiple: true, thumbnail: true });
+
+            $("body").attr("style","background-color: #fff;");
+
+            //2、外部js引用
+            laydate({
+                elem: '#MaturityTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+                event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+            });
+            laydate({
+                elem: '#InsuranceTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+                event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+            });
+
+            //3、获取父窗体对象,执行Ajax
+            //初始化表单验证
+            $("#form1").initValidform(submits);
+        })
+
+        function submits() {
+            var photo_name = '';
+            var photo_remark = '';
+            var strLi='';
+            $('.photo-list li').each(function (i) {
+                photo_name += $(this).find('input[name="hid_photo_name"]').attr('value') + '|';
+                photo_remark += $(this).find('input[name="hid_photo_remark"]').attr('value') + '|';
+                strLi=strLi+'<li><div class="img-box">'
+                    +'<a href="'+$(this).find('input[name="hid_photo_name"]').attr('value')+'" data-gallery="" title="'+$(this).find('input[name="hid_photo_remark"]').attr('value')+'">'
+                    +'<img src="'+$(this).find('input[name="hid_photo_name"]').attr('value')+'" style="width:112px;height:112px">'
+                    +'</a>'
+                    +'<span class="remark"><i>'+$(this).find('input[name="hid_photo_remark"]').attr('value')+'</i></span>'
+                    +'</div></li>';
+            });
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            postData.OrderId=@ViewBag.orderId;
+            postData.photo_name=photo_name;
+            postData.photo_remark=photo_remark;
+            postData = $("#form1").serializeObject(postData);
+
+            DFCommon.ajax({
+                type: 'POST',
+                url: '/Orders/UpdateOrderInsurance',
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1) {
+                        MsgBox.Success("保存成功", "");
+                        //修改父窗口的值
+                        $("#bxrq", W.document).html($('#MaturityTime').val());//保险日期
+                        $("#bxgs",W.document).html($('#InsuranceName').val());//保险公司
+                        $("#bxdqrq",W.document).html($('#InsuranceTime').val());//保险到期日期
+                        $("#bzxx", W.document).html($('#Remark').val());//备注信息
+                        $("#bdzl", W.document).html('<ul>'+strLi+'</ul>'+'<div id="blueimp-gallery" class="blueimp-gallery"><div class="slides"></div><h3 class="title"></h3><a class="prev">‹</a><a class="next">›</a><a class="close">×</a><a class="play-pause"></a><ol class="indicator"></ol></div>');//保单图片信息
+                        //parent.location.reload();属性父窗口
+                    } else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+</script>
+}

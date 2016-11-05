@@ -1,0 +1,815 @@
+﻿@model DF.Finance.Model.Order
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    if (Model.Status == 1)
+    {
+        ViewBag.NavName = "Orders_N1";
+    }
+    else if (Model.Status == 2) 
+    {
+        ViewBag.NavName = "Orders_N2";
+    }
+    else if (Model.Status == 3)
+    {
+        ViewBag.NavName = "Orders_N3";
+    }
+    else if (Model.Status == 4)
+    {
+        ViewBag.NavName = "Orders_N4";
+    }
+    else if (Model.Status == 5)
+    {
+        ViewBag.NavName = "Orders_N5";
+    }
+    else if (Model.Status == 6)
+    {
+        ViewBag.NavName = "Orders_N6";
+    }
+    else 
+    {
+        ViewBag.NavName = "Orders";
+    }
+}
+@section css{
+    <link href="~/_R/css/Order.css" rel="stylesheet">
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="~/_R/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+    <style>
+        caption {
+            text-align:center;
+            font-size:15px;
+            font-weight:bold;
+            color:#BD5353; 
+       }
+        .statu-wait {
+            color:red;
+        }
+        .lightBoxGallery img {
+            margin: 5px;
+            width: 160px;
+        }
+    </style>
+}
+
+<form class="form-horizontal">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true">订单详情</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <input type="hidden" id="OrderId" value="@Model.Id" />
+                        <input type="hidden" id="status" value="@Model.Status" />
+                        <!--节点审核信息start-->
+                        <div class="panel-body">
+                            <div class="form-group order-flow col-sm-12" style="margin-left:20%;">
+                                <div class="col-sm-1">
+                                    <div class="order-flow-@(Model.Status==1?"wait":"left")" id="step1">
+                                        <a class="order-flow-input">完整</a>
+                                        <span>
+                                            <p class="name">资料提交</p>
+                                             @if (Model.Status == 1)
+                                             {
+                                                <p>资料已录入</p>
+                                             }
+                                             else if (Model.Status == 91)
+                                             {
+                                                <p>不完整</p>
+                                                <p>@Model.Remark</p>
+                                             }
+                                             else
+                                             {
+                                                 <p>完整</p>
+                                             }
+                                           
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="order-flow-@(Model.Status < 2 ? "wait" : "arrive")" id="step2">
+                                        <a class="order-flow-input">通过</a>
+                                        <span>
+                                            <p class="name">审批</p>
+                                            @if (Model.Status > 1 && Model.Status != 91)
+                                            {
+                                                if (Model.Status == 2)
+                                                {
+                                                    <p class="statu-wait">待总部审批</p>
+
+                                                }
+                                                else if (Model.Status == 92)
+                                                {
+                                                    <p>审批不通过</p>
+                                                    <p>@Model.Remark</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>审批通过</p>
+                                                    <p>@(Model.OrderExtAttribute.ApprovalTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.ApprovalTime.ToString("yyyy-MM-dd"))</p>
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="order-flow-@(Model.Status < 3 ? "wait" : "arrive")" id="step3">
+                                        <a class="order-flow-input">合同</a>
+                                        <span>
+                                            <p class="name">签订合同</p>
+                                            @if (Model.Status > 2 && Model.Status != 92 & Model.Status != 91)
+                                            {
+                                                if (Model.Status == 3)
+                                                {
+                                                    <p class="statu-wait">待签订合同</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>已签订合同</p>
+                                                    <p>@(Model.OrderExtAttribute.ContractTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.ContractTime.ToString("yyyy-MM-dd"))</p>
+                                                }
+                                            }
+                                            
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="order-flow-@(Model.Status < 4 ? "wait" : "arrive")" id="step4">
+                                        <a class="order-flow-input">资料</a>
+                                        <span>
+                                            <p class="name">放款资料</p>
+                                            @if (Model.Status > 3 && Model.Status != 92 & Model.Status != 91)
+                                            {
+                                                if (Model.Status == 4)
+                                                {
+                                                    <p class="statu-wait">待放款</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>已放款</p>
+                                                    <p>@(Model.OrderExtAttribute.LoanTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.LoanTime.ToString("yyyy-MM-dd"))</p>
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="order-flow-@(Model.Status < 5 ? "wait" : "arrive")" id="step5">
+                                        <a class="order-flow-input">操作</a>
+                                        <span>
+                                            <p class="name">登记证操作</p>
+                                            @if (Model.Status > 4 && Model.Status != 92 & Model.Status != 91)
+                                            {
+                                                if (Model.Status == 5)
+                                                {
+                                                    <p class="statu-wait">待登记</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>已登记</p>
+                                                    <p>@(Model.OrderExtAttribute.CheckInTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.CheckInTime.ToString("yyyy-MM-dd"))</p>
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="order-flow-@(Model.Status < 6 ? "wait" : "arrive")" id="step6">
+                                        <a class="order-flow-input">资料邮寄</a>
+                                        <span>
+                                            <p class="name">资料邮寄</p>
+                                            @if (Model.Status > 5 && Model.Status != 92 & Model.Status != 91)
+                                            {
+                                                if (Model.Status == 6)
+                                                {
+                                                    <p class="statu-wait">待邮寄</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>已邮寄</p>
+                                                    <p>@(Model.OrderExtAttribute.MailingTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.MailingTime.ToString("yyyy-MM-dd"))</p>
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <div class="order-flow-right-@(Model.Status!=99 ? "wait" : "arrive")" id="step7">
+                                        <a class="order-flow-input">已完成</a>
+                                        <span>
+                                            <p class="name">已完成</p>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---订单详细信息--->
+                        <div class="panel-body">
+                            <div class="form-group order-flow col-sm-12">
+                                <!--客户信息start-->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <caption>客户信息</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>金融业代</th>
+                                                <th>放款金融公司</th>
+                                                <th>区域</th>
+                                                <th>汽车类型</th>
+                                                <th>收单日期</th>
+                                                <th>申请人姓名</th>
+                                                <th>申请人手机</th>
+                                                <th>申请人身份证号码</th>
+                                                <th>共申人姓名</th>
+                                                <th>共申人手机</th>
+                                                <th>担保人姓名</th>
+                                                <th>担保人手机</th>
+                                                <th>贷款产品</th>
+                                                <th>贷款利息类型</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span id="jryd">@Model.AddName</span></td>
+                                                <td><span id="fkjrgs">@Model.LCName</span></td>
+                                                <td><span id="qy">@Model.DepartmentName</span></td>
+                                                <td><span id="qclx">@Model.OldCar</span></td>
+                                                <td><span id="sdrq">@Model.AcquirerTime</span></td>
+                                                <td><span id="sqrxm">@Model.ApplicantName</span></td>
+                                                <td><span id="sqrsj">@Model.ApplicantPhone</span></td>
+                                                <td><span id="sqrsfz">@Model.ApplicantIDCard</span></td>
+                                                <td><span id="gsrxm">@Model.CoApplicantName</span></td>
+                                                <td><span id="gsrsj">@Model.CoApplicantPhone</span></td>
+                                                <td><span id="dbrxm">@Model.GuarantorName</span></td>
+                                                <td><span id="dbrsj">@Model.GuarantorPhone</span></td>
+                                                <td><span id="dkcp">@Model.LoanProducts</span></td>
+                                                <td><span id="dklxlx">@Model.LoanInterest</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--车行信息start-->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <caption>车行信息</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>实际交易方</th>
+                                                <th>放款环节</th>
+                                                <th>销售顾问姓名</th>
+                                                <th>销售顾问手机</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span id="sjjyf">@Model.DealersName</span></td>
+                                                <td><span id="fkhj">@Model.LoanLink</span></td>
+                                                <td><span id="xxgwxm">@Model.SalesName</span></td>
+                                                <td><span id="xxgwsj">@Model.SalesPhone</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--车辆信息start-->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <caption>车辆信息</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>汽车品牌</th>
+                                                <th>汽车车型</th>
+                                                <th>车身价</th>
+                                                <th>贷款金额</th>
+                                                <th>贷款期限</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span id="qcpp">@Model.CarBrand</span></td>
+                                                <td><span id="qccx">@Model.Models</span></td>
+                                                <td><span id="csj">@Model.CarWorth 元</span></td>
+                                                <td><span id="dkje">@Model.LoanAmount</span></td>
+                                                <td><span id="dkqx">@Model.LoanTerm</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--审批信息start-->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <caption>流程信息</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>审批金额</th>
+                                                <th>审批通过日期</th>
+                                                <th>签订合同号码</th>
+                                                <th>签订合同日期</th>
+                                                <th>开票单位</th>
+                                                <th>放款日期</th>
+                                                <th>从车行收回登记证日期</th>
+                                                <th>登记证状态</th>
+                                                <th>抵押后收回登记证日期</th>
+                                                <th>资料邮寄时间</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span id="spje">@(Model.OrderExtAttribute.ApprovalAmount == 0 ? "" : Model.OrderExtAttribute.ApprovalAmount.ToString())</span></td>
+                                                <td><span id="sptgrq">@(Model.OrderExtAttribute.ApprovalTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.ApprovalTime.ToString())</span></td>
+                                                <td><span id="qdhthm">@Model.OrderExtAttribute.ContractNumber</span></td>
+                                                <td><span id="qdhtrq">@(Model.OrderExtAttribute.ContractTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.ContractTime.ToString())</span></td>
+                                                <td><span id="kpdw">@Model.OrderExtAttribute.BillingUnit</span></td>
+                                                <td><span id="fkrq">@(Model.OrderExtAttribute.LoanTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.LoanTime.ToString())</span></td>
+                                                <td><span id="cchshdjzrq">@(Model.OrderExtAttribute.CheckInTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.CheckInTime.ToString())</span></td>
+                                                <td id="span_djzzt">
+                                                    @foreach (DF.Finance.Model.SysDictionary item in ViewBag.CheckInStatus)
+                                                    {
+                                                        if (item.Val == Model.OrderExtAttribute.CheckInStatus.ToString())
+                                                        {
+                                                            <span id="djzdyz">@item.Name</span>
+                                                        }
+                                                    }
+                                                </td>
+                                                <td><span id="dyhhsdjzrq">@(Model.OrderExtAttribute.RecoveryTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.RecoveryTime.ToString())</span></td>
+                                                <td><span id="zlyjsj">@(Model.OrderExtAttribute.MailingTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.MailingTime.ToString())</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--保险信息-->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <caption>保险信息</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>保险日期</th>
+                                                <th>保险公司</th>
+                                                <th>保险到期日期</th>
+                                                <th>备注信息</th>
+                                                <th>保单资料</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span id="bxrq">@(Model.Insurance.InsuranceTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.Insurance.InsuranceTime.ToString())</span></td>
+                                                <td><span id="bxgs">@Model.Insurance.InsuranceName</span></td>
+                                                <td><span id="bxdqrq">@(Model.Insurance.MaturityTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.Insurance.MaturityTime.ToString())</span></td>
+                                                <td><span id="bzxx">@Model.Insurance.Remark</span></td>
+                                                <td>
+                                                    <div class="lightBoxGallery">
+                                                        @if (Model.Insurance.Id != 0)
+                                                        {
+                                                            if (Model.Insurance.OrderInsuranceImgs.Count != 0)
+                                                            {
+                                                                <div class="photo-list" id="bdzl">
+                                                                    <ul>
+                                                                        @foreach (var item in Model.Insurance.OrderInsuranceImgs)
+                                                                        {
+                                                                            <li>
+                                                                                <div class="img-box">
+                                                                                    <a href="@item.ImgPath" data-gallery=""><img style="width:112px;height:112px" src="@item.ImgPath"></a>
+                                                                                    <span class="remark"><i>@item.Remark</i></span>
+                                                                                </div>
+                                                                            </li>
+                                                                        }
+                                                                    </ul>
+                                                                    <div id="blueimp-gallery" class="blueimp-gallery">
+                                                                        <div class="slides"></div>
+                                                                        <h3 class="title"></h3>
+                                                                        <a class="prev">‹</a>
+                                                                        <a class="next">›</a>
+                                                                        <a class="close">×</a>
+                                                                        <a class="play-pause"></a>
+                                                                        <ol class="indicator"></ol>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        }
+
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                           
+                                <!--订单提醒信息-->
+                                @if (Model.OrderRemindRemarks.Count != 0)
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <caption>订单提醒信息</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th>订单提醒类型</th>
+                                                    <th>备注信息</th>
+                                                    <th>订单提醒类型</th>
+                                                    <th>备注信息</th>
+                                                    <th>订单提醒类型</th>
+                                                    <th>备注信息</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    @foreach (var item in Model.OrderRemindRemarks)
+                                                    {
+                                                        <td>@item.RemindTypeName</td>
+                                                        <td>@item.Remark</td>
+                                                    }
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--工具菜单start-->
+    <div class="page-footer">
+        <div class="btn-wrap tooltip-demo" style="position: fixed;">
+            @if (ViewBag.OrderActionEnum != "已完成")
+            {
+                <input id="actionOk" type="button" value="@ViewBag.OrderActionEnum" class="btn btn-primary" />
+            }
+            @if (ViewBag.OrderActionEnum == "资料完整")
+            {
+                <input id="actionNo" type="button" value="资料不完整" class="btn btn-primary" />
+            }
+            else if (ViewBag.OrderActionEnum == "审批通过")
+            {
+                <input id="actionNo" type="button" value="审批不通过" class="btn btn-primary" />
+            }
+            else if (ViewBag.OrderActionEnum == "登记证操作" || ViewBag.OrderActionEnum == "资料回邮")
+            {
+                //if (Model.Insurance.Id == 0 || ViewBag.OrderActionEnum == "登记证操作") //如果在“登记证操作”这一步已经录入了保险资料，则登记证操作不显示了
+                //{
+
+                //}
+                <input id="Insurance" type="button" value="保险信息录入" class="btn btn-primary" />
+
+            }
+            @if (ViewBag.OrderActionEnum != "已完成")//订单已完成的话，则不能回滚，且没有其他操作了
+            {
+                <input id="SaveOrder" type="button" value="确定保存" data-role="Edit" class="btn btn-primary" data-placement="top" data-toggle="tooltip" data-original-title="确定保存之后无法撤销" />
+                <input id="RollBack" type="button" value="回滚" data-role="RollBack" class="btn btn-primary" data-placement="top" data-toggle="tooltip" data-original-title="订单回滚只能从当前状态往上回滚，不能回滚到下一步" />
+            }
+            <input id="btnReturn" type="button" value="返回上一页" class="btn  btn-primary" onclick="javascript:history.back(-1);" />
+            <input id="btnOrderRecord" type="button" value="查看订单操作日志" class="btn  btn-primary"/>
+         </div>
+    </div>
+</form>
+
+@section js{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table//bootstrap-table-filter-control.js"></script>
+    <!-- blueimp gallery -->
+    <script src="~/_R/js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+}
+
+@section scripts
+{
+<script>
+
+    //工具提示
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+
+    var OrderId = $('#OrderId').val();//订单Id
+    var EnumAction='';
+    var freshUrl=''
+    var Remark='';
+    $("#SaveOrder").click(function () {
+        if(EnumAction=="")
+        {
+            MsgBox.Prompt("警告","请先完成"+$('#actionOk').val()+"操作,方可执行此操作","");
+        }
+        else
+        {
+            Save();
+        }
+    });
+
+    function Save(){
+        //freshUrl='/Orders/Edit?Id='+OrderId;暂时不刷新
+        Postdata = { orderId: OrderId, EnumStr: EnumAction, remark: Remark };
+        PostUrl = '/Orders/Update';
+        var ajax=function(){
+            DFCommon.ajax({
+                type: 'POST',
+                url: PostUrl,
+                dataType: "json",
+                data:Postdata,
+                success: function (data, res) {
+                    if (res.Code == 1) {
+                        MsgBox.Success('确认成功,恭喜您订单状态提交成功', '', freshUrl);
+                    }
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+        MsgBox.Confirm('友情提醒','点击"确认"后无法撤销,请确保当前操作已完成',ajax);
+
+    }
+
+    $("#actionOk").click(function () {
+        EnumAction=$('#actionOk').val();//订单操作状态
+        switch(EnumAction)
+        {
+            case "资料完整":
+                ShowNode1Ok();
+                $("#step1").removeClass("order-flow-wait").addClass("order-flow-left");
+                break;
+            case "审批通过":
+                ShowNode2Ok();
+                $("#step2").removeClass("order-flow-wait").addClass("order-flow-arrive");
+                break;
+            case "录入合同资料":
+                ShowNode3Ok();
+                $("#step3").removeClass("order-flow-wait").addClass("order-flow-arrive");
+                break;
+            case "放款资料录入":
+                ShowNode4Ok();
+                $("#step4").removeClass("order-flow-wait").addClass("order-flow-arrive");
+                break;
+            case "登记证操作":
+                ShowNode5Ok();
+                $("#step5").removeClass("order-flow-wait").addClass("order-flow-arrive");
+                break;
+            case "资料回邮":
+                ShowNode6Ok();
+                $("#step6").removeClass("order-flow-wait").addClass("order-flow-right-arrive");
+                break;
+        }
+    });
+
+    $("#actionNo").click(function () {
+        EnumAction=$('#actionNo').val();//订单操作状态
+        switch(EnumAction)
+        {
+            case "资料不完整":
+                ShowNode1No();
+                break;
+            case "审批不通过":
+                ShowNode2No();
+                break;
+        }
+    });
+
+    //保险信息录入
+    $("#Insurance").click(function(){
+        var url='/Orders/Insurance?layout=layouTpage&orderId=' + OrderId;
+        Dialog.Url('保险信息录入',null,url,null,768,460);
+    });
+
+    //状态回滚事件
+    $("#RollBack").click(function(){
+        var url='/Orders/Rollback?layout=layouTpage&orderId=' + OrderId;
+        Dialog.Url('订单状态回滚',null,url,null,300,250);
+    })
+
+    $("#btnOrderRecord").click(function(){
+        var url='/OrderRecord/Index?layout=layouTpage&orderId=' + OrderId;
+        Dialog.Url('订单操作日志',null,url,null,1000,650);
+    })
+
+    //节点1通过
+    function ShowNode1Ok()
+    {
+        MsgBox.Success('资料完整','请点击"确定保存"进行确定','')
+    }
+
+    //节点1不通过
+    function ShowNode1No(){
+        var content='<div class="form-group col-sm-12">'+
+                '<label class="control-label col-sm-3" for="txt_Node1remark">备注原因</label>'+
+                '<div class="col-sm-9">'+
+                '<textarea class="form-control" id="Node1remark" rows="2" cols="20" class="input">@Model.Remark</textarea>' +
+                '</div></div>';
+        //弹出对话框
+        Dialog.Content('备注愿因',content,'保存',Node1No,450,60,null);
+    }
+
+    //节点2审批通过
+    function ShowNode2Ok(){
+        var content='<div class="form-group col-sm-10">'+
+               '<label class="control-label col-sm-5" for="txt_Node2spje">审批金额</label>'+
+               '<div class="col-sm-7"><input type="text" class="form-control" id="Node2spje" value="@Model.OrderExtAttribute.ApprovalAmount"></div>'+
+               '</div>'+
+               '<div class="form-group col-sm-10">'+
+               '<label class="control-label col-sm-5" for="txt_Node2sptgrq">审批通过日期</label>'+
+               '<div class="col-sm-7"><input type="text" value="@(Model.OrderExtAttribute.ApprovalTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.ApprovalTime.ToString())" class="laydate-icon form-control layer-date" id="Node2sptgrq" name="Node2sptgrq" onclick="laydate()"></div>'+
+               '</div>';
+        //弹出对话框
+        Dialog.Content('审批通过',content,'保存',Node2Ok,450,100,null);
+    }
+
+    //节点2审批通过
+    function ShowNode2No(){
+        var content='<div class="form-group col-sm-12">'+
+                '<label class="control-label col-sm-3" for="txt_Node2remark">不通过原因</label>'+
+                '<div class="col-sm-9">'+
+                '<textarea class="form-control" id="Node2remark" class="input"></textarea>' +
+                '</div></div>';
+        //弹出对话框
+        Dialog.Content('审批不通过',content,'保存',Node2No,450,60,null);
+    }
+
+    //节点3 签订合同
+    function ShowNode3Ok(){
+        var content='<div class="form-group col-sm-10">'+
+                '<label class="control-label col-sm-5" for="txt_Node3qdhthm">签订合同号码</label>'+
+                '<div class="col-sm-7"><input type="text" class="form-control" id="Node3qdhthm" value="@Model.OrderExtAttribute.ContractNumber"></div>'+
+                '</div>'+
+                '<div class="form-group col-sm-10">'+
+                '<label class="control-label col-sm-5" for="txt_Node3qdhtrq">签订合同日期</label>'+
+                '<div class="col-sm-7"><input type="text" value="@(Model.OrderExtAttribute.ContractTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.ContractTime.ToString())" class="laydate-icon form-control layer-date" id="Node3qdhtrq" onclick="laydate()"></div>'+
+                '</div>';
+
+        //弹出对话框
+        Dialog.Content('签订合同',content,'保存',Node3Ok,450,100,null);
+    }
+
+    //节点4 放款资料
+    function ShowNode4Ok(){
+        //跳转页面
+        var url='/Orders/billing?layout=layouTpage&orderId=' + OrderId;
+        Dialog.Url('放款资料录入',null,url,'',300,280);
+    }
+
+    //节点5 登记证操作
+    function ShowNode5Ok(){
+        //跳转页面
+        var url='/Orders/CheckIn?layout=layouTpage&orderId=' + OrderId;
+        Dialog.Url('登记证操作',null,url,'',300,280);
+    }
+
+    //节点6 资料邮寄时间
+    function ShowNode6Ok(){
+        var content='<div class="form-group col-sm-10">'+
+                '<label class="control-label col-sm-5" for="txt_Node6zlyjsj">资料邮寄时间</label>'+
+                '<div class="col-sm-7">'+
+                '<input type="text" value="@(Model.OrderExtAttribute.MailingTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.OrderExtAttribute.MailingTime.ToString())" class="laydate-icon form-control layer-date" id="Node6zlyjsj" onclick="laydate()"></div></div>';
+        //弹出对话框
+        Dialog.Content('资料邮寄',content,'保存',Node6Ok,450,60,null);
+    }
+
+
+
+    /*************************************************执行方法体**************************************************/
+
+    //节点1不通过
+    function Node1No(){
+        if ($("#Node1remark").val() == "") {
+            MsgBox.Error('清输入备注原因');
+        }
+        else {
+            //更新订单，备注不完整的具体原因
+            Remark=$("#Node1remark").val();
+            PostUrl = '/Orders/OrderRemark';
+            Postdata = { orderId: OrderId,remark: Remark };
+            UpdateOrder(PostUrl, Postdata, '');
+        }
+    }
+
+    //节点2通过，保存审批金额和审批日期
+    function Node2Ok(){
+        if ($("#Node2spje").val() == ""||$("#Node2sptgrq").val()=="") {
+            MsgBox.Error('请输入审批金额或审批金额日期');
+        }
+        else {
+            //更新订单，保存审批金额和审批通过日期
+            Remark='保存审批金额和审批通过日期，审批金额：'+$("#Node2spje").val()+'，审批日期：'+$("#Node2sptgrq").val();
+            postData=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.OrderExtAttribute));
+            postData.OrderId=@Model.Id;
+            postData.ApprovalAmount=$("#Node2spje").val();
+            postData.ApprovalTime=$("#Node2sptgrq").val();
+            PostUrl = '/Orders/UpdateOrderExtAttribute';
+            UpdateOrder(PostUrl, postData, '');
+
+            //赋值
+            $("#spje").html($("#Node2spje").val());
+            $("#sptgrq").html($("#Node2sptgrq").val())
+        }
+    }
+
+    //节点2不通过，保存不通过的原因
+    function Node2No(){
+        if ($("#Node2remark").val() == "") {
+            MsgBox.Error('请输入不通过原因');
+        }
+        else {
+            Remark='审批不通过，备注原因：'+$("#Node2remark").val();
+            PostUrl = '/Orders/OrderRemark';
+            Postdata = { orderId: OrderId,remark: Remark };
+            UpdateOrder(PostUrl, Postdata, '');
+        }
+    }
+
+    //节点3签订合同，保存合同号码和签订合同的日期
+    function Node3Ok () {
+        if ($("#Node3qdhthm").val() == ""||$("#Node3qdhtrq").val()=="") {
+            MsgBox.Error('对不起，请输入签订合同号码和签订合同日期！');
+        }
+        else {
+            //更新订单，保存签订合同号码
+            Remark='签订合同,合同号码：'+$("#Node3qdhthm").val()+'签订合同日期:'+$("#Node3qdhtrq").val();
+            PostUrl = '/Orders/UpdateOrderExtAttribute';
+            postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.OrderExtAttribute));
+            postData.OrderId=@Model.Id;
+            postData.ContractNumber=$("#Node3qdhthm").val();
+            postData.ContractTime=$("#Node3qdhtrq").val();
+            UpdateOrder(PostUrl, postData, '');
+
+            //赋值
+            $("#qdhthm").html($("#Node3qdhthm").val());
+            $("#qdhtrq").html($("#Node3qdhtrq").val())
+        }
+    }
+
+    //节点5登记证操作，保存从车行收回登记证日期、登记证抵押中、抵押后收回登记证日期
+    function Node5Ok(){
+
+        if($("#Node5cchhsdjzrq").val()==""||$("#Node5djzdyz").val()==""||$("#Node5dyhhsdjzrq").val()=="")
+        {
+            MsgBox.Error("请输入车行收回登记证日期、登记证抵押中、抵押后收回登记证日期");
+        }
+        else{
+            //更新订单，保存:从车行收回登记证日期、登记证抵押中、抵押后收回登记证日期
+            Remark='登记证操作,收回日期：'+$("#Node5cchhsdjzrq").val()+',抵押后收回登记证日期：'+$("#Node5dyhhsdjzrq").val();
+            PostUrl = '/Orders/UpdateOrderExtAttribute';
+            postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.OrderExtAttribute));
+            postData.OrderId=@Model.Id;
+            postData.CheckInTime=$("#Node5cchhsdjzrq").val();
+            postData.CheckInStatus=$("#Node5djzdyz").val();
+            postData.RecoveryTime=$("#Node5dyhhsdjzrq").val();
+            UpdateOrder(PostUrl, postData, '');
+
+            //赋值
+            $("#cchshdjzrq").html($("#Node5cchhsdjzrq").val());
+            $("#dyhhsdjzrq").html($("#Node5dyhhsdjzrq").val());
+            $("#span_djzzt").html("<span>"+$("#Node5cchhsdjzrq").val()+"</span>");
+        }
+    }
+
+    //节点6资料邮寄，保存资料邮寄时间
+    function Node6Ok(){
+        if($('#Node6zlyjsj').val()==""){
+            MsgBox.Error('请填写资料邮寄时间');
+        }
+        else{
+            //更新订单，保存资料邮寄时间
+            Remark='资料回邮,资料邮寄时间：'+$('#Node6zlyjsj').val();
+            PostUrl = '/Orders/UpdateOrderExtAttribute';
+            postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.OrderExtAttribute));
+            postData.OrderId=@Model.Id;
+            postData.MailingTime=$('#Node6zlyjsj').val();
+            UpdateOrder(PostUrl, postData, '');
+
+            //赋值
+            $('#zlyjsj').html($('#Node6zlyjsj').val());
+        }
+    }
+
+    //修改数据的统一执行方法
+    function UpdateOrder(Url,Postdata,freshUrl)
+    {
+        DFCommon.ajax({
+            type: 'POST',
+            url: Url,
+            dataType: "json",
+            data:Postdata,
+            success: function (data, res) {
+                if (res.Code == 1) {
+                    MsgBox.Success('操作成功,请点击"确定保存"进行确定', '', freshUrl);
+                }
+                else {
+                    MsgBox.Error("错误", res);
+                }
+            }
+        });
+    }
+</script>
+}

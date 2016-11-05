@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "SysDictionaryType";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var isDebug =@(DF.Finance.WebCommon.WebRunTime.IsDebug)
+        $(function () {
+            //1.初始化Table
+            DFCommon.TableInit("#formSearch").Init();
+            $("#btn_add").click(function () {
+                $("#form2").initValue({ TypeName: "", TypeCode: "", IsSys: 0, Id: 0 });
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+                $('#myModal').modal({
+                    toggle: true
+                })
+            });
+        });
+        function fat_IsSys(value, row, index) {
+            return (value == 0 ? "是" : "否");
+        }
+        function fat_oper(value, row, index) {
+            var html = '<a  href="/SysDictionary/DicManageIndex?TypeId=' + value + '" class=" btn btn-link ' + (row.IsSys == 0 ? "disabled" : "") + '" data-role="Show">管理</a>';
+            if (isDebug == 1)
+                html += '|<a  data-toggle="modal" data-target="#myModal" class="edit btn btn-link " data-role="Edit">编辑</a>';
+            return html;
+        }
+        window.actionEvents = {
+            'click .edit': function (e, value, row, index) {
+                $("#form2").initValue(row);
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+            }
+        };
+        //初始化表单验证
+        $("#form2").initValidform(function () {
+            //console.log("ok");
+            var postData = $("#form2").serializeObject();
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEdit", "SysDictionaryType")",
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1) {
+                        MsgBox.Success("保存成功", "", true);
+                    }
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        });
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetSysDictionaryTypeList", "SysDictionaryType")" data-query="#btn_query" data-table="#tb_dicType">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">类型名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="TypeName">
+                    </div>
+                    <label class="control-label col-sm-1">Code</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="TypeCode">
+                    </div>
+                    <label class="control-label col-sm-1 @(DF.Finance.WebCommon.WebRunTime.IsDebug==1?"":"hidden")">系统默认</label>
+                    <div class="col-sm-2 @(DF.Finance.WebCommon.WebRunTime.IsDebug==1?"":"hidden")">
+                        <select class="form-control" name="IsSys">
+                            <option value="">--系统默认--</option>
+                            <option value="0">是</option>
+                            <option value="1">否</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1"></label>
+                    <div class="col-sm-2">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary @(DF.Finance.WebCommon.WebRunTime.IsDebug == 1 ? "" : "hidden")" data-role="Add">
+            <span class=" glyphicon glyphicon-plus" aria-hidden="true">
+            </span>新增
+        </button>
+        <a class=""></a>
+        @*<button id="btn_delete" type="button" class="btn btn-warning">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>*@
+    </div>
+
+    <table id="tb_dicType">
+        <thead>
+            <tr>
+                @*<th data-checkbox="true"></th>*@
+                <th data-field="TypeName" data-halign="center" data-align="center">名称</th>
+                <th data-field="TypeCode" data-halign="center" data-align="center">Code</th>
+                <th data-field="IsSys" data-formatter="fat_IsSys" data-halign="center" data-align="center" class="@(DF.Finance.WebCommon.WebRunTime.IsDebug==1?"":"hidden")">系统默认</th>
+                <th data-field="Id" data-formatter="fat_oper" data-events="actionEvents" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h5>分类</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="form2" class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">类型名称</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="TypeName" datatype="*1-50">
+                            </div>
+                        </div>
+                        <div class="form-group m-t">
+                            <label class="control-label col-md-3">类型Code</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="TypeCode" datatype="*1-50">
+                            </div>
+                        </div>
+                        <div class="form-group @(DF.Finance.WebCommon.WebRunTime.IsDebug == 1 ? "" : "hidden")">
+                            <label class="col-sm-3 control-label">系统默认</label>
+                            <div class="col-sm-5  radio i-checks">
+                                <label>
+                                    <input type="radio" value="0" name="IsSys"> <i></i>是
+                                    <input type="radio" value="1" name="IsSys"> <i></i>否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <div class="col-md-10 text-center">
+                                    <div>
+                                        <input type="hidden" name="Id" value="0" />
+                                        <button type="submit" class="btn btn-primary" id="btnsave" data-role="Add">保存</button>
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

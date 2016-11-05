@@ -1,0 +1,115 @@
+﻿
+<div class="content  infinite-scroll infinite-scroll-bottom  page-sales-clientManage" data-distance="100">
+    <div class="row no-border p-y-1 text-center bg-white color-content">
+        <div class="col-40">公司名称</div>
+        <div class="col-20">联系人</div>
+        <div class="col-40">联系电话</div>
+    </div>
+    <div class="list-block m-t-0">
+        <ul class="bg-color">
+            <template v-for="item in list">
+                <li class="item-content item-link p-l-0" v-tap="gotoClientDetail(item.Id)">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner p-r-0 m-l-0">
+                        <a class="row width-full  no-gutter text-center color-content font-sm">
+                            <div class="col-40 text-left">
+                                {{ item.CompanyName}}
+                            </div>
+                            <div class="col-20 text-right">
+                                {{ item.Contacts}}
+                            </div>
+                            <div class="col-40 word-break-all text-right">
+                                {{ item.CompanyPhone}}
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </template>
+        </ul>
+    </div>
+    <!-- 加载提示符 -->
+    <div class="infinite-scroll-preloader" v-if="loading">
+        <div class="preloader"></div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                list: [],//数据列表
+                maxItems: 0,//数据总条数
+                lastIndex: 0,//最后的索引
+                pageIndex: 1,//当前页
+                pageSize: 5,//每次加载数据量
+                loading: false//加载状态
+            },
+            methods: {
+                init: function () {
+                    var This = this;
+                    //获取数据
+                    this.getData(function (data) {
+                        //console.log(data);
+                        vue.list = data.Items;
+                        vue.lastIndex = data.Items.length;
+                        vue.maxItems = data.TotalItems;//总条数
+                    });
+                },
+                //跳转到-客户详情
+                gotoClientDetail: function (id) {
+                    //console.log(id);
+                    storage.setItem("cusId", id);
+                    $.router.load("#AgentClientDetail", true);
+                },
+                //获取数据
+                getData: function (callback) {
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/FinancialBusiness/GetMyCustomUserList",
+                        isShowLoading: true,
+                        data: { pageIndex: this.pageIndex, pageSize: this.pageSize },
+                        success: function (data) {
+                            if (callback) callback(data);
+                        }
+                    });
+                },
+                //滚动加载数据
+                scrollLoad: function () {
+                    vue.getData(function (data) {
+                        // 重置加载flag
+                        vue.loading = false;
+                        if (vue.lastIndex >= vue.maxItems) {
+                            // 加载完毕，则注销无限加载事件，以防不必要的加载
+                            $.detachInfiniteScroll($('.infinite-scroll'));                           
+                        } else {
+                            // 添加新条目
+                            for (var i = 0; i < data.Items.length; i++) {
+                                vue.list.push(data.Items[i]);
+                            }
+                            //更新最后加载的序号
+                            vue.lastIndex = vue.list.length;
+                            vue.pageIndex++;
+                            //容器发生改变,如果是js滚动，需要刷新滚动
+                            $.refreshScroller();
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+        // 注册'infinite'事件处理函数
+        $(document).on('infinite', '.infinite-scroll-bottom', function () {
+            // 如果正在加载，则退出
+            if (vue.loading) return;
+            // 设置flag
+            vue.loading = true;
+            //滚动加载数据
+            vue.scrollLoad();
+        });
+    });
+    //$(function () {
+    //    CheckLogin();
+    //});
+</script>

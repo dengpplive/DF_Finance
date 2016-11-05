@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>订单管理</title>
+		<meta name="keywords" content="节点1">
+		<meta name="description" content="节点1">
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.0.0" rel="stylesheet">
+		<base target="_blank">
+		 <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	</head>
+
+	<body class="gray-bg">
+		<div class="ibox float-e-margins m-l m-r">
+				 <div class="ibox-title">
+					<h5>订单列表</h5>
+					<div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>                            
+                    </div>
+				 </div>
+				 <div id="toolbar1">
+			        <!--<button id="remove" class="btn btn-danger" disabled>
+			            <i class="glyphicon glyphicon-remove"></i> Delete
+			        </button>-->
+    			 </div>
+    			 <div class="ibox-content">
+    				<div class="row row-lg">                  
+	                    <div class="col-sm-26">
+	                        <!-- Example Pagination -->
+	                        <div class="example-wrap">
+	                            <div class="example">
+	                                <table id="Table" 
+	                                	data-toolbar="#toolbar1"
+	                                	data-toggle="table" 
+	                                	data-search="true"
+	                                	data-show-refresh="true"
+	                                	data-show-toggle="true"
+	                                	data-show-columns="true"
+	                                	data-url="js/demo/bootstrap_table_test.json" 
+	                                	data-click-to-select="true"
+	                                	data-query-params="queryParams" 
+	                                	data-mobile-responsive="true" 
+	                                	data-height="600" 
+	                                	data-show-columns="true"
+	           							data-show-pagination-switch="true"
+	           	                     	data-pagination="true" 
+	           	                     	data-id-field="id"
+	           							data-page-list="[10, 25, 50, 100, ALL]"
+	                                	data-icon-size="outline" 
+	                                	data-search="false"
+	                                	class="table">
+	                                    <thead>
+	                                        <tr>
+	                                            <th data-field="id">ID</th>
+	                                            <th data-field="name">录入的资料相关信息</th>
+	                                            <th data-field="price">节点1审核信息</th>
+	                                            <th data-field="0">节点2审核信息</th>
+	                                            <th data-field="1">节点3审核信息</th>
+	                                            <th data-field="2">节点4审核信息</th>
+	                                            <th data-field="3">节点5审核信息</th>
+	                                            <th data-field="4">节点6审核信息</th>
+	                                            <th data-field="5">保险相关信息</th>
+	                                            <th data-field="6">未放款提醒备注</th>
+	                                            <th data-field="7">登记证未回收提醒备注</th>
+	                                            <th data-field="8">登记证未邮寄提醒备注</th>
+	                                            <th data-field="9">续保备注</th>
+	                                            <th data-field="10">状态</th>
+	                                            <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">
+	                                            	操作
+	                                            </th>
+	                                        </tr>
+	                                    </thead>
+	                                </table>
+	                            </div>
+	                        </div>
+	                        <!-- End Example Pagination -->
+	                    </div>
+                	</div>
+    			</div>
+            </div>
+        </div>
+    	
+    
+    	<!-- 备注弹出框 -->
+		<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content animated bounceInRight">
+	                <div class="modal-header">
+	                	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	                    </button>
+	                    <h4 class="modal-title">添加订单备注</h4>
+	                    <small class="font-bold"></small>
+	                </div>
+	                <div class="modal-body">
+	                    <form id="commentForm" class="form-horizontal m-t" novalidate="novalidate">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">未放款提醒备注：</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">登记证未回收提醒备注</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">登记证未邮寄提醒备注：</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">续保提醒备注：</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" name="comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                </div>
+                            </div>
+                        </form>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+    	
+	    <!-- 全局js -->
+	    <script src="js/jquery.min.js?v=2.1.4"></script>
+	    <script src="js/bootstrap.min.js?v=3.3.5"></script>
+	    <!-- 自定义js -->
+	    <script src="js/content.js?v=1.0.0"></script>
+	    <!-- Bootstrap table -->
+	    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>   
+	    <!-- Peity -->
+	    <script src="js/demo/bootstrap-table-demo.js"></script>
+		<!-- Sweet alert -->
+	    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+    
+	   <script >
+	    var $table = $('#Table');
+	    
+	    //操作字符串格式化
+	   	function actionFormatter(value, row, index) {
+		    return [
+		    	'<div class="text-center">',
+		    	'<button class="btn btn-primary btn-sm" id="AuditOk" data-toggle="modal" data-target="#myModal" type="button">添加各类备注</button>',
+		    	'</div>'
+		    ].join('');
+		}
+	   	
+		window.actionEvents = {
+		    'click #AuditOk': function (e, value, row, index) {
+		        //alert('You click like icon, row: ' + JSON.stringify(row));
+		        console.log(value, row, index);
+		    }
+		};   	
+	   
+	    //添加订单备注
+		$('.AuditSubmit').click(function(){
+			for(var i=20;i<=29;i++){
+				$table.bootstrapTable('hideColumn', i);//隐藏列21至列29
+			}
+	    	swal({
+	    		title: "添加订单备注",
+	            text: "添加成功",
+	            type: "success"
+	        });
+	    });
+	   </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+﻿<div class="content page-sales-accomplish infinite-scroll infinite-scroll-bottom " data-distance="100">
+    <div class="center-block width-heigth-4 line-height-4  text-center color-white round bg-purple m-t-1">{{TotalPoint}}</div>
+    <p class="text-center color-red">我的积分</p>
+
+    <div class="list-block m-t-1">
+        <div class="row  p-y-1 bg-white  text-center  color-content font-sm">
+            <div class="col-25 first">日期</div>
+            <div class="col-25">所得积分</div>
+            <div class="col-50">备注</div>
+        </div>
+        <div class="list-block m-t-0 bg-white font-sm ">
+            <ul class="">
+
+                <li class="p-y-1 border-bottom row text-center  color-content font-sm-media374" v-for="p in orderList" v-tap="gotoloanDetail(p.SourceType,p.SourceId,p.Id)">
+                    <div class="col-25 first">
+                        {{p.AddTime|formatDate}}
+                    </div>
+                    <div class="col-25">
+                        {{p.Value}}
+                    </div>
+                    <div class="col-50">
+                        {{p.Remark}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 加载提示符 -->
+    <div class="infinite-scroll-preloader" v-if="loading">
+        <div class="preloader"></div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+
+        //日期格式过滤器
+        Vue.filter('formatDate', function (value) {
+            return $.formatDate('yyyy-MM-dd', value);
+        })
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                TotalPoint: 0,//总积分
+                orderList: [],//订单列表
+                maxItems: 0,//数据总条数
+                lastIndex: 0,//最后的索引
+                pageIndex: 1,//当前页
+                pageSize: 5,//每次加载数据量
+                loading: false//加载状态
+            },
+            methods: {
+                init: function () {
+                    //获取数据
+                    this.getData(function (data) {
+                        //console.log(data);
+                        vue.TotalPoint = data.TotalPoint;
+                        vue.orderList = data.PointList.Items;
+                        vue.lastIndex = data.PointList.Items.length;
+                        vue.maxItems = data.PointList.TotalItems;//总条数
+                    });
+                },
+                //获取数据
+                getData: function (callback) {
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/UserSales/GetMyPointView",
+                        isShowLoading: true,
+                        data: { pageIndex: this.pageIndex, pageSize: this.pageSize },
+                        success: function (data) {
+                            if (callback) callback(data);
+                        }
+                    });
+                },
+                //跳往销售顾问-积分详情
+                gotoloanDetail: function (sType, oid,pid) {                   
+                    storage.setItem("orderId", oid);
+                    storage.setItem("pId", pid);
+                    if (sType == 2) {//订单页面
+                        $.router.load("#UserSalePointsDetail", true);
+                    } else {
+                        //跳往其他页面
+                    }
+                },
+                //滚动加载数据
+                scrollLoad: function () {
+                    vue.getData(function (data) {
+                        // 重置加载flag
+                        vue.loading = false;
+                        if (vue.lastIndex >= vue.maxItems) {
+                            // 加载完毕，则注销无限加载事件，以防不必要的加载
+                            $.detachInfiniteScroll($('.infinite-scroll'));
+                        } else {
+                            // 添加新条目
+                            for (var i = 0; i < data.PointList.Items.length; i++) {
+                                vue.orderList.push(data.PointList.Items[i]);
+                            }
+                            //更新最后加载的序号
+                            vue.lastIndex = vue.orderList.length;
+                            vue.pageIndex++;
+                            //容器发生改变,如果是js滚动，需要刷新滚动
+                            $.refreshScroller();
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+        // 注册'infinite'事件处理函数
+        $(document).on('infinite', '.infinite-scroll-bottom', function () {
+            // 如果正在加载，则退出
+            if (vue.loading) return;
+            // 设置flag
+            vue.loading = true;
+            //滚动加载数据
+            vue.scrollLoad();
+        });
+    });
+    //end-------------------
+</script>

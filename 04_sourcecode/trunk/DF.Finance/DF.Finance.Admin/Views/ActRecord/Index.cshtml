@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "ActRecord";
+}
+
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+    <!-- excel导出插件 -->
+    <script src="~/_R/js/plugins/export/bootstrap-table-export.min.js"></script>
+    <script src="~/_R/js/plugins/export/tableExport.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            DFCommon.TableInit("#formSearch").Init({               
+                showExport: true,//显示导出按钮
+                exportDataType: "selected",//选择的列导出
+                exportTypes: ['excel']//导出类型
+            });
+            laydate({
+                elem: '#add_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#add_endtime',
+                event: 'focus'
+            });
+        });
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetActRecordList", "ActRecord")" data-query=" #btn_query" data-table="#tb_ActRecord">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">活动名称：</label>
+                    <div class="col-sm-2">
+                        <select class="form-control m-b" name="ActId" id="ActId">
+                            <option value="">--活动名称--</option>
+                            @{
+                                foreach (DF.Finance.Model.Activity item in ViewBag.ActivityList)
+                                {
+                                    <option value="@item.Id">@item.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <label class="control-label col-sm-1">参加时间</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="add_starttime" id="add_starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="add_endtime" id="add_endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <label class="col-sm-4"></label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_UserIP">用户IP</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="UserIP" id="txt_search_UserIP">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_UserName">参与用户</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="UserName" id="txt_search_UserName">
+                    </div>
+                    <div class="control-label col-sm-1">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                    <div class="control-label col-sm-5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+
+                    </div>
+                    <div class="col-sm-3">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table id="tb_ActRecord" data-filter-control="false">
+        <thead>
+            <tr>
+                <th data-field="ActName" data-halign="center" data-align="center" data-filter-control="select">活动名称</th>
+                <th data-field="UserName" data-halign="center" data-align="center" data-filter-control="input">参与用户</th>
+                <th data-field="AddTime" data-halign="center" data-align="center">参加时间</th>
+                <th data-field="UserIP" data-halign="center" data-align="center">用户IP</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

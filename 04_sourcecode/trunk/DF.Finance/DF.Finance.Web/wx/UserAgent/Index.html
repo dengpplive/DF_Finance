@@ -1,0 +1,73 @@
+﻿<!-- 这里是页面内容区 -->
+<div class="content page-sales-index">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img class="img-responsive" src="http://placehold.it/350x150"> </div>
+            <div class="swiper-slide"><img class="img-responsive" src="http://placehold.it/360x150"> </div>
+            <div class="swiper-slide"><img class="img-responsive" src="http://placehold.it/370x150"> </div>
+            <div class="swiper-slide"><img class="img-responsive" src="http://placehold.it/380x150"> </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="row no-gutter border-bottom">
+        <div class="col-50 p-y-1_5 border-right ">
+            <a title="录入资料" class="text-center width-full center-block color-content" href="#AgentEntry">
+                <img src="../../_R/images/icon/input_data.png"><br>
+                录入资料
+            </a>
+        </div>
+        <div class="col-50  p-y-1_5 ">
+            <a title="录入资料" class="text-center width-full center-block color-content" href="#AgentApprovalList">
+                <img src="../../_R/images/icon/check.png"><br>
+                审核查询
+            </a>
+        </div>
+    </div>
+    <div class="row no-gutter border-bottom">
+        <div class="col-50 p-y-1_5 border-right">
+            <a title="录入资料" class="text-center width-full center-block color-content" href="#AgentClientManage">
+                <img src="../../_R/images/icon/clients.png"><br>
+                客户管理
+            </a>
+        </div>
+        <div class="col-50 p-y-1_5">
+            <a title="录入资料" class="text-center width-full center-block color-content" href="#AgentMe">
+                <img class="larstImg" src="../../_R/images/icon/me.png"><span class="badge-md " v-if="RemindCount>0">{{RemindCount}}</span> <br>
+                个人中心
+            </a>
+        </div>
+    </div>
+    <!--<div class="text-center p-y-0-5 color-conten-week absolute width-full" style="bottom: 0">
+        学车易技术支持<br>
+        <a class="color-conten-week" href="http://www.xuecehyi.com" title="学车易">www.xuecehyi.com</a>
+    </div>-->
+</div>
+
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true
+    });
+    //console.log(DFCommon.userModel);
+    $(function () {
+        
+   
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: DFCommon.Vue.$data.userModel
+        });
+        // console.log("index");
+        //console.log(DFCommon.Vue.$data);
+        // console.log(DFCommon.Vue.userModel.RemindCount);
+        //if (!!!DFCommon.userModel) {
+        //   $.router.load("#AgentLogin");
+        //} else {
+        //    if (DFCommon.userModel.RemindCount == 0) {
+        //        $("#AgentIndexRemindCount").hide();
+        //    } else {
+        //        $("#AgentIndexRemindCount").html(DFCommon.userModel.RemindCount);
+        //    }
+        //}
+    });
+</script>

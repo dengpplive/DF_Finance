@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "SysManagerRole";
+}
+
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table//bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init();
+
+            //2.初始化Button的点击事件
+            //新增数据click事件注册
+            $("#btn_add").click(function () {
+                location.href = "@Url.Action("EditRole", "Role")" + "?Id=0";
+            });
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "Role")");
+            });
+
+            //条件查询click事件注册
+            $("#btn_query").click(function () {
+                $("#tb_roles").bootstrapTable('refresh');
+            });
+        });
+        function fat_roletype(value, row, index) {
+
+            return value == 1 ? "超级管理员" : "系统管理员";
+        }
+       
+        function fat_oper(value, row, index) {
+            // console.log(row);
+            return '<a  href="/Role/EditRole?Id=' + row.Id + '" >修改</a>';
+        }
+
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetRole", "Role")"  data-query="#btn_query" data-table="#tb_roles">
+     </from>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="tb_roles" data-filter-control="false">
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="RoleName" data-halign="center" data-align="center" data-filter-control="input">角色名称</th>
+                <th data-field="RoleType" data-formatter="fat_roletype" data-halign="center" data-align="center" data-filter-control="select">角色类型</th>
+                <th data-field="Id" data-formatter="fat_oper" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

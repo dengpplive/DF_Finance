@@ -1,0 +1,23 @@
+﻿<div class="content">
+    <input type="number" placeholder="请输入共申人手机" data-empty-alt="手机号不能为空">
+
+    <div class="content-block">
+        <p><a href="JavaScript:;" class="button button-big button-round" id="btnSubmit">提交表单</a></p>
+    </div>
+</div>
+<script>
+    //$(document).on("pageInit", function (e, pageId, $page) { console.log("pageInit"); });
+    $(document).ready(function () {
+        var $Obj = template.PageObj();
+        console.log($Obj);
+        $Obj.find("#btnSubmit").on("tap", function () {
+
+            console.log("a");
+            if ($Obj.valide()) {
+                $.toast("提交成功");
+            };
+
+        });
+    });
+
+</script>

@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C5C23DB2-BB8B-42F9-937B-01DEAF30DC93}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DF.Finance.Web</RootNamespace>
+    <AssemblyName>DF.Finance.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data\XmlDocument.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\WebApiDoc.cs" />
+    <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\ResponseTypeFactory.cs" />
+    <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
+    <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApi\DuibaController.cs" />
+    <Compile Include="WebApi\UserClientController.cs" />
+    <Compile Include="WebApi\UserSalesController.cs" />
+    <Compile Include="WebApi\FinancialBusinessController.cs" />
+    <Compile Include="WebApi\OrderController.cs" />
+    <Compile Include="WebApi\TestController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\AllDocument.xml" />
+    <Content Include="App_Data\ModelDocument.xml" />
+    <Content Include="App_Data\XmlDocument.xml" />
+    <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Areas\HelpPage\TestClient.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\skin\base.css" />
+    <Content Include="Content\skin\default\ie_update.jpg" />
+    <Content Include="Content\skin\default\loadimg.gif" />
+    <Content Include="Content\skin\default\logo.png" />
+    <Content Include="Content\skin\default\nav\home.png" />
+    <Content Include="Content\skin\default\nav\order.png" />
+    <Content Include="Content\skin\default\nav\pus.png" />
+    <Content Include="Content\skin\default\nav\sys.png" />
+    <Content Include="Content\skin\default\nav\user.png" />
+    <Content Include="Content\skin\default\order_speed.gif" />
+    <Content Include="Content\skin\default\skin_icons.png" />
+    <Content Include="Content\skin\default\style.css" />
+    <Content Include="Content\skin\default\valid_icons.png" />
+    <Content Include="Content\skin\layout.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="html\Consultant\1.html" />
+    <Content Include="html\Consultant\accomplish.html" />
+    <Content Include="html\Consultant\changeEmail.html" />
+    <Content Include="html\Consultant\exchangeDetail.html" />
+    <Content Include="html\Consultant\exchangeLog.html" />
+    <Content Include="html\Consultant\index.html" />
+    <Content Include="html\Consultant\login.html" />
+    <Content Include="html\Consultant\me.html" />
+    <Content Include="html\Consultant\pointsDetail.html" />
+    <Content Include="html\Consultant\pointsStore.html" />
+    <Content Include="html\Consultant\sigin.html" />
+    <Content Include="html\Consultant\我的金融业代.html" />
+    <Content Include="html\Consultant\我的金融业代详情.html" />
+    <Content Include="html\Customers\index.html" />
+    <Content Include="html\Customers\login.html" />
+    <Content Include="html\Sales\1.html" />
+    <Content Include="html\Sales\accomplish.html" />
+    <Content Include="html\Sales\approvalList.html" />
+    <Content Include="html\Sales\changeMobile.html" />
+    <Content Include="html\Sales\changePwd.html" />
+    <Content Include="html\Sales\clientDetail.html" />
+    <Content Include="html\Sales\clientManage.html" />
+    <Content Include="html\Sales\edit.html" />
+    <Content Include="html\Sales\index.html" />
+    <Content Include="html\Sales\loanDetail.html" />
+    <Content Include="html\Sales\login.html" />
+    <Content Include="html\Sales\me.html" />
+    <Content Include="html\Sales\messageDetail.html" />
+    <Content Include="html\Sales\messageList.html" />
+    <Content Include="html\Sales\salesCounselorDetail.html" />
+    <Content Include="html\Sales\signin.html" />
+    <Content Include="html\selectUserType.html" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\HelpPage\Views\Web.config" />
+    <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\WebApiTestClient.js" />
+    <Content Include="wx\selectUserType.html" />
+    <Content Include="wx\Test.html" />
+    <Content Include="wx\test\a.html" />
+    <Content Include="wx\test\b.html" />
+    <Content Include="wx\test\c.html" />
+    <Content Include="wx\test\d.html" />
+    <Content Include="wx\test\f.html" />
+    <Content Include="wx\UserAgent\Accomplish.html" />
+    <Content Include="wx\UserAgent\ApprovalList.html" />
+    <Content Include="wx\UserAgent\ChangeMobile.html" />
+    <Content Include="wx\UserAgent\ChangePwd.html" />
+    <Content Include="wx\UserAgent\ClientDetail.html" />
+    <Content Include="wx\UserAgent\ClientManage.html" />
+    <Content Include="wx\UserAgent\Entry.html" />
+    <Content Include="wx\UserAgent\Index.html" />
+    <Content Include="wx\UserAgent\LoanDetail.html" />
+    <Content Include="wx\UserAgent\Login.html" />
+    <Content Include="wx\UserAgent\Me.html" />
+    <Content Include="wx\UserAgent\MessageList.html" />
+    <Content Include="wx\UserAgent\SalesCounselorDetail.html" />
+    <Content Include="wx\UserAgent\Signin.html" />
+    <Content Include="wx\UserClient\Index.html" />
+    <Content Include="wx\UserClient\Login.html" />
+    <Content Include="wx\UserSales\Accomplish.html" />
+    <Content Include="wx\UserSales\ChangeEmail.html" />
+    <Content Include="wx\UserSales\ChangeMobile.html" />
+    <Content Include="wx\UserSales\ChangePwd.html" />
+    <Content Include="wx\UserSales\ExchangeDetail.html" />
+    <Content Include="wx\UserSales\ExchangeLog.html" />
+    <Content Include="wx\UserSales\Index.html" />
+    <Content Include="wx\UserSales\LoanDetail.html" />
+    <Content Include="wx\UserSales\Login.html" />
+    <Content Include="wx\UserSales\Me.html" />
+    <Content Include="wx\UserSales\MessageList.html" />
+    <Content Include="wx\UserSales\PointsDetail.html" />
+    <Content Include="wx\UserSales\Signin.html" />
+    <Content Include="wx\UserSales\MyFinancialBusiness.html" />
+    <Content Include="wx\UserSales\MyFinancialBusinessDeatil.html" />
+    <Content Include="wx\_template\json\说明.txt" />
+    <Content Include="wx\_template\testTemplate.html" />
+    <Content Include="wx\_template\UserClientTemplate.html" />
+    <Content Include="wx\_template\UserSaleTemplate.html" />
+    <Content Include="wx\_template\UserAgentTemplate.html" />
+    <Content Include="_R\css\font-awesome.css" />
+    <Content Include="_R\css\font-awesome.min.css" />
+    <Content Include="_R\css\main.css" />
+    <Content Include="_R\css\raffle.css" />
+    <Content Include="_R\css\sui.css" />
+    <Content Include="_R\css\sui.min.css" />
+    <Content Include="_R\css\swiper.min.css" />
+    <Content Include="_R\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientDialogs.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientReferences.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="_R\images\bg\bg_home.jpg" />
+    <Content Include="_R\images\bg\bg_login.jpg" />
+    <Content Include="_R\images\bg\me_bg_purple.jpg" />
+    <Content Include="_R\images\home\banner1.jpg" />
+    <Content Include="_R\images\home\banner2.jpg" />
+    <Content Include="_R\images\home\cry.png" />
+    <Content Include="_R\images\home_clothes.png" />
+    <Content Include="_R\images\icon\appraveing.png" />
+    <Content Include="_R\images\icon\book_car_on.png" />
+    <Content Include="_R\images\icon\buliding_on.jpg" />
+    <Content Include="_R\images\icon\check.png" />
+    <Content Include="_R\images\icon\check_on.png" />
+    <Content Include="_R\images\icon\clients.png" />
+    <Content Include="_R\images\icon\clients_on.png" />
+    <Content Include="_R\images\icon\diamond.jpg" />
+    <Content Include="_R\images\icon\diamond_me.jpg" />
+    <Content Include="_R\images\icon\diamond_on.jpg" />
+    <Content Include="_R\images\icon\dollar.jpg" />
+    <Content Include="_R\images\icon\dollar_big.png" />
+    <Content Include="_R\images\icon\dollar_on.jpg" />
+    <Content Include="_R\images\icon\email.jpg" />
+    <Content Include="_R\images\icon\email_on.jpg" />
+    <Content Include="_R\images\icon\group_on.png" />
+    <Content Include="_R\images\icon\headImg.png" />
+    <Content Include="_R\images\icon\horn_on.jpg" />
+    <Content Include="_R\images\icon\identity_card.png" />
+    <Content Include="_R\images\icon\input_data.png" />
+    <Content Include="_R\images\icon\input_data_on.png" />
+    <Content Include="_R\images\icon\lock.jpg" />
+    <Content Include="_R\images\icon\lock.png" />
+    <Content Include="_R\images\icon\lock_on.jpg" />
+    <Content Include="_R\images\icon\log.jpg" />
+    <Content Include="_R\images\icon\log_me.jpg" />
+    <Content Include="_R\images\icon\log_on.jpg" />
+    <Content Include="_R\images\icon\me.png" />
+    <Content Include="_R\images\icon\me_on.png" />
+    <Content Include="_R\images\icon\me_orange.jpg" />
+    <Content Include="_R\images\icon\phone.jpg" />
+    <Content Include="_R\images\icon\phone.png" />
+    <Content Include="_R\images\icon\phone_on.png" />
+    <Content Include="_R\images\icon\rmb.jpg" />
+    <Content Include="_R\images\icon\rmb_orange.jpg" />
+    <Content Include="_R\images\icon\shop.png" />
+    <Content Include="_R\images\icon\volidCode.jpg" />
+    <Content Include="_R\images\raffle\bg_md1_raffle.jpg" />
+    <Content Include="_R\images\raffle\bg_md2_raffle.png" />
+    <Content Include="_R\images\raffle\bg_top_raffle.png" />
+    <Content Include="_R\images\raffle\btn_begin_spin.jpg" />
+    <Content Include="_R\images\raffle\btn_normal.jpg" />
+    <Content Include="_R\images\raffle\btn_on.jpg" />
+    <Content Include="_R\images\raffle\ui_scroll_bar.jpg" />
+    <Content Include="_R\images\shield.png" />
+    <Content Include="_R\js\ComData.js" />
+    <Content Include="_R\js\Common.js" />
+    <Content Include="_R\js\lib\jquery-1.12.2.js" />
+    <Content Include="_R\js\lib\json2.js" />
+    <Content Include="_R\js\lib\sm.js" />
+    <Content Include="_R\js\lib\sm.min.js" />
+    <Content Include="_R\js\lib\storage.js" />
+    <Content Include="_R\js\lib\swiper.min.js" />
+    <Content Include="_R\js\lib\touch.js" />
+    <Content Include="_R\js\lib\vue-tap-click.js" />
+    <Content Include="_R\js\lib\vue.js" />
+    <Content Include="_R\js\lib\vue.min.js" />
+    <Content Include="_R\js\lib\zepto.js" />
+    <Content Include="_R\js\lib\zepto.min.js" />
+    <Content Include="_R\js\template.js" />
+    <None Include="Properties\PublishProfiles\DF_Finance_Forward.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="xmlconfig\log4net.config" />
+    <Content Include="xmlconfig\site.config" />
+    <Content Include="xmlconfig\user.config" />
+    <Content Include="_R\fonts\fontawesome-webfont.eot" />
+    <Content Include="_R\fonts\fontawesome-webfont.ttf" />
+    <Content Include="_R\fonts\fontawesome-webfont.woff" />
+    <Content Include="_R\fonts\fontawesome-webfont.woff2" />
+    <Content Include="_R\fonts\FontAwesome.otf" />
+    <Content Include="wx\_template\json\test.json" />
+    <Content Include="wx\_template\json\UserAgentTemplate.json" />
+    <Content Include="wx\_template\json\UserSaleTemplate.json" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\LuckDraw.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_SalesLayout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="wx\_template\json\UserClientTemplate.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DF.Finance.BLL\DF.Finance.BLL.csproj">
+      <Project>{769499c5-ccb9-4030-b281-f16adbdb53fd}</Project>
+      <Name>DF.Finance.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Finance.Common\DF.Finance.Common.csproj">
+      <Project>{4b138f90-ff32-4b88-bbef-1977268afb5a}</Project>
+      <Name>DF.Finance.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Finance.Model\DF.Finance.Model.csproj">
+      <Project>{b1d6e5c6-6c7f-4308-8873-e7ea71fbd116}</Project>
+      <Name>DF.Finance.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Finance.WebCommon\DF.Finance.WebCommon.csproj">
+      <Project>{16fa1f9e-3cbb-4a83-b09e-8080e30513ec}</Project>
+      <Name>DF.Finance.WebCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50812</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://www.dfweb.com</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

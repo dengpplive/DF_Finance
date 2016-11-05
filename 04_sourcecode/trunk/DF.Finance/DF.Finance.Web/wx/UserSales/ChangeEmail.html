@@ -1,0 +1,107 @@
+﻿<div class="content">
+    <p class="text-center p-y-1">修改绑定邮箱</p>
+    <div class="list-block">
+        <ul>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/email.jpg" style="width: 1.2rem"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="email" v-model="oldEmail" placeholder="请输入原绑定邮箱"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/email.jpg" style="width: 1.2rem"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="email" v-model="newEmail" placeholder="请输入新邮箱"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content-block">
+        <p>
+            <a href="javascript:void(0)" id="btn_submit" v-tap="submit" class="button button-fill button-big bg-purple">绑定</a>
+        </p>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        //begin-------------------
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                oldEmail: "",
+                newEmail: ""
+            },
+            methods: {
+                init: function () {
+                    //$("#btn_submit").on("tap", this.submit);
+                },
+                CheckMail: function (mail) {
+                    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                    if (filter.test(mail)) return true;
+                    else {
+                        return false;
+                    }
+                },
+                submit: function () {
+                    var This = this;
+                    if ($.trim(This.oldEmail) == "") {
+                        $.alert("请输入原绑定邮箱");
+                        return;
+                    }
+                    if (!This.CheckMail($.trim(This.oldEmail))) {
+                        $.alert("输入原绑定邮箱格式错误");
+                        return;
+                    }
+                    if ($.trim(This.newEmail) == "") {
+                        $.alert("请输入新邮箱");
+                        return;
+                    }
+                    if (!This.CheckMail($.trim(This.newEmail))) {
+                        $.alert("输入新邮箱格式错误");
+                        return;
+                    }
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/UserSales/UpdateEmail",
+                        isShowLoading: true,
+                        data: vue.$data,
+                        success: function (data) {
+                            //console.log(data);
+                            if (data) {
+                                $.toast("绑定新邮箱成功");
+                                DFCommon.Vue.userModel.Email = This.newEmail;
+                            } else {
+                                $.toast("绑定新邮箱失败");
+                            }
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+    });
+    //end-------------------
+</script>

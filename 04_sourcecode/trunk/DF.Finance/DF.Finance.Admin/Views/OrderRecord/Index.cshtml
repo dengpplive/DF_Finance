@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@section css{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+
+<div class="panel-default" style="height: 670px; overflow:auto;">
+    @*<div class="panel-heading">
+            <h5>订单操作日志</h5>
+        </div>*@
+    <div>
+        <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("Search", "OrderRecord")" data-query="#btn_query" data-table="#tb_OrderRecords">
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-2 text-right">订单Id：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="OrderId" value="@ViewBag.OrderId" />
+                    </div>
+                    <label class="col-sm-2 text-right">操作人姓名：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="UserName" />
+                    </div>
+                    <label class="col-sm-2 text-right">操作人昵称：</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="RealName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 text-right">操作日期：</label>
+                    <div class="col-sm-5">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input id="txtS_Time" name="S_Time" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-6">
+                                <input id="txtE_Time" name="E_Time" class="laydate-icon form-control layer-date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-1">
+                            <button class="btn btn-primary" type="button" id="btn_query">查询</button>
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row row-lg" style="margin-top: 10px;">
+                <div class="col-md-12">
+                    <div class="example-wrap">
+                        <div class="example">
+                            <table id="tb_OrderRecords" class="table">
+                                <thead>
+                                    <tr>
+                                        <th data-field="UserName" data-halign="center" data-align="center">用户名</th>
+                                        <th data-field="RealName" data-halign="center" data-align="center">真实姓名</th>
+                                        <th data-field="OriginalStatusAdmin" data-halign="center" data-align="center">原始状态</th>
+                                        <th data-field="TargetStatusAdmin" data-halign="center" data-align="center">目标状态</th>
+                                        <th data-field="Ip" data-halign="center" data-align="center">IP</th>
+                                        <th data-field="AddTime" data-halign="center" data-align="center">操作日期</th>
+                                        <th data-field="Remark" data-halign="center" data-align="center">备注</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section js{
+    <script src="~/_R/js/content.js?v=1.0.0"></script>
+
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- Peity -->
+    <script src="~/_R/js/demo/bootstrap-table-demo.js"></script>
+
+    <!-- layerDate plugin javascript -->
+    <script src="~/_R/js/plugins/layer/laydate/laydate.js"></script>
+}
+
+@section scripts{
+
+    <script>
+    var tableInit=DFCommon.TableInit("#formSearch")
+    $(function () {
+        //1.初始化Table
+        tableInit.Init();
+
+        //2.外部js调用
+        //laydate({
+        //    elem: '#txtS_Time', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+        //    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        //});
+        //laydate({
+        //    elem: '#txtE_Time', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+        //    event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        //});
+        $("body").removeClass("gray-bg");
+        $("body").attr("style", "background-color: #fff;")
+    });
+
+    //4.刷新表格
+    function refresh() {
+        tableInit.refresh();
+    }
+    </script>
+}
+

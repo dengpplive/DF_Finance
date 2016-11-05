@@ -1,0 +1,158 @@
+body * {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei", "宋体", Arial, MIC, Tahoma, sans-serif;
+}
+
+.main {
+    width: 1440px;
+    margin: 0 auto;
+    background-color: #FEF2E5;
+}
+
+.top {
+    height: 939px;
+    background-image: url("/_r/images/raffle/bg_top_raffle.png");
+}
+
+.md1 {
+    height: 702px;
+    width: 925px;
+    margin: 0 auto;
+    background-image: url("/_r/images/raffle/bg_md1_raffle.jpg");
+}
+
+.md2 {
+    height: 602px;
+    width: 925px;
+    margin-top: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("/_r/images/raffle/bg_md2_raffle.png");
+}
+
+.foot {
+    height: 60px;
+    line-height:60px;
+    color:white;
+    margin-top: 72px;
+    background-color: #f14400;
+    font-size:14px;
+}
+    .foot div {
+        width:925px;
+        margin-left:auto;
+        margin-right:auto;
+        font-weight:300;
+    }
+
+#winning_num {
+    height: 62px;
+    line-height: 62px;
+    width: 528px;
+    position: relative;
+    top: 565px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: #754934;
+    font-size: 62px;
+}
+
+#btn_start {
+    display: block;
+    width: 190px;
+    height: 68px;
+    line-height: 68px;
+    text-align: center;
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
+    position: relative;
+    top: 672px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("/_r/images/raffle/btn_begin_spin.jpg");
+}
+
+
+.btn_raffle_type {
+    display: inline-block;
+    width: 202px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    font-size: 26px;
+
+    background-image: url("/_r/images/raffle/btn_normal.jpg");
+    margin-left: 6px;
+    text-decoration: none;
+    text-indent: 16px;
+    color: white;
+
+}
+
+.btn_raffle_type.on {
+    background-image: url("/_r/images/raffle/btn_on.jpg");
+    color: black;
+}
+     body * {
+            box-sizing: border-box;
+        }
+
+        .tb_header {
+            width: 796px;
+            margin-top: 52px;
+            margin-left: 63px;
+            font-weight: bold;
+            color: #8e5315;
+        }
+
+        ul {
+            list-style: none;
+            width: 796px;
+            margin-top: 30px;
+            margin-left: 63px;
+          
+            height: 320px;
+            overflow: auto;
+        }
+
+        #winnerList li span {
+            display: inline-block;
+        }
+
+        .pt105 {
+            padding-top: 105px;
+        }
+
+        .pt80 {
+            padding-top: 80px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .color-orange {
+            color: #8e5315;
+        }
+        .md2 > div {
+            width: 796px;
+            position: relative;
+            top: 140px;
+            left:42px;
+            padding-left:36px;
+        }
+        .mt20 {
+            margin-top:20px;
+        }
+        .lh40 {
+            line-height:40px;
+        }
+        .pl60 {
+            padding-left:60px
+        }
+        h3 {
+            font-weight:normal;
+        }

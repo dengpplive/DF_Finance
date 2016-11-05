@@ -1,0 +1,85 @@
+﻿@model DF.Finance.Model.OrderExtAttribute
+@{
+    ViewBag.Title = "登记证操作";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Orders_N5";
+}
+
+@section css{
+<link href="~/_R/css/Order.css" rel="stylesheet" />
+<link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+<div class="row">
+    <form class="form-horizontal" id="form1">
+        <div class="form-group col-sm-12">
+            <label class="control-label col-sm-5" for="txt_Node5cchhsdjzrq">从车行收回登记证日期</label>
+            <div class="col-sm-7">
+                <input required type="text" value="@(Model.CheckInTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.CheckInTime.ToString())" class="laydate-icon form-control layer-date" name="CheckInTime" id="CheckInTime" onclick="laydate()">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="control-label col-sm-5" for="txt_Node5dyhhsdjzrq">抵押后收回登记证日期</label>
+            <div class="col-sm-7">
+                <input type="text" value="@(Model.RecoveryTime.ToString() == "1900/1/1 0:00:00" ? "" : Model.RecoveryTime.ToString())" class="laydate-icon form-control layer-date" name="RecoveryTime" id="RecoveryTime" onclick="laydate()">
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <label class="control-label col-sm-5" for="txt_Node5djzdyz">登记证抵押中</label>
+            <div class="col-sm-7">
+                <select class="form-control" id="CheckInStatus" name="CheckInStatus" required data-selval="@Model.CheckInStatus">
+                    <option value="">--请选择状态--</option>
+                    @foreach (DF.Finance.Model.SysDictionary item in ViewBag.CheckInStatus)
+                    {
+                        <option value="@item.Val">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-3" style="float:right;margin-right:20px;">
+                <button type="submit" class="btn btn-primary" data-role="Edit">保存</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section js{
+<script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+}
+
+@section scripts{
+<script>
+    var api = top.dialog.get(window); //获取父窗体对象
+    var W = api.data;
+    $(document).ready(function () {
+        //初始化表单验证
+        $("#form1").initValidform(submits);
+       
+    });
+    function submits() {
+        var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+        postData = $("#form1").serializeObject(postData);
+       
+        DFCommon.ajax({
+            type: 'POST',
+            url: "@Url.Action("UpdateOrderExtAttribute", "Orders")",
+            data: postData,
+            dataType: "json",
+            success: function (data, res) {
+                if (res.Code == 1) {
+                    MsgBox.Success("操作成功", "");
+                    //修改父窗口的值
+                    $("#cchshdjzrq", W.document).html($('#CheckInTime').val());//从车行收回登记证日期
+                    $("#span_djzzt", W.document).html($('#CheckInStatus').val());//登记证状态
+                    $("#dyhhsdjzrq", W.document).html($('#RecoveryTime').val());//抵押后收回登记证日期
+                }
+                else {
+                    MsgBox.Error("错误", res);
+                }
+            }
+        });
+    }
+</script>
+}
+

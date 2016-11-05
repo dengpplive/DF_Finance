@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>节点审核</title>
+		<meta name="keywords" content="节点1">
+		<meta name="description" content="节点1">
+
+		<link rel="shortcut icon" href="favicon.ico">
+		<link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+		<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+		<link href="css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css?v=4.0.0" rel="stylesheet">
+		<base target="_blank">
+		 <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	</head>
+
+	<body class="gray-bg">
+		<!--
+        	作者：1602858625@qq.com
+        	时间：2016-05-09
+        	描述：节点1信息审查
+        -->
+		<div class="ibox float-e-margins m-l m-r">
+				 <div class="ibox-title">
+					<h5>节点1信息审查</h5>
+					<div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>                            
+                    </div>
+				 </div>
+				 <div id="toolbar1">
+			        <!--<button id="remove" class="btn btn-danger" disabled>
+			            <i class="glyphicon glyphicon-remove"></i> Delete
+			        </button>-->
+    			 </div>
+    			 <div class="ibox-content">
+    				<div class="row row-lg">                  
+	                    <div class="col-sm-26">
+	                        <!-- Example Pagination -->
+	                        <div class="example-wrap">
+	                            <div class="example">
+	                                <table id="Table" 
+	                                	data-toolbar="#toolbar1"
+	                                	data-toggle="table" 
+	                                	data-search="true"
+	                                	data-show-refresh="true"
+	                                	data-show-toggle="true"
+	                                	data-show-columns="true"
+	                                	data-url="js/demo/bootstrap_table_test.json" 
+	                                	data-click-to-select="true"
+	                                	data-query-params="queryParams" 
+	                                	data-mobile-responsive="true" 
+	                                	data-height="600" 
+	                                	data-show-columns="true"
+	           							data-show-pagination-switch="true"
+	           	                     	data-pagination="true" 
+	           	                     	data-id-field="id"
+	           							data-page-list="[10, 25, 50, 100, ALL]"
+	                                	data-icon-size="outline" 
+	                                	data-search="false"
+	                                	class="table">
+	                                    <thead>
+	                                        <tr>
+	                                            <th data-field="id">ID</th>
+	                                            <th data-field="name">金融业代</th>
+	                                            <th data-field="price">放款金融公司</th>
+	                                            <th data-field="0">新车/二手车</th>
+	                                            <th data-field="1">区域</th>
+	                                            <th data-field="2">收单日期</th>
+	                                            <th data-field="3">申请人姓名</th>
+	                                            <th data-field="4">申请人电话</th>
+	                                            <th data-field="5">身份证号码</th>
+	                                            <th data-field="6">担保人姓名</th>
+	                                            <th data-field="11">担保人电话</th>
+	                                            <th data-field="12">共申人姓名</th>
+	                                            <th data-field="13">共申人电话</th>
+	                                            <th data-field="14">贷款产品</th>
+	                                            <th data-field="15">贷款利息类型</th>
+	                                            <th data-field="16">实际交易方</th>
+	                                            <th data-field="21">放款环节</th>
+	                                            <th data-field="22">销售顾问姓名</th>
+	                                            <th data-field="23">销售顾问电话</th>
+	                                            <th data-field="24">汽车品牌</th>
+	                                            <th data-field="25">车型</th>
+	                                            <th data-field="26">车身价</th>
+	                                            <th data-field="27">贷款金额</th>
+	                                            <th data-field="28">贷款日期</th>
+	                                            <th data-field="29">状态</th>
+	                                            <th data-field="action" data-formatter="actionFormatter" data-events="actionEvents">
+	                                            	操作
+	                                            </th>
+	                                        </tr>
+	                                    </thead>
+	                                </table>
+	                            </div>
+	                        </div>
+	                        <!-- End Example Pagination -->
+	                    </div>
+                	</div>
+    			</div>
+            </div>
+        </div>
+    	
+    	<!--
+        	作者：1602858625@qq.com
+        	时间：2016-05-09
+        	描述：节点2是否审批通过
+        -->
+        
+    	<!--
+        	作者：1602858625@qq.com
+        	时间：2016-05-09
+        	描述：节点3
+        -->
+        
+    	<!--
+        	作者：1602858625@qq.com
+        	时间：2016-05-09
+        	描述：节点4
+        -->
+        
+    	<!--
+        	作者：1602858625@qq.com
+        	时间：2016-05-09
+        	描述：节点5
+        -->
+        
+    	<!--
+        	作者：1602858625@qq.com
+        	时间：2016-05-09
+        	描述：节点6
+        -->
+    
+    	<!-- 备注弹出框 -->
+	<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <!--<i class="fa fa-laptop modal-icon"></i>-->
+                    <h4 class="modal-title">备注不完整原因</h4>
+                    <small class="font-bold"></small>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><label>备注信息</label> <input type="text" placeholder="请输入备注信息" class="form-control"></div>
+                </div>
+                <div class="modal-footer">
+                	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary AuditSubmit">保存</button>
+                </div>
+            </div>
+        </div>
+	</div>
+    	
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.5"></script>
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+    <!-- Bootstrap table -->
+    <script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>   
+    <!-- Peity -->
+    <script src="js/demo/bootstrap-table-demo.js"></script>
+	<!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+    
+   <script >
+    var $table = $('#Table');
+    
+    //节点1操作字符串格式化
+   	function actionFormatter(value, row, index) {
+	    return [
+	    	'<div class="text-center">',
+	    	'<button class="btn btn-primary btn-sm" id="AuditOk" type="button">完整</button>',
+	    	'<button class="btn btn-danger btn-sm" id="AuditNo" data-toggle="modal" data-target="#myModal" type="button">不完整</button>',
+	    	'</div>'
+	    ].join('');
+	}
+   	
+   	//节点2操作字符串格式化
+   	function actionFormatter2(value, row, index) {
+	    return [
+	    	'<div class="text-center">',
+	    	'<button class="btn btn-primary btn-sm" id="Section2Ok" type="button">通过</button>',
+	    	'<button class="btn btn-danger btn-sm" id="Section2No" data-toggle="modal" data-target="#myModal" type="button">不通过</button>',
+	    	'</div>'
+	    ].join('');
+	}
+
+	window.actionEvents = {
+	    'click #AuditOk': function (e, value, row, index) {
+	        //alert('You click like icon, row: ' + JSON.stringify(row));
+	        swal({
+                    title: "资料提交成功",
+                    text: "恭喜你进入节点2",
+                    type:"success"
+            });
+	        console.log(value, row, index);
+	    },
+	    'click #AuditNo': function (e, value, row, index) {
+	        console.log(value, row, index);
+	    }
+	};   	
+   
+    //保存备注，驳回信息资料
+	$('.AuditSubmit').click(function(){
+		for(var i=20;i<=29;i++){
+			$table.bootstrapTable('hideColumn', i);//隐藏列21至列29
+		}
+    	swal({
+    		title: "信息资料不完整",
+            text: "驳回成功",
+            type: "success"
+        });
+        //var last=$('#Table thead tr>th').last();
+		//alert(last.attr('data-field'));
+		//last.attr('data-formatter','actionFormatter2');
+    });
+    
+    //表格刷新
+    function tableRefresh(){
+    	$table.bootstrapTable('refresh');
+    }
+    
+    //获取被选中的列的Id列表
+	function getIdSelections() {
+	    return $.map($table.bootstrapTable('getSelections'), function (row) {
+	        return row.id
+	    });
+	}
+   </script>
+</body>
+</html>

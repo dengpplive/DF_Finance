@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">-->
+    <link rel="stylesheet" href="/_R/css/sui.css">
+    <link href="http://cdn.bootcss.com/Swiper/3.3.1/css/swiper.min.css" rel="stylesheet">
+    <link href="/_R/css/main.css" rel="stylesheet">
+    <style>
+        .content {
+            top: 2.2rem;
+            bottom: 2.2rem;
+        }
+
+        .bar {
+            position: fixed;
+            z-index: 999999;
+        }
+
+        .page-group {
+            margin-top: 2.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bar bar-nav theme-dark">
+        <a class="icon icon-left pull-left back color-white"></a>
+        <h1 class="title">录入资料-业代姓名</h1>
+    </header>
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab">
+        <a class="tab-item external " href="javascript:;"  id="home">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item external active" href="edit.html">
+            <span class="icon icon-edit"></span>
+            <span class="tab-label">录入资料</span>
+        </a>
+        <a class="tab-item external" href="check.html">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">审查核实</span>
+        </a>
+        <a class="tab-item external" href="me.html">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+            <span class="badge">2</span>
+        </a>
+    </nav>
+    <div class="page-group">
+
+        <div class="page page-current" id="test">
+            <div class="content">
+                <div class="content-block" id="btnTestAjax">
+                    <p><a href="#" class="button button-big button-round">测试Ajax</a></p>
+                </div>
+                <div class="content-block">
+                    <p><a href="#page1" class="button button-big button-round">测试路由加载</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="page1">
+
+        </div>
+        <div class="page" id="page2">
+
+        </div>
+    </div>
+    <script src="../_R/js/lib/zepto.js"></script>
+    <script src="../_R/js/lib/touch.js"></script>
+    <script src="../_R/js/lib/sm.js"></script>
+    <script src="../_R/js/Common.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //测试ajax
+            $("#btnTestAjax").tap(function () {
+                TestAjax();
+            });
+            $("#home").tap(function () {
+                $.router.load("#test");
+            });
+            //解决刷新问题
+            //截获带锚点的参数
+            var prm = window.location.hash.replace("#", "");
+            //纪录描点后面的值
+            if (prm.length) {
+                $.ajax({
+                    type: 'get',
+                    url: prm + ".html",
+                    success: function (data) {
+                        $("#" + prm).prepend(data);
+                    }
+                });
+
+            }
+            $(document).on("pageAnimationStart", function (e, pageId, $page) {
+                var $obj = $("#" + pageId);
+                if (!$obj.find(".content").length) {
+                    console.log("a");
+                    $.ajax({
+                        type: 'get',
+                        url: pageId + ".html",
+                        success: function (data) {
+                            $obj.html(data);
+                        }
+                    });
+                }
+            });
+        });
+        function TestAjax() {
+            DFCommon.ajax({
+                type: 'get',
+                url: "/api/Test/TestAjax",
+                isShowLoading: true,
+                success: function (data, res) {
+                    if (res.Code == 1) {
+                        $.toast("成功");
+                    }
+                    else {
+
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

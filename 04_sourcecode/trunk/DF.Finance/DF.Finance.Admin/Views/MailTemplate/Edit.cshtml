@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = ViewBag.title;
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "MailTemplate";
+}
+@using DF.Finance.Model
+@section css
+{
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+<script src="~/ueditor/ueditor.config.js"></script>
+<script src="~/ueditor/ueditor.all.min.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function submits() {
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))
+            postData = $("#form1").serializeObject(postData);
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEdit", "MailTemplate")",
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1)
+                        MsgBox.Success("保存成功", "");
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            //初始化表单验证
+            $("#form1").initValidform(submits);
+            //初始化编辑器
+            DFCommon.UELoad();
+        });
+    </script>
+}
+<form class="form-horizontal m-t" id="form1">
+    <div class="panel-body" style="padding:0px;margin:5px;">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">@(ViewBag.title)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label hidden">系统默认：</label>
+                            <div class="col-sm-2  radio i-checks hidden">
+                                <label>
+                                    <input type="radio" value="1" name="IsSys" @( (Model.Id > 0 && Model.IsSys == 1) || Model.Id == 0 ? "checked=checked" : "")> <i></i>是
+                                    <input type="radio" value="0" name="IsSys" @((Model.Id > 0 && Model.IsSys == 0) ? "checked=checked" : "")> <i></i>否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">调用别名：</label>
+                            <div class="col-sm-3">
+                                <input id="Code" name="Code" class="form-control" type="text" ajaxurl="@Url.Action("ExistCode", "MailTemplate", new { Id = Model.Id })" value="@Model.Code" datatype="*1-50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">模板标题：</label>
+                            <div class="col-sm-3">
+                                <input id="Title" name="Title" class="form-control" type="text" value="@Model.Title" ajaxurl="@Url.Action("ExistTitle", "MailTemplate", new { Id = Model.Id })" datatype="*1-100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮件标题：</label>
+                            <div class="col-sm-3">
+                                <input id="MailTitle" name="MailTitle" class="form-control" type="text"  value="@Model.MailTitle" datatype="*1-100">
+                            </div>
+                        </div>                       
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮件内容：</label>
+                            <div class="col-sm-8">
+                                @*<textarea name="Content" class="form-control" datatype="*1-1000" rows="3" type="text/plain">@Model.Content</textarea>*@
+                                <script id="Content" name="Content" type="text/plain">
+                                    @Html.Raw(Model.Content)
+                                </script>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">替换关键词描述</label>
+                            <div class="col-sm-8">
+                                <textarea name="Description" class="form-control" datatype="*1-1000" rows="3">@Model.Description</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;&nbsp;</button>           
+        </div>
+    </div>
+</form>

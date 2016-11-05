@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "SysManagerList";
+}
+
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var rolelist =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.roleList))
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init();
+
+            //新增数据click事件注册
+            $("#btn_add").click(function () {
+                location.href = "@Url.Action("Edit", "SysAdmin")" + "?Id=0";
+            });
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "SysAdmin")");
+            });
+            //日期框
+            laydate({
+                elem: '#starttime',
+                event: 'focus' 
+            });
+            laydate({
+                elem: '#endtime',
+                event: 'focus' 
+            });
+        });      
+        function fat_islock(value, row, index) {
+            return (value == 0 ? "正常" : "锁定");
+        }
+        function fat_role(value, row, index) {
+            for (var i in rolelist) {
+                if (rolelist[i].Id == value) return rolelist[i].RoleName;
+            }
+            return '';
+        }
+        function fat_oper(value, row, index) {
+            return '<a href="/SysAdmin/Edit?Id=' + row.Id + '" >修改</a>';
+        }       
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetUserList", "SysAdmin")" data-query="#btn_query" data-table="#tb_roles">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">用户名</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="username">
+                    </div>
+                    <label class="control-label col-sm-1">昵称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="realname">
+                    </div>
+                    <label class="control-label col-sm-1">联系电话</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="telphone">
+                    </div>
+                    <label class="control-label col-sm-1">邮箱</label>
+                    <div class="col-sm-2">
+                        <input type="email" class="form-control" name="email">
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-1">状态</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="state">
+                            <option value="">--所有状态---</option>
+                            <option value="0">正常</option>
+                            <option value="1">锁定</option>
+                        </select>
+                    </div>
+                    <label class="control-label col-sm-1">时间</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="starttime" id="starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="endtime" id="endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="tb_roles" data-filter-control="false" >
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="RoleId" data-formatter="fat_role" data-halign="center" data-align="center">角色</th>
+                <th data-field="UserName" data-halign="center" data-align="center" data-filter-control="input">用户名</th>
+                <th data-field="RealName" data-halign="center" data-align="center" data-filter-control="select">昵称</th>
+                <th data-field="TelePhone" data-halign="center" data-align="center">联系电话</th>
+                <th data-field="Email" data-halign="center" data-align="center">电子邮箱</th>
+                <th data-field="IsLock" data-formatter="fat_islock" data-halign="center" data-align="center">状态</th>
+                <th data-field="AddTime" data-halign="center" data-align="center">添加时间</th>
+                <th data-field="Id" data-formatter="fat_oper" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>

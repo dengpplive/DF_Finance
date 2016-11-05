@@ -1,0 +1,53 @@
+﻿文件说明：
+         1.agent.json 金融业代模板配置文件
+
+
+
+
+结构说明：
+		 /// <summary>
+        /// 页面配置 ListPage
+        /// </summary>
+        private class PageLayout
+        {
+            /// <summary>
+            /// 页面标识，建议与页面名称一致，必须唯一【必须写此参数】
+            /// </summary>
+            public string Id { get; set; }
+            /// <summary>
+            /// 指向页面
+            /// </summary>
+            public string PageLinks { get; set; }
+            /// <summary>
+            /// 标题
+            /// </summary>
+            public string Title { get; set; }
+            /// <summary>
+            /// 预加载页面编号 多个 , 分割
+            /// a,b
+            /// </summary>
+            public string Preloading { get; set; }
+            /// <summary>
+            /// 是否每次进入页面都重新获取最新数据
+            /// [每次进入页面是否需要重新拉取数据，如果false 则不重新拉取]
+            /// </summary>
+            public bool AreReacquire { get; set; }
+           
+        }
+        /// <summary>
+        /// 全局配置
+        /// </summary>
+        private class GlobalConfiguration
+        {
+            /// <summary>
+            /// 标题，设置此值将所有页面标题后面都会追加此标题 
+            /// 例如a页面标题叫:资料录入
+            /// Title：-金融业代
+            /// 最终显示：资料录入-金融业代
+            /// </summary>
+            public string Title { get; set; }
+            /// <summary>
+            /// 模板首次加载的Id
+            /// </summary>
+            public string HomeId { get; set; }
+        }

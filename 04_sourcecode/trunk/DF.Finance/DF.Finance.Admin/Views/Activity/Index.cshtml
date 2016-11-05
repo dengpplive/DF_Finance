@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Activity";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table//bootstrap-table-filter-control.js"></script>
+    <script src="~/_R/js/jQuery.Screenshot.js"></script>
+    <script src="~/_R/js/jQuery.dateformat.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var dic =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dicModel))
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch", function () {
+                screenshotPreview1();
+            });
+            oTableObj.Init({ expandRow: expandRow });
+            //日期框
+            laydate({
+                elem: '#aty_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#aty_endtime',
+                event: 'focus'
+            });
+
+            laydate({
+                elem: '#add_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#add_endtime',
+                event: 'focus'
+            });
+            //新增数据click事件注册
+            $("#btn_add").click(function () {
+                location.href = "@Url.Action("Edit", "Activity")" + "?Id=0";
+            });
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "Activity")");
+            });
+        });
+        //展开行事件
+        function expandRow(index, row, $detail) {
+            var html = '<div class="panel panel-default"><div class="panel-body text-left"><dl class="dl-horizontal">' +
+                '<dt>活动地址：</dt>' +
+                '<dd>' + row.Address + '</dd>' +
+                '<dt>活动备注：</dt>' +
+                '<dd>' + row.Remark + '</dd>';
+                //'<dt>活动细则：</dt>'+
+                //'<dd>' + row.Description + '</dd>' +
+                //'</dl></div></div>';
+            $detail.html(html);
+        }
+        function fat_islock(value, row, index) {
+            return (value == 0 ? "开启" : "关闭");
+        }
+        function fat_fDate(value, row, index) {
+            return $.formatDate("yyyy-MM-dd", value);
+        }
+        function getName(v)
+        {
+            for (var i = 0; i < dic.length; i++) {
+                if (dic[i].Id == v) return dic[i].Name;
+            }
+            return '';
+        }
+        function fat_ActType(value, row, index) {           
+            return getName(value);
+        }
+        function fat_img(value, row, index) {
+            var html = '<img src="' + value + '" width="80px" height="80px"  class="screenshot" rel="' + value + '"/>';
+            if (row.ActLink != undefined && row.ActLink != "") {
+                html = '<a href="' + row.ActLink + '" target="_blank">' + html + '</a>'
+            }
+            return html;
+        }
+        function fat_oper(value, row, index) {
+            var html = '<a href="/Activity/Edit?Id=' + row.Id + '" data-role="Edit">编辑</a><br/>';
+            html += '<a href="/ActPrize/Edit?Id=0&ActId=' + row.Id + '" data-role="Add">新增奖品</a>';
+            var name = getName(row.ActType);           
+            //需要权限控制
+            if (name == "抽奖") {
+                html += '<br/><a href="#" class="handedit">生成抽奖数据</a>';
+            }
+            return html;
+        }
+        window.actionEvents = {
+            'click .handedit': function (e, value, row, index) {
+                MsgBox.Confirm("您确定要重新生成该活动的抽奖数据?", "将会覆盖掉原有的抽奖数据", function () {                  
+                    DFCommon.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("HandCreatePrizeData", "Activity")",
+                        data: row,
+                        dataType: "json",
+                        success: function (data, res) {
+                            if (res.Code == 1) {
+                                MsgBox.Success("生成成功", "您可以在\"活动人员列表\"和\"获奖记录\"页查看新数据");
+                            }
+                            else {
+                                MsgBox.Error("错误", res);
+                            }
+                        }
+                    });
+                });
+            }
+        };
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetActivityList", "Activity")" data-query="#btn_query" data-table="#tb_Activity">
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_atytitle">活动名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="atytitle" id="txt_search_atytitle">
+                    </div>
+
+                    <label class="control-label col-sm-1">开始时间</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="aty_starttime" id="aty_starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="aty_endtime" id="aty_endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_IsLock">活动状态</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="IsLock" id="txt_search_IsLock">
+                            <option value="">--活动状态---</option>
+                            <option value="1">开启</option>
+                            <option value="0">关闭</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_adduser">添加人</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="adduser" id="txt_search_adduser">
+                    </div>
+                    <label class="control-label col-sm-1">添加时间</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="add_starttime" id="add_starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="add_endtime" id="add_endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <table id="tb_Activity" data-filter-control="false" data-detail-view="true">
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="ActType" data-formatter="fat_ActType" data-halign="center" data-align="center" data-filter-control="input">活动类型</th>
+                <th data-field="Title" data-halign="center" data-align="center" data-filter-control="input">活动名称</th>
+                <th data-field="IsLock" data-formatter="fat_islock" data-halign="center" data-align="center">活动状态</th>
+                <th data-field="ActImg" data-formatter="fat_img" data-halign="center" data-align="center">活动图片</th>
+                @*<th data-field="Address" data-halign="center" data-align="center">活动地址</th>*@
+                <th data-field="StartTime" data-formatter="fat_fDate" data-halign="center" data-align="center">开始时间</th>
+                <th data-field="EndTime" data-formatter="fat_fDate" data-halign="center" data-align="center">结束时间</th>
+                <th data-field="AddUserName" data-halign="center" data-align="center">添加人</th>
+                <th data-field="AddTime" data-halign="center" data-align="center">添加时间</th>
+                <th data-field="UpdateUserName" data-halign="center" data-align="center">更新人</th>
+                <th data-field="UpdateTime" data-halign="center" data-align="center">更新时间</th>
+                <th data-field="SortId" data-halign="center" data-align="center">排序</th>
+                @*<th data-field="Description" data-halign="center" data-align="center">活动细则</th>
+                <th data-field="Remark" data-halign="center" data-align="center">备注</th>*@
+                <th data-field="Id" data-formatter="fat_oper" data-events="actionEvents" data-width="200" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

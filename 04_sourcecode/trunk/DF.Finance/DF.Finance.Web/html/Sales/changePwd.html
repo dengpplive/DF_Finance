@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>个人中心-修改密码</title>
+    <link rel="stylesheet" href="/_R/css/font-awesome.css">
+    <link rel="stylesheet" href="/_R/css/sui.css">
+    <link rel="stylesheet" href="/_R/css/main.css">
+</head>
+<body class="page">
+<!-- 标题栏 -->
+<header class="bar bar-nav theme-dark">
+    <a class="icon icon-left pull-left back color-white"></a>
+    <h1 class="title">个人中心-修改密码</h1>
+</header>
+<!-- 工具栏 -->
+<nav class="bar bar-tab">
+    <a class="tab-item external " href="index.html">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">首页</span>
+    </a> 
+    <a class="tab-item external" href="edit.html">
+        <span class="icon icon-edit"></span>
+        <span class="tab-label">录入资料</span>
+    </a>
+    <a class="tab-item external" href="approvalList.html">
+        <span class="icon icon-search"></span>
+        <span class="tab-label">审查核实</span>
+    </a>
+    <a class="tab-item external active" href="#">
+        <span class="icon icon-me"></span>
+        <span class="tab-label">个人中心</span>
+        <span class="badge">2</span>
+    </a>
+</nav>
+<!-- 这里是页面内容区 -->
+<div class="content">
+    <!-- 这里是页面内容区 -->
+    <img src="/_R/images/shield.png" class="img-size-4 center-block m-t-2">
+    <p class="text-center">修改登录密码</p>
+
+    <div class="list-block">
+        <ul>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg" style="width: 1.5rem"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="text" data-bind="value:pwd" placeholder="请输入原登录密码"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg" style="width: 1.5rem"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="text" data-bind="value:pwd" placeholder="请输入新登录密码"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg" style="width: 1.5rem"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="text" data-bind="value:pwd" placeholder="请再次输入新登录密码"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <div class="content-block">
+        <p><a href="javascript:void(0)" data-bind="click:submit" class="button button-fill button-big bg-purple">确定</a>
+        </p>
+    </div>
+</div>
+<script src="/_R/js/lib/zepto.js"></script>
+<script src="/_R/js/lib/sm.js"></script>
+<script src="/_R/js/app.js"></script>
+
+</body>
+</html>
+

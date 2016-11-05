@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+    <link href="../../_R/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../_R/css/sui.css" rel="stylesheet" />
+    <link href="../../_R/css/swiper.min.css" rel="stylesheet" />
+    <link href="../../_R/css/main.css" rel="stylesheet" />
+    <script src="../../_R/js/lib/zepto.min.js"></script>
+    <style>
+        /*.content {
+            top: 2.2rem;
+            bottom: 2.2rem;
+        }*/
+
+        .bar {
+            position: fixed;
+            z-index: 999999;
+        }
+
+        .page-group {
+            margin-top: 2.2rem;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <header class="bar bar-nav theme-dark">
+        <a class="button button-link button-nav pull-left back" data-transition='slide-out'>
+            <span class="icon icon-left color-white"></span>
+        </a>
+        <h1 class="title" id="title"></h1>
+    </header>
+
+    <nav class="bar bar-tab hidden">
+        <a class="tab-item external ">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item external">
+            <img class="icon" src="/_r/images/icon/dollar.jpg">
+            <span class="tab-label">我的贷款</span>
+        </a>
+        <a class="tab-item external">
+            <img class="icon" src="/_r/images/icon/rmb.jpg">
+            <span class="tab-label">抽奖记录</span>
+        </a>
+        <a class="tab-item active external">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+        </a>
+    </nav>
+
+    <div class="page-group" id="pageGroup">
+
+    </div>
+    <script src="../../_R/js/lib/json2.js"></script>
+    <script src="../../_R/js/lib/sm.js"></script>
+    <script src="../../_R/js/lib/touch.js"></script>
+    <script src="../../_R/js/lib/vue.min.js"></script>
+    <script src="../../_R/js/lib/vue-tap-click.js"></script>
+    <script src="../../_R/js/lib/swiper.min.js"></script>
+    <script src="../../_R/js/lib/storage.js"></script>
+    <script src="../../_R/js/Common.js"></script>
+    <script src="../../_R/js/template.js"></script>
+    <script src="../../_R/js/ComData.js"></script>
+    <script type="text/javascript">
+        DFCommon.getUserInfo();
+
+        if (DFCommon.Vue) {
+            template.Init("json/UserClientTemplate.json");
+        } else {
+            template.Init("json/UserClientTemplate.json", "UserClientLogin", function () {
+                $.router.load("#UserClientLogin");
+            });
+        }
+        $.init();
+        $(function () {
+            $(document).on("pageInit", function (e, pageId, $page) {
+                PageLoad();
+            });
+        });
+        window.onload = function () {
+            PageLoad();
+        }
+        //页面加载完成后处理
+        function PageLoad() {
+            if (DFCommon.Vue) {
+                if (DFCommon.Vue.userModel.GroupId != 3) {
+                    location.href = "/wx/selectUserType.html";
+                    return;
+                }
+            }
+            var pageId = $(".page-current").attr("id");
+            //登录 注册 首页不需要底部
+            //if (pageId == "AgentLogin" || pageId == "AgentSignin" || pageId == "AgentIndex") {
+            //    $("#LoginBar").hide();
+            //} else {
+            //    $("#LoginBar").show();
+            //    //开始移除css
+            //    var $bar = $("#LoginBar").find("a");
+            //    var index = 3;
+            //    switch (pageId) {
+            //        case "AgentEntry":
+            //            index = 1;
+            //            break;
+            //        case "AgentApprovalList":
+            //            index = 2;
+            //            break;
+            //    }
+            //    $(".active").removeClass("active");
+            //    $bar.eq(index).addClass("active");
+            //}
+        }
+
+    </script>
+
+</body>
+</html>

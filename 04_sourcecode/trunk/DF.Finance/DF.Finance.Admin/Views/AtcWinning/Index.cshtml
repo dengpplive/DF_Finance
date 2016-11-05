@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "AtcWinning";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+    <!-- excel导出插件 -->
+    <script src="~/_R/js/plugins/export/bootstrap-table-export.min.js"></script>
+    <script src="~/_R/js/plugins/export/tableExport.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var table = DFCommon.TableInit("#formSearch").Init({
+                showExport: true,//显示导出按钮
+                exportDataType: "selected",//选择的列导出
+                exportTypes: ['excel']//导出类型
+            });
+            window.actionEvents = {
+                'click .edit': function (e, value, row, index) {
+                    MsgBox.Confirm("确认该用户已领奖", "请仔细核对",
+                        function () {
+                            DFCommon.ajax({
+                                type: 'POST',
+                                url: "@Url.Action("Edit", "AtcWinning")",
+                                data: row,
+                                dataType: "json",
+                                success: function (data, res) {
+                                    if (res.Code == 1)
+                                        MsgBox.Success("领奖成功", "领奖成功", true);
+                                    else {
+                                        MsgBox.Error("错误", res);
+                                    }
+                                }
+                            });
+                        });
+                }
+            };
+            laydate({
+                elem: '#add_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#add_endtime',
+                event: 'focus'
+            });
+        });
+        var list =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.dicModel))
+        function fat_IsAward(value, row, index) {
+            return value == 1 ? '已领奖' : '未领奖';
+        }
+        function fat_AwardTime(value, row, index) {
+            return value.indexOf("1900-01-01") != -1 ? '' : value;
+        }
+        function fat_UpdateTime(value, row, index) {
+            return value.indexOf("1900-01-01") != -1 ? '' : value;
+        }
+        function fat_PrizeClass(value, row, index) {
+            for (var i = 0; i < list.length; i++) {
+                if (list[i].Id == value) return list[i].Name;
+            }
+            return '';
+        }
+        function fat_oper(value, row, index) {
+            if (row.IsAward == 0)
+                return '<a class="edit" data-role="Edit">领奖</a>';
+        }
+
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetAtcWinningList", "AtcWinning")" data-query="#btn_query" data-table="#tb_AtcWinning">
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_username">用户</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="username" id="txt_search_username">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_PrizeName">奖品名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="prizename" id="txt_search_PrizeName">
+                    </div>
+                    <label class="control-label col-sm-1">领奖时间</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="add_starttime" id="add_starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="add_endtime" id="add_endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <label class="col-sm-1"></label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1" for="txt_search_phone">手机号码</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="phone" id="txt_search_phone">
+                    </div>
+                    <label class="col-sm-1 control-label">活动名称：</label>
+                    <div class="col-sm-2">
+                        <select class="form-control m-b" name="ActId" id="ActId">
+                            <option value="">--活动名称--</option>
+                            @{
+                                foreach (DF.Finance.Model.Activity item in ViewBag.ActivityList)
+                                {
+                                    <option value="@item.Id">@item.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <label class="control-label col-sm-1">奖项</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="PrizeClass" id="txt_search_PrizeClass">
+                            <option value="">--奖项---</option>
+                            @foreach (DF.Finance.Model.SysDictionary item in ViewBag.dicModel)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-1">领奖状态</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="IsAward" id="txt_search_IsAward">
+                            <option value="">--领奖状态---</option>
+                            <option value="0">未领奖</option>
+                            <option value="1">已领奖</option>
+                        </select>
+                    </div>
+                    <div class="control-label col-sm-1"></div>
+                    <div class="col-sm-3">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table id="tb_AtcWinning" data-filter-control="false">
+        <thead>
+            <tr>
+                <th data-field="Title" data-halign="center" data-align="center" data-filter-control="select">活动名称</th>
+                <th data-field="UserName" data-halign="center" data-align="center" data-filter-control="input">用户</th>
+                <th data-field="AwardPhone" data-halign="center" data-align="center">手机号码</th>
+                <th data-field="PrizeClass" data-formatter="fat_PrizeClass" data-halign="center" data-align="center">奖项</th>
+                <th data-field="PrizeName" data-halign="center" data-align="center">奖品名称</th>
+                <th data-field="IsAward" data-formatter="fat_IsAward" data-halign="center" data-align="center">领奖状态</th>
+                <th data-field="AwardTime" data-formatter="fat_AwardTime" data-halign="center" data-align="center">领奖时间</th>
+                <th data-field="UpdateTime" data-formatter="fat_UpdateTime" data-halign="center" data-align="center">更新时间</th>
+                <th data-field="UpdateUserName" data-halign="center" data-align="center">更新人</th>
+                <th data-field="Id" data-formatter="fat_oper" data-events="actionEvents" data-halign="center" data-align="center">操作</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+

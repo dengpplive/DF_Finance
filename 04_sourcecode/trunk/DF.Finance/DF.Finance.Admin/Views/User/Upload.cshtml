@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "UserUpload";
+}
+
+@section css{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-filter-control.js"></script>
+}
+
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <form id="formSearch" class="form-horizontal">
+        <div class="panel panel-default">
+            <div class="panel-heading">数据导入</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传Excel：</label>
+                    <div class="col-sm-6">
+                        <input id="Title" name="Title" class="form-control upload-path" type="text">
+                    </div>
+                    <span class="upload-box upload-img"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">
+                        <button type="button" id="btn_upload" class="btn btn-primary">导入数据</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+<script>
+    $(function () {
+        //初始化上传
+        $(".upload-img").InitUploader({ filetypes: "xlsx,xls" });
+    })
+    //导入数据click事件注册
+    $("#btn_upload").click(function () {
+        DFCommon.ajax({
+            type: "GET",
+            url: "@Url.Action("Up", "User")"+"?FilePath="+$("#Title").val(),
+            dataType: "json",
+            success: function (data, res) {
+            if (res.Code == 1) {
+                MsgBox.Success("数据导入成功");
+            }
+            else {
+                MsgBox.Error("错误", res);
+            }
+          }
+       });
+    });
+</script>
+}

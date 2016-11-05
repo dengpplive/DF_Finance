@@ -1,0 +1,264 @@
+﻿<div class="content">
+    <template v-if="StatusClientAuditName=='审核通过'">
+        <!--审核通过-->
+        <div class="text-center mt-0-5">
+            <i class="fa fa-check-circle color-success" style="font-size: 5rem" aria-hidden="true"></i>
+        </div>
+        <p class="text-center color-red mt-0-5">审核通过</p>
+    </template>
+
+    <template v-if="StatusClientAuditName=='等待审核'">
+        <!--等待审核-->
+        <div class="text-center mt-0-5">
+            <img src="/_R/images/icon/appraveing.png" class="width-heigth-4">
+        </div>
+        <p class="text-center color-red mt-0-5">等待审核</p>
+    </template>
+
+    <template v-if="StatusClientAuditName=='审核不通过'">
+        <!--审核未通过-->
+        <div class="text-center mt-0-5">
+            <i class="fa  fa-times-circle color-red " style="font-size: 5rem" aria-hidden="true"></i>
+        </div>
+        <p class="text-center color-red mt-0-5">审核未通过</p>
+    </template>
+
+    <div class="list-block mt-0-5">
+        <ul>
+            <li class="item-content">
+            
+                <div class="item-inner">
+                    <div class="item-title">原因</div>
+                    <div class="item-after color-purple">{{Order.Remark}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+           
+                <div class="item-inner">
+                    <div class="item-title">销售顾问</div>
+                    <div class="item-after color-purple">{{Order.SalesName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+             
+                <div class="item-inner">
+                    <div class="item-title">提交日期</div>
+                    <div class="item-after color-purple">{{Order.AddTime|formatDate}}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list-block">
+        <ul>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title"><img src="/_R/images/icon/clients_on.png" style="height: 1.2rem;position: relative;top: 0.2rem"> 客户信息</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">放款金融公司</div>
+                    <div class="item-after color-purple">{{Order.LCName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">汽车类型</div>
+                    <div class="item-after color-purple">{{Order.Models}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">收单日期</div>
+                    <div class="item-after color-purple">{{Order.AcquirerTime|formatDate}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">区域</div>
+                    <div class="item-after color-purple">{{Order.DepartmentName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">申请人姓名</div>
+                    <div class="item-after color-purple">{{Order.ApplicantName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">申请人手机</div>
+                    <div class="item-after color-purple">{{Order.ApplicantPhone}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">申请人身份证号码</div>
+                    <div class="item-after color-purple">{{Order.ApplicantIDCard}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">共申人姓名</div>
+                    <div class="item-after color-purple">{{Order.CoApplicantName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">共申人手机</div>
+                    <div class="item-after color-purple">{{Order.CoApplicantPhone}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">担保人姓名</div>
+                    <div class="item-after color-purple">{{Order.GuarantorName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">担保人手机</div>
+                    <div class="item-after color-purple">{{Order.GuarantorPhone}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">贷款类型</div>
+                    <div class="item-after color-purple">{{Order.LoanProducts}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">贷款利息类型</div>
+                    <div class="item-after color-purple">{{Order.LoanInterest}}</div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="list-block">
+        <ul>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title"><img src="/_R/images/icon/book_car_on.png" style="height: 1.2rem;position: relative;top: 0.2rem"> 车行信息</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">开票单位</div>
+                    <div class="item-after color-purple">{{OpenTicketConpanyName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">实际交易方</div>
+                    <div class="item-after color-purple">{{Order.DealersName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">车行销售顾问姓名</div>
+                    <div class="item-after color-purple">{{Order.SalesName}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">车行销售顾问手机</div>
+                    <div class="item-after color-purple">{{Order.SalesPhone}}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list-block">
+        <ul>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title"><img src="/_R/images/icon/book_car_on.png" style="height: 1.2rem;position: relative;top: 0.2rem"> 车辆信息</div>
+                    <div class="item-after"></div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">汽车品牌</div>
+                    <div class="item-after color-purple">{{Order.CarBrand}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">汽车车型</div>
+                    <div class="item-after color-purple">{{Order.Models}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">车身价</div>
+                    <div class="item-after color-purple">{{Order.CarWorth}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">贷款金额</div>
+                    <div class="item-after color-purple">{{Order.LoanAmount|currency ''}}</div>
+                </div>
+            </li>
+            <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">贷款期限</div>
+                    <div class="item-after color-purple">{{Order.LoanTerm}}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        //日期格式过滤器
+        Vue.filter('formatDate', function (value) {
+            return $.formatDate('yyyy-MM-dd', value);
+        })
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                StatusClientAuditName: "",
+                Order: {},
+                OrderRecord: {}
+            },
+            methods: {
+                init: function () {
+                    //获取数据
+                    this.getData(function (data) {
+
+                        vue.$data.StatusClientAuditName = data.Order.StatusClientAuditName;
+                        vue.$data.Order = data.Order;
+                        vue.$data.OrderRecord = data.OrderRecord;
+                        //console.log(vue.$data);
+                    });
+                },
+                //获取数据
+                getData: function (callback) {
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/FinancialBusiness/GetLoanDetail",
+                        isShowLoading: true,
+                        data: { orderId: storage.getItem("orderId") },
+                        success: function (data) {
+                            if (callback) callback(data);
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+    });
+    //$(function () {
+    //    CheckLogin();
+    //});
+</script>

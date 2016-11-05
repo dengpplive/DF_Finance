@@ -1,0 +1,232 @@
+﻿@model DF.Finance.Model.User
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Users";
+}
+<form class="form-horizontal" id="form1" novalidate="novalidate">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#tab-1" aria-expanded="true"> 基本信息-1</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#tab-2">基本信息-2</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户类型：</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control m-b" id="GroupId" name="GroupId" data-selval="@Model.GroupId">
+                                        @foreach (DF.Finance.Model.UserGroup item in ViewBag.Groups)
+                                        {
+                                            <option value="@item.Id">@item.Title</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户名：</label>
+                                <div class="col-sm-3">
+                                    <input id="UserName" name="UserName" class="form-control" type="text" value="@Model.UserName" datatype="*2-25" sucmsg=" " nullmsg="请输入用户名" errormsg="长度2-25个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip">只允许字母、数字、下划线</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户密码：</label>
+                                <div class="col-sm-3">
+                                    <input id="PassWord" name="PassWord" class="form-control" type="password" value="@Model.PassWord" datatype="*2-25" sucmsg=" " nullmsg="请输入用户密码" errormsg="长度2-25个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户手机：</label>
+                                <div class="col-sm-3">
+                                    <input id="Mobile" name="Mobile" class="form-control" type="text" value="@Model.Mobile" datatype="*2-11" sucmsg=" " nullmsg="请输入手机号" errormsg="长度2-11个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip">请填写正确格式的手机号</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">电子邮箱：</label>
+                                <div class="col-sm-3">
+                                    <input id="Email" name="Email" class="form-control" type="text" value="@Model.Email" datatype="e" sucmsg=" " nullmsg="请输入邮箱" >
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">上传头像:</label>
+                                <div class="col-md-3">
+                                    <input id="Avatar" name="Avatar" class="form-control upload-path" type="text" value="@Model.Avatar" datatype="*0-255" sucmsg="" nullmsg="请上传用户头像">
+                                </div>
+                                <span class="upload-img"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" id="Sex">性别：</label>
+                                <div class="col-sm-2  radio i-checks">
+                                    <label>
+                                        <input type="radio" value="男" name="Sex" @(Model.Sex =="男"? "checked=checked" : "")> <i></i> 男
+                                        <input type="radio" value="女" name="Sex" @(Model.Sex == "女"?"checked=checked" : "")> <i></i>女
+                                    </label>
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">生日:</label>
+                                <div class="col-md-2">
+                                    <input id="Birthday" name="Birthday" class="laydate-icon form-control layer-date" value="@Model.Birthday">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">电话:</label>
+                                <div class="col-md-2">
+                                    <input type="text" class="form-control" name="TelPhone" value="@Model.TelPhone" datatype="*0-25" sucmsg=" " nullmsg="请输入电话" errormsg="长度0-25个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">身份证：</label>
+                                <div class="col-sm-3">
+                                    <input id="IDCard" name="IDCard" class="form-control" type="text" value="@Model.IDCard" datatype="*0-20" sucmsg=" " nullmsg="请输入身份证号码" errormsg="长度0-20个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">区域：</label>
+                                <div class="col-sm-3">
+                                    <input id="Area" name="Area" class="form-control" type="text" value="@Model.Area" datatype="*0-255" sucmsg=" " nullmsg="请输入区域" errormsg="长度0-255个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">详细地址：</label>
+                                <div class="col-sm-3">
+                                    <input id="Address" name="Address" class="form-control" type="text" value="@Model.Address" datatype="*0-255" sucmsg=" " nullmsg="请输入详细地址" errormsg="长度0-255个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">QQ：</label>
+                                <div class="col-sm-3">
+                                    <input id="QQ" name="QQ" class="form-control" type="text" value="@Model.QQ" datatype="*0-20" sucmsg=" " nullmsg="请输入QQ号码" errormsg="长度0-20个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户积分：</label>
+                                <div class="col-sm-3">
+                                    <input id="Point" name="Point" class="form-control" type="text" value="@Model.Point" datatype="n" sucmsg=" " nullmsg="请输入积分" errormsg="必须是整数">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip">整数</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">用户状态：</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control m-b" id="Status" name="Status" data-selval="@Model.Status">
+                                        <option value="0">正常</option>
+                                        <option value="1">待验证</option>
+                                        <option value="2">待审核</option>
+                                        <option value="3">锁定</option>
+                                    </select>
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">注册日期:</label>
+                                <div class="col-md-4">
+                                    <input id="RegTime" name="RegTime" class="laydate-icon form-control layer-date" value="@Model.RegTime">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">注册Ip：</label>
+                                <div class="col-sm-3">
+                                    <input id="RegIp" name="RegIp" class="form-control" type="text" value="@Model.RegIp" datatype="*0-20" sucmsg=" " nullmsg="请输入IP" errormsg="长度0-20个字符">
+                                </div>
+                                <span class="help-block m-b-none Validform_checktip"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary btn_submit" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary" type="button" onclick="history.go(-1)">&nbsp;&nbsp;&nbsp;&nbsp;返回上一页&nbsp;&nbsp;&nbsp;</button>
+        </div>
+    </div>
+</form>
+@section css{
+<link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section scripts{
+<!-- iCheck -->
+<script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- layerDate plugin javascript -->
+<script src="~/_R/js/plugins/layer/laydate/laydate.js"></script>
+
+<script>
+    //外部js调用
+    laydate({
+        elem: '#RegTime', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+        event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+    });
+
+    laydate({
+        elem: '#Birthday', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+        event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        //初始化上传
+        $(".upload-img").InitUploader({});
+
+        //复选框初始化
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        //初始化表单验证
+        $("#form1").initValidform(submits);
+    });
+    
+    function submits() {
+        //console.log("ok");
+        var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))           
+        postData = $("#form1").serializeObject(postData);
+        //console.log(postData);
+        //return false;
+        DFCommon.ajax({
+            type: 'POST',
+            url: "@Url.Action("AddOrEdit", "User")",
+            data: postData,
+            dataType: "json",
+            success: function (data, res) {
+                if (res.Code == 1) {
+                    MsgBox.Success("保存成功", "");
+                }
+                else {
+                    MsgBox.Error("错误", res);
+                }
+            }
+         });
+    }
+</script>
+}

@@ -1,0 +1,2676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>DF.Finance.Model</name>
+  </assembly>
+  <members>
+    <member name="T:DF.Finance.Model.Enums.RemindTypeEnums">
+      <summary>
+            提醒类型枚举
+            2016-05-26 jim
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Enums.OrderStatusEnum">
+      <summary>
+            订单状态枚举
+            2016-05-23 jim
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Enums.OrderActionEnum">
+      <summary>
+            订单状态操作
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.资料不完整">
+      <summary>
+            资料不完整
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.资料完整">
+      <summary>
+            资料完整
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.审批不通过">
+      <summary>
+            审批不通过
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.审批通过">
+      <summary>
+            审批通过
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.录入合同资料">
+      <summary>
+            录入合同资料
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.放款资料录入">
+      <summary>
+            放款资料录入
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.登记证操作">
+      <summary>
+            登记证操作
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.资料回邮">
+      <summary>
+            资料回邮
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.保险信息录入">
+      <summary>
+            保险信息录入
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderActionEnum.订单提醒备注">
+      <summary>
+            订单提醒备注
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Enums.OrderStatusEnumExtension">
+      <summary>
+            订单枚举状态扩展方法
+            </summary>
+    </member>
+    <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToClientString(DF.Finance.Model.Enums.OrderStatusEnum)">
+      <summary>
+            转换成客户端显示订单状态名称
+            </summary>
+      <param name="status">状态</param>
+      <returns></returns>
+    </member>
+    <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToAdminString(DF.Finance.Model.Enums.OrderStatusEnum)">
+      <summary>
+            转换成后台管理端显示订单状态名称
+            </summary>
+      <param name="status">状态</param>
+      <returns></returns>
+    </member>
+    <member name="F:DF.Finance.Model.Enums.OrderStatusEnumExtension.allowStatus">
+      <summary>
+            往下一步
+            </summary>
+    </member>
+    <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.CheckToStatus(DF.Finance.Model.Enums.OrderStatusEnum,DF.Finance.Model.Enums.OrderStatusEnum)">
+      <summary>
+            检测源状态是否允许转换到目标状态（当前状态到下一个状态）
+            </summary>
+      <param name="sourceStatus">源状态</param>
+      <param name="targetStatus">目标状态</param>
+      <returns></returns>
+    </member>
+    <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.GetNextStatus(DF.Finance.Model.Enums.OrderStatusEnum,DF.Finance.Model.Enums.OrderActionEnum)">
+      <summary>
+            获取下一个扭转的状态值
+            </summary>
+      <param name="sourceStatus"></param>
+      <param name="action"></param>
+      <returns></returns>
+    </member>
+    <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.ToPreviousStatusEnum(DF.Finance.Model.Enums.OrderStatusEnum)">
+      <summary>
+            获取可扭转到上一步的订单状态的枚举数组
+            </summary>
+      <param name="status">当前订单状态枚举</param>
+      <returns></returns>
+    </member>
+    <member name="M:DF.Finance.Model.Enums.OrderStatusEnumExtension.CheckToPrevious(DF.Finance.Model.Enums.OrderStatusEnum,DF.Finance.Model.Enums.OrderStatusEnum)">
+      <summary>
+            判断是否可以往上回滚订单状态
+            </summary>
+      <param name="Current">当前订单状态枚举值</param>
+      <param name="Previous">要扭转的订单状态枚举值</param>
+      <returns></returns>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.UserName">
+      <summary>
+            参与用户名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.UserId">
+      <summary>
+            用户id
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.ActName">
+      <summary>
+            活动名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.ActId">
+      <summary>
+            活动编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.AddTime">
+      <summary>
+            参加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActRecord.UserIP">
+      <summary>
+            用户IP
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.UserName">
+      <summary>
+            中奖用户名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.Title">
+      <summary>
+            活动名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.PrizeClass">
+      <summary>
+            奖项
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.ActId">
+      <summary>
+            活动编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.PrizeId">
+      <summary>
+            奖品编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.PrizeName">
+      <summary>
+            奖品名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.IsAward">
+      <summary>
+            是否已领奖
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.AwardTime">
+      <summary>
+            领奖时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.AwardPhone">
+      <summary>
+            获奖人手机号码
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.UpdateTime">
+      <summary>
+            更新时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.AtcWinning.UpdateUserName">
+      <summary>
+            更新人
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.User">
+      <summary>
+            金融业代用户
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.IssueOrderCount">
+      <summary>
+            出单数
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.TotalLoanAmount">
+      <summary>
+            总的贷款金额
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.UserName">
+      <summary>
+            金融业代的姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.UserSalesList">
+      <summary>
+             销售顾问列表
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.CompanyName">
+      <summary>
+            公司名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.Address">
+      <summary>
+            公司地址
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.CompanyPhone">
+      <summary>
+            公司联系电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.Contacts">
+      <summary>
+            联系人
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.UserAgentId">
+      <summary>
+            金融业代编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.DistributionTime">
+      <summary>
+            分配日期
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.LastLoanTime">
+      <summary>
+            最后放款时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.DeleteFlag">
+      <summary>
+            删除标识0.正常 1.删除
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.AddUserId">
+      <summary>
+            添加人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.AddName">
+      <summary>
+            添加人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.UpdateUserId">
+      <summary>
+            修改人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.UpdateName">
+      <summary>
+            修改人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.CustomerManagement.UpdateTime">
+      <summary>
+            修改时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.OrderId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.ApprovalAmount">
+      <summary>
+            审批金额
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.ApprovalTime">
+      <summary>
+            审批通过时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.ContractNumber">
+      <summary>
+            贷款合同号码
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.ContractTime">
+      <summary>
+            合同签订时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.BillingUnit">
+      <summary>
+            开票单位
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.LoanTime">
+      <summary>
+            放款时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.CheckInTime">
+      <summary>
+            登记证时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.RecoveryTime">
+      <summary>
+            登记收回时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.CheckInStatus">
+      <summary>
+            登记证状态
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderExtAttribute.MailingTime">
+      <summary>
+            资料邮寄时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.photo_name">
+      <summary>
+            保单资料图片地址
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.photo_remark">
+      <summary>
+            保单资料图片备注
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.OrderId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.InsuranceName">
+      <summary>
+            保险公司名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.InsuranceTime">
+      <summary>
+            保险日期
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.MaturityTime">
+      <summary>
+            保险到期日期
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.AddUserId">
+      <summary>
+            添加人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.AddName">
+      <summary>
+            添加人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.UpdateUserId">
+      <summary>
+            修改人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.UpdateName">
+      <summary>
+            修改人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.UpdateTime">
+      <summary>
+            修改时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsurance.Remark">
+      <summary>
+            备注
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.Insurance">
+      <summary>
+            订单保险信息
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.OrderRemindRemarks">
+      <summary>
+            订单提醒备注
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.OrderExtAttribute">
+      <summary>
+            订单扩展属性
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.OrderRecords">
+      <summary>
+            订单操作记录
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.StatusAdminName">
+      <summary>
+            后台订单的状态
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.Id">
+      <summary>
+            系统编号 自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.OrderNo">
+      <summary>
+            订单编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.Status">
+      <summary>
+            订单状态
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.UserAgentId">
+      <summary>
+            所属业代编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.UserSalesId">
+      <summary>
+            所属销售顾问编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.LCName">
+      <summary>
+            放贷公司名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.OldCar">
+      <summary>
+            新车/二手车
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.DepartmentName">
+      <summary>
+            部门名称（包含：区域，省份，城市） 以,隔开
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.AcquirerTime">
+      <summary>
+            收单时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.ApplicantName">
+      <summary>
+            申请人姓名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.ApplicantPhone">
+      <summary>
+            申请人电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.ApplicantIDCard">
+      <summary>
+            申请人身份证号码
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.GuarantorName">
+      <summary>
+            担保人姓名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.GuarantorPhone">
+      <summary>
+            担保人电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.CoApplicantName">
+      <summary>
+            共申人姓名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.CoApplicantPhone">
+      <summary>
+            共申人电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.LoanProducts">
+      <summary>
+            贷款产品
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.LoanInterest">
+      <summary>
+            贷款利息类型
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.DealersId">
+      <summary>
+            实际交易方id
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.DealersName">
+      <summary>
+            实际交易方名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.LoanLink">
+      <summary>
+            放款环节
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.SalesName">
+      <summary>
+            销售顾问姓名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.SalesPhone">
+      <summary>
+            销售顾问电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.CarBrand">
+      <summary>
+            汽车品牌
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.Models">
+      <summary>
+            车型
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.CarWorth">
+      <summary>
+            车身价
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.LoanAmount">
+      <summary>
+            贷款金额
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.LoanTerm">
+      <summary>
+            贷款期限
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.AddName">
+      <summary>
+            添加人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.UpdateUserId">
+      <summary>
+            修改人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.UpdateName">
+      <summary>
+            修改人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.UpdateTime">
+      <summary>
+            修改时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.Remark">
+      <summary>
+            备注
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Order.DeleteFlag">
+      <summary>
+            删除标识0.正常 1.删除
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.OriginalStatusAdmin">
+      <summary>
+            后台订单的状态
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.TargetStatusAdmin">
+      <summary>
+            目标状态
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.OrderId">
+      <summary>
+            订单编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.OriginalState">
+      <summary>
+            原始状态
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.TargetState">
+      <summary>
+            目标状态
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.UserId">
+      <summary>
+            操作人id
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.UserName">
+      <summary>
+            操作人用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.RealName">
+      <summary>
+            操作人昵称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.Ip">
+      <summary>
+            操作人ip
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRecord.Remark">
+      <summary>
+            记录信息
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRemindRemark.RemindTypeName">
+      <summary>
+            类型名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRemindRemark.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRemindRemark.OrderId">
+      <summary>
+            订单编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRemindRemark.RemindType">
+      <summary>
+            提醒类型 1.未放款提醒 21.未收回提醒 22.未邮寄提醒 3.保险到期提醒 4.未放款提醒5.金融业代提醒 61.放款成功前端提醒 62.放款成功邮件提醒
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderRemindRemark.Remark">
+      <summary>
+            备注内容
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.PrizeCount">
+      <summary>
+            中奖人数
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.Level">
+      <summary>
+            层级
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.OldParentId">
+      <summary>
+            旧父级菜单
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.OperType">
+      <summary>
+            1添加 0修改
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.ChildList">
+      <summary>
+            子集
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.Name">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.Val">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.ParentId">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.DicType">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.Remark">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.SortId">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.IsHide">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionary.DeleteFlag">
+      <summary>
+            删除标识0.正常 1.删除
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.RemindTypeName">
+      <summary>
+            类型名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.ViewId">
+      <summary>
+            所属编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.RemindType">
+      <summary>
+            提醒类型 1.未放款提醒 21.未收回提醒 22.未邮寄提醒 3.保险到期提醒 4.未放款提醒5.金融业代提醒 61.放款成功前端提醒 62.放款成功邮件提醒
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.Reminder">
+      <summary>
+            提醒内容
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.UserId">
+      <summary>
+            通知用户
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.IsLock">
+      <summary>
+            是否隐藏
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.IsNoticeAdmin">
+      <summary>
+            是否通知管理员
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.SourceType">
+      <summary>
+            来源类型 1.订单 2.实际交易方
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.DeleteFlag">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.Remind.IHaveRead">
+      <summary>
+            是否已读
+             </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.DictionaryManageView">
+      <summary>
+            后台字典显示
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.DictionaryManageView.SysDictionaryList">
+      <summary>
+            系统字典数据列表
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.DictionaryManageView.Total">
+      <summary>
+            数据总条数
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.DictionaryView">
+      <summary>
+            字典分类下面的字典数据
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.Item">
+      <summary>
+            字典数据
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.LoanDetailView">
+      <summary>
+            客户贷款详情
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.LoanDetailView.Order">
+      <summary>
+            订单
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.LoanDetailView.OrderRecord">
+      <summary>
+            订单记录
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.LoanDetailView.OpenTicketConpanyName">
+      <summary>
+            开票单位
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.MyAchievementView">
+      <summary>
+            金融业代 -我的业绩数据
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyAchievementView.LoanTotalAmount">
+      <summary>
+            贷款总金额
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyAchievementView.LoanTotalOrderCount">
+      <summary>
+            贷款总单数
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyAchievementView.UserAgentName">
+      <summary>
+            金融业代姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyAchievementView.OrderList">
+      <summary>
+            我的订单列表
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.MyFinanceView">
+      <summary>
+            销售顾问-我的金融业代
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyFinanceView.UserAgentId">
+      <summary>
+            金融业代用户Id
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyFinanceView.UserName">
+      <summary>
+            金融业代用户姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyFinanceView.Mobile">
+      <summary>
+            金融业代手机
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyFinanceView.OrderCount">
+      <summary>
+            金融业代贷款订单数
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.MyFinanceView.OrderList">
+      <summary>
+            我的订单列表
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.PrizeView">
+      <summary>
+            抽奖结果页面结果数据
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Views.PrizeView.tels">
+      <summary>
+            参与抽奖的用户手机号
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Views.PrizeView.winners">
+      <summary>
+            中奖信息
+            </summary>
+    </member>
+    <member name="F:DF.Finance.Model.Views.PrizeView.awardgrades">
+      <summary>
+            奖项信息
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.PrizeView.activity">
+      <summary>
+            抽奖活动
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.AwardGrade.type">
+      <summary>
+            奖项 
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.AwardGrade.typeName">
+      <summary>
+            奖项名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.AwardGrade.WinningCount">
+      <summary>
+            中奖数
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ActWinning.name">
+      <summary>
+            用户姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ActWinning.tel">
+      <summary>
+            手机号
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ActWinning.type">
+      <summary>
+            奖项 
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ActWinning.typeName">
+      <summary>
+            奖项名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.Tels.userId">
+      <summary>
+            用户Id
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.Tels.UserName">
+      <summary>
+            用户姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.Tels.Mobile">
+      <summary>
+            用户手机号码
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.Tels.PrizeClass">
+      <summary>
+            奖项类型
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.Role">
+      <summary>
+            用户所属的角色
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.RoleId">
+      <summary>
+            角色ID
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.RoleType">
+      <summary>
+            管理员类型 1超管2系统管理员
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.UserName">
+      <summary>
+            用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.PassWord">
+      <summary>
+            登录密码
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.Salt">
+      <summary>
+            6位随机字符串,加密用到
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.RealName">
+      <summary>
+            用户昵称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.TelePhone">
+      <summary>
+            联系电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.Email">
+      <summary>
+            电子邮箱
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.IsLock">
+      <summary>
+            是否锁定
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.AddTime">
+      <summary>
+            添加时间
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManage.UserName2">
+      <summary>
+            用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRole.RoleValueList">
+      <summary>
+            权限集合
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRole.ActionTypeList">
+      <summary>
+            权限类型集合
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRole.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRole.RoleName">
+      <summary>
+            角色名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRole.RoleType">
+      <summary>
+            角色类型
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRole.IsSys">
+      <summary>
+            是否系统默认
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.ClassLayer">
+      <summary>
+            层级样式
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.OldParentId">
+      <summary>
+            旧父级菜单
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.ProcType">
+      <summary>
+            操作类型
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.NavigationList">
+      <summary>
+            二级导航，因模板只支持二级
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.ParentId">
+      <summary>
+            所属父导航ID
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.ActionType">
+      <summary>
+            权限资源
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.Name">
+      <summary>
+            导航名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.Title">
+      <summary>
+            标题
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.SubTitle">
+      <summary>
+            副标题
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.IconUrl">
+      <summary>
+            图片地址
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.LinkUrl">
+      <summary>
+            链接地址
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.SortId">
+      <summary>
+            排序数字
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.IsLock">
+      <summary>
+            是否隐藏0显示1隐藏
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.IsSys">
+      <summary>
+            系统默认
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.Remark">
+      <summary>
+            备注说明
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysNavigation.IconClass">
+      <summary>
+            导航图标样式
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserLoginLog.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserLoginLog.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserLoginLog.UserName">
+      <summary>
+            用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserLoginLog.LoginTime">
+      <summary>
+            登录时间
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserLoginLog.LoginIP">
+      <summary>
+            登录IP
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserLoginLog.Remark">
+      <summary>
+            备注
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserPointLog.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserPointLog.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserPointLog.UserName">
+      <summary>
+            用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserPointLog.Value">
+      <summary>
+            增减积分
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserPointLog.AddTime">
+      <summary>
+            操作时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserPointLog.Remark">
+      <summary>
+            备注
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsuranceImg.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsuranceImg.InsuranceId">
+      <summary>
+            保险编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsuranceImg.ImgPath">
+      <summary>
+            图片路径
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.OrderInsuranceImg.Remark">
+      <summary>
+            备注
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionaryType.Id">
+      <summary>
+            自动增长
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionaryType.TypeName">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionaryType.TypeCode">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysDictionaryType.IsSys">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.ActId">
+      <summary>
+            活动编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.PrizeName">
+      <summary>
+            奖品名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.Quantity">
+      <summary>
+            奖品数量
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.AddUserName">
+      <summary>
+            添加人
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.WQuantity">
+      <summary>
+            已中数量
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.ErnienNum">
+      <summary>
+            每次摇奖数量
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.PrizeClass">
+      <summary>
+            奖项类别
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.NumberOfAwards">
+      <summary>
+            设奖名额
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.ActPrize.PrizeImg">
+      <summary>
+            奖品图片
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.UserName">
+      <summary>
+            用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.ActionType">
+      <summary>
+            操作类型
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.Remark">
+      <summary>
+            备注
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.UserIP">
+      <summary>
+            用户IP
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerLog.AddTime">
+      <summary>
+            操作时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.GroupId">
+      <summary>
+            用户组ID
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.UserName">
+      <summary>
+            用户名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Salt">
+      <summary>
+            6位随机字符串,加密用到
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.PassWord">
+      <summary>
+            用户密码
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Mobile">
+      <summary>
+            用户手机
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Email">
+      <summary>
+            电子邮箱
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Avatar">
+      <summary>
+            用户头像
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Sex">
+      <summary>
+            性别
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Birthday">
+      <summary>
+            生日
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.TelPhone">
+      <summary>
+            电话
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.IDCard">
+      <summary>
+            身份证
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Area">
+      <summary>
+            所属地区逗号分隔
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Address">
+      <summary>
+            详细地址
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.QQ">
+      <summary>
+            QQ号码
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Point">
+      <summary>
+            账户积分
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.Status">
+      <summary>
+            账户状态,0正常,1待验证,2待审核,3锁定
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.RegTime">
+      <summary>
+            注册时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.User.RegIp">
+      <summary>
+            注册
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRoleValue.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRoleValue.RoleId">
+      <summary>
+            角色Id
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRoleValue.NavName">
+      <summary>
+            导航名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.SysManagerRoleValue.ActionType">
+      <summary>
+            权限类型
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.Start">
+      <summary>
+            开始
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.End">
+      <summary>
+            结束
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.UnitTyep">
+      <summary>
+            单位类型 1.天 2.月
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.FirstDay">
+      <summary>
+            多少天一次
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.RemindType">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.Remark">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.ReplaceText">
+      <summary></summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.ForOrderState">
+      <summary>
+            针对订单状态
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.RemindRule.AnalyzingField">
+      <summary>
+            对比字段
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserAgent.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserAgent.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserAgent.Department">
+      <summary>
+            部门 以,隔开
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.CompanyName">
+      <summary>
+            公司名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.DeleteFlag">
+      <summary>
+            删除标识0.正常 1.删除
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.AddUserId">
+      <summary>
+            添加人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.AddName">
+      <summary>
+            添加人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.UpdateUserId">
+      <summary>
+            修改人编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.UpdateName">
+      <summary>
+            修改人名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.BillingManagementt.UpdateTime">
+      <summary>
+            修改时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.Title">
+      <summary>
+            活动名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.Address">
+      <summary>
+            活动地址
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.ActType">
+      <summary>
+            活动类型
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.StartTime">
+      <summary>
+            开始时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.EndTime">
+      <summary>
+            结束时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.AddTime">
+      <summary>
+            添加时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.AddUserName">
+      <summary>
+            添加人
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.UpdateTime">
+      <summary>
+            更新时间
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.UpdateUserName">
+      <summary>
+            更新人
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.DeleteFlag">
+      <summary>
+            删除标识 0.正常 1.删除
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.Description">
+      <summary>
+            活动细则
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.ActLink">
+      <summary>
+            活动链接
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.IsLock">
+      <summary>
+            是否锁定
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.ActImg">
+      <summary>
+            活动图片
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.SortId">
+      <summary>
+            排序
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Activity.Remark">
+      <summary>
+            备注
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserClient.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserClient.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserClient.ApprovedTime">
+      <summary>
+            审批通过日期
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserClient.PrizeCount">
+      <summary>
+            抽奖次数
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserGroup.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserGroup.Title">
+      <summary>
+            组别名称
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserGroup.Point">
+      <summary>
+            默认积分
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserGroup.IsLock">
+      <summary>
+            是否禁用
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserGroup.IsSys">
+      <summary>
+            是否系统默认认组别，不可删除
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserSale.Id">
+      <summary>
+            编号自增
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserSale.UserId">
+      <summary>
+            用户编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.UserSale.DealersId">
+      <summary>
+            车行编号
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.Id">
+      <summary>
+            自动增长
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.IsSys">
+      <summary>
+            是否系统默认
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.Code">
+      <summary>
+            调用别名
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.MailTitle">
+      <summary>
+            邮件标题
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.Title">
+      <summary>
+            模板标题
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.Content">
+      <summary>
+            邮件内容
+             </summary>
+    </member>
+    <member name="P:DF.Finance.Model.MailTemplate.Description">
+      <summary>
+            替换关键词描述
+             </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.ReportDealDetailsView">
+      <summary>
+            实际交易方成交清单 报表详情
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanTime">
+      <summary>
+            放款日期
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.AgentUserName">
+      <summary>
+            金融业代姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.DealersName">
+      <summary>
+            实际交易方名称
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApprovalAmount">
+      <summary>
+            贷款金额 审批通过的金额
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LCName">
+      <summary>
+            放款金融公司
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.OldCar">
+      <summary>
+            新车/二手车
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.AcquirerTime">
+      <summary>
+            收单日期
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApplicantName">
+      <summary>
+            贷款人姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApplicantPhone">
+      <summary>
+            贷款人电话
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.ApplicantIDCard">
+      <summary>
+            贷款人身份证号码
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.GuarantorName">
+      <summary>
+            担保人姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.GuarantorPhone">
+      <summary>
+            担保人电话
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CoApplicantName">
+      <summary>
+            共申人姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CoApplicantPhone">
+      <summary>
+            共申人电话
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanProducts">
+      <summary>
+            贷款产品
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanInterest">
+      <summary>
+            贷款利息类型
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanLink">
+      <summary>
+            放款环节
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.SalesName">
+      <summary>
+            销售顾问姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.SalesPhone">
+      <summary>
+            销售顾问电话
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CarBrand">
+      <summary>
+            汽车品牌
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.Models">
+      <summary>
+            车型
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.CarWorth">
+      <summary>
+            车身价
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanAmount">
+      <summary>
+            贷款金额 未审批的金额
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.LoanTerm">
+      <summary>
+            贷款期限
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.ReportDealDetailsView.OrderId">
+      <summary>
+            订单Id
+            </summary>
+    </member>
+    <member name="T:DF.Finance.Model.Views.UserSaleView">
+      <summary>
+            app端销售顾问列表
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.UserSaleView.UserId">
+      <summary>
+            销售顾问Id
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.UserSaleView.UserName">
+      <summary>
+            销售顾问姓名
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.UserSaleView.Mobile">
+      <summary>
+            销售顾问手机
+            </summary>
+    </member>
+    <member name="P:DF.Finance.Model.Views.UserSaleView.OrderCount">
+      <summary>
+            销售顾问单数
+            </summary>
+    </member>
+  </members>
+  <assembly>
+    <name>DF.Finance.Web</name>
+  </assembly>
+  <name>DF.Finance.Web</name>DF.Finance.Web<members><member name="M:DF.Finance.Web.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)"><summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription" />. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary><param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The ID as a string.</returns></member><member name="T:DF.Finance.Web.Areas.HelpPage.HelpPageConfig"><summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.Controllers.HelpController"><summary>
+            The controller that will handle requests for the help page.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)"><summary>
+            Sets the documentation provider for help page.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="documentationProvider">The documentation provider.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})"><summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sampleObjects">The sample objects.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)"><summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample request.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])"><summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample request.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)"><summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample response.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])"><summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample response.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)"><summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample.</param><param name="mediaType">The media type.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)"><summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample.</param><param name="mediaType">The media type.</param><param name="type">The parameter type or return type of an action.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)"><summary>
+            Gets the help page sample generator.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><returns>The help page sample generator.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator)"><summary>
+            Sets the help page sample generator.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sampleGenerator">The help page sample generator.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)"><summary>
+            Gets the model description generator.
+            </summary><param name="config">The configuration.</param><returns>The <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator" /></returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)"><summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription" /> ID.</param><returns>
+            An <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /></returns></member><member name="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"><summary>
+            Describes a type model.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"><summary>
+            Generates model descriptions for given types.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelNameAttribute"><summary>
+            Use this attribute to change the name of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> generated for a type.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel"><summary>
+            The model that represents an API displayed on the help page.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.#ctor"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /> class.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"><summary>
+            Gets or sets the <see cref="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription" /> that describes the API.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.UriParameters"><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ParameterDescription" /> collection that describes the URI parameters for the API.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation"><summary>
+            Gets or sets the documentation for the request.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription"><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the request body.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters"><summary>
+            Gets the request body parameter descriptions.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription"><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the resource.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties"><summary>
+            Gets the resource property descriptions.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests"><summary>
+            Gets the sample requests associated with the API.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses"><summary>
+            Gets the sample responses associated with the API.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages"><summary>
+            Gets the error messages associated with this model.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator"><summary>
+            This class will generate the samples for the help page.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.#ctor"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator" /> class.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)"><summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The samples keyed by media type.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)"><summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The samples keyed by media type.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,DF.Finance.Web.Areas.HelpPage.SampleDirection)"><summary>
+            Gets the request or response body samples.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param><returns>The samples keyed by media type.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,DF.Finance.Web.Areas.HelpPage.SampleDirection)"><summary>
+            Search for samples that are provided directly through <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples" />.
+            </summary><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param><param name="type">The CLR type.</param><param name="formatter">The formatter.</param><param name="mediaType">The media type.</param><param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param><returns>The sample that matches the parameters.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)"><summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects" />. If no sample object is found, it will try to create
+            one using <see cref="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator,System.Type)" /> (which wraps an <see cref="T:DF.Finance.Web.Areas.HelpPage.ObjectGenerator" />) and other
+            factories in <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories" />.
+            </summary><param name="type">The type.</param><returns>The sample object.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)"><summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The type.</returns></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},DF.Finance.Web.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)"><summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" /> is used.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param><param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param><param name="formatters">The formatters.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)"><summary>
+            Writes the sample object using formatter.
+            </summary><param name="formatter">The formatter.</param><param name="value">The value.</param><param name="type">The type.</param><param name="mediaType">Type of the media.</param><returns></returns></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes"><summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" />.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"><summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"><summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"><summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null" /> object.
+            </summary><remarks>
+            Collection includes just <see cref="M:DF.Finance.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)" /> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks></member><member name="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey"><summary>
+            This is used to identify the place where the sample should be applied.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type.
+            </summary><param name="mediaType">The media type.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type and CLR type.
+            </summary><param name="mediaType">The media type.</param><param name="type">The CLR type.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(DF.Finance.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            </summary><param name="sampleDirection">The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,DF.Finance.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type, <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            </summary><param name="mediaType">The media type.</param><param name="sampleDirection">The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.ControllerName"><summary>
+            Gets the name of the controller.
+            </summary><value>
+            The name of the controller.
+            </value></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.ActionName"><summary>
+            Gets the name of the action.
+            </summary><value>
+            The name of the action.
+            </value></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.MediaType"><summary>
+            Gets the media type.
+            </summary><value>
+            The media type.
+            </value></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.ParameterNames"><summary>
+            Gets the parameter names.
+            </summary></member><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"><summary>
+            Gets the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.ImageSample"><summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.ImageSample.#ctor(System.String)"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ImageSample" /> class.
+            </summary><param name="src">The URL of an image.</param></member><member name="T:DF.Finance.Web.Areas.HelpPage.InvalidSample"><summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.ObjectGenerator"><summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"><summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32" />, <see cref="T:System.String" />, <see cref="T:System.Enum" />, <see cref="T:System.DateTime" />, <see cref="T:System.Uri" />, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1" />.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2" />
+            Tuples: <see cref="T:System.Tuple`1" />, <see cref="T:System.Tuple`2" />, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2" /> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            Collections: <see cref="T:System.Collections.Generic.IList`1" />, <see cref="T:System.Collections.Generic.IEnumerable`1" />, <see cref="T:System.Collections.Generic.ICollection`1" />, <see cref="T:System.Collections.IList" />, <see cref="T:System.Collections.IEnumerable" />, <see cref="T:System.Collections.ICollection" /> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1" /> or <see cref="T:System.Collections.IList" />.
+            Queryables: <see cref="T:System.Linq.IQueryable" />, <see cref="T:System.Linq.IQueryable`1" />.
+            </summary><param name="type">The type.</param><returns>An object of the given type.</returns></member><member name="T:DF.Finance.Web.Areas.HelpPage.SampleDirection"><summary>
+            Indicates whether the sample is used for request or response
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.TextSample"><summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary></member><member name="T:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider"><summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> that reads the API documentation from an XML documentation file.
+            </summary></member><member name="M:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider" /> class.
+            </summary><param name="documentPath">The physical path to XML document.</param></member><member name="M:DF.Finance.Web.WebApiApplication.Application_BeginRequest(System.Object,System.EventArgs)"><summary>
+            2016-04-13
+            jim 
+            1.增加获取用户信息 把用户信息放到Cache中
+            </summary><param name="sender"></param><param name="e"></param></member><member name="M:DF.Finance.Web.WebApiApplication.Application_EndRequest(System.Object,System.EventArgs)"><summary>
+            2016-04-13
+            jim 
+            1.请求结束清理掉Cache
+            </summary><param name="sender"></param><param name="e"></param></member><member name="T:DF.Finance.Web.WebApi.FinancialBusinessController"><summary>
+            金融业代
+            </summary></member><member name="M:DF.Finance.Web.WebApi.FinancialBusinessController.UserLogin(System.String,System.String)"><summary>
+            会员登录
+            </summary><param name="mobile">手机号</param><param name="pwd">登录密码</param><returns></returns></member><member name="M:DF.Finance.Web.WebApi.FinancialBusinessController.UserLoginOut"><summary>
+            会员注销
+            </summary><returns></returns></member><member name="M:DF.Finance.Web.WebApi.TestController.TestAjax"><summary>
+            测试ajax
+            </summary><returns></returns></member></members><member name="M:DF.Finance.Web.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)"><summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription" />. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary><param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The ID as a string.</returns></member><summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription" />. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription" />. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" />.<returns>The ID as a string.</returns>The ID as a string.<member name="T:DF.Finance.Web.Areas.HelpPage.HelpPageConfig"><summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary></member><summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.Controllers.HelpController"><summary>
+            The controller that will handle requests for the help page.
+            </summary></member><summary>
+            The controller that will handle requests for the help page.
+            </summary>
+            The controller that will handle requests for the help page.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)"><summary>
+            Sets the documentation provider for help page.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="documentationProvider">The documentation provider.</param></member><summary>
+            Sets the documentation provider for help page.
+            </summary>
+            Sets the documentation provider for help page.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="documentationProvider">The documentation provider.</param>The documentation provider.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})"><summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sampleObjects">The sample objects.</param></member><summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sampleObjects">The sample objects.</param>The sample objects.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)"><summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample request.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            Sets the sample request directly for the specified media type and action.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sample">The sample request.</param>The sample request.<param name="mediaType">The media type.</param>The media type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])"><summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample request.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sample">The sample request.</param>The sample request.<param name="mediaType">The media type.</param>The media type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)"><summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample response.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            Sets the sample request directly for the specified media type of the action.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sample">The sample response.</param>The sample response.<param name="mediaType">The media type.</param>The media type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])"><summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample response.</param><param name="mediaType">The media type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sample">The sample response.</param>The sample response.<param name="mediaType">The media type.</param>The media type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)"><summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample.</param><param name="mediaType">The media type.</param></member><summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            Sets the sample directly for all actions with the specified media type.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sample">The sample.</param>The sample.<param name="mediaType">The media type.</param>The media type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)"><summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sample">The sample.</param><param name="mediaType">The media type.</param><param name="type">The parameter type or return type of an action.</param></member><summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sample">The sample.</param>The sample.<param name="mediaType">The media type.</param>The media type.<param name="type">The parameter type or return type of an action.</param>The parameter type or return type of an action.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="type">The type.</param>The type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate request samples.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="type">The type.</param>The type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param></member><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="type">The type.</param>The type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])"><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="type">The type.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            The help page will use this information to produce more accurate response samples.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="type">The type.</param>The type.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)"><summary>
+            Gets the help page sample generator.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><returns>The help page sample generator.</returns></member><summary>
+            Gets the help page sample generator.
+            </summary>
+            Gets the help page sample generator.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<returns>The help page sample generator.</returns>The help page sample generator.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator)"><summary>
+            Sets the help page sample generator.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="sampleGenerator">The help page sample generator.</param></member><summary>
+            Sets the help page sample generator.
+            </summary>
+            Sets the help page sample generator.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="sampleGenerator">The help page sample generator.</param>The help page sample generator.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)"><summary>
+            Gets the model description generator.
+            </summary><param name="config">The configuration.</param><returns>The <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator" /></returns></member><summary>
+            Gets the model description generator.
+            </summary>
+            Gets the model description generator.
+            <param name="config">The configuration.</param>The configuration.<returns>The <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator" /></returns>The <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator" /><member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)"><summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary><param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param><param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription" /> ID.</param><returns>
+            An <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /></returns></member><summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration" />.</param>The <see cref="T:System.Web.Http.HttpConfiguration" />.<param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription" /> ID.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" /> ID.<returns>
+            An <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /></returns>
+            An <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /><member name="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription"><summary>
+            Describes a type model.
+            </summary></member><summary>
+            Describes a type model.
+            </summary>
+            Describes a type model.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"><summary>
+            Generates model descriptions for given types.
+            </summary></member><summary>
+            Generates model descriptions for given types.
+            </summary>
+            Generates model descriptions for given types.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelNameAttribute"><summary>
+            Use this attribute to change the name of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> generated for a type.
+            </summary></member><summary>
+            Use this attribute to change the name of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> generated for a type.
+            </summary>
+            Use this attribute to change the name of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> generated for a type.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel"><summary>
+            The model that represents an API displayed on the help page.
+            </summary></member><summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+            The model that represents an API displayed on the help page.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.#ctor"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /> class.
+            </summary></member><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /> class.
+            </summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel" /> class.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"><summary>
+            Gets or sets the <see cref="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription" /> that describes the API.
+            </summary></member><summary>
+            Gets or sets the <see cref="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription" /> that describes the API.
+            </summary>
+            Gets or sets the <see cref="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription" /> that describes the API.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.UriParameters"><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ParameterDescription" /> collection that describes the URI parameters for the API.
+            </summary></member><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ParameterDescription" /> collection that describes the URI parameters for the API.
+            </summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ParameterDescription" /> collection that describes the URI parameters for the API.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation"><summary>
+            Gets or sets the documentation for the request.
+            </summary></member><summary>
+            Gets or sets the documentation for the request.
+            </summary>
+            Gets or sets the documentation for the request.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription"><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the request body.
+            </summary></member><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the request body.
+            </summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the request body.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters"><summary>
+            Gets the request body parameter descriptions.
+            </summary></member><summary>
+            Gets the request body parameter descriptions.
+            </summary>
+            Gets the request body parameter descriptions.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription"><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the resource.
+            </summary></member><summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the resource.
+            </summary>
+            Gets or sets the <see cref="T:DF.Finance.Web.Areas.HelpPage.ModelDescriptions.ModelDescription" /> that describes the resource.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties"><summary>
+            Gets the resource property descriptions.
+            </summary></member><summary>
+            Gets the resource property descriptions.
+            </summary>
+            Gets the resource property descriptions.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests"><summary>
+            Gets the sample requests associated with the API.
+            </summary></member><summary>
+            Gets the sample requests associated with the API.
+            </summary>
+            Gets the sample requests associated with the API.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses"><summary>
+            Gets the sample responses associated with the API.
+            </summary></member><summary>
+            Gets the sample responses associated with the API.
+            </summary>
+            Gets the sample responses associated with the API.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages"><summary>
+            Gets the error messages associated with this model.
+            </summary></member><summary>
+            Gets the error messages associated with this model.
+            </summary>
+            Gets the error messages associated with this model.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator"><summary>
+            This class will generate the samples for the help page.
+            </summary></member><summary>
+            This class will generate the samples for the help page.
+            </summary>
+            This class will generate the samples for the help page.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.#ctor"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator" /> class.
+            </summary></member><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator" /> class.
+            </summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator" /> class.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)"><summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The samples keyed by media type.</returns></member><summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            </summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" />.<returns>The samples keyed by media type.</returns>The samples keyed by media type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)"><summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The samples keyed by media type.</returns></member><summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            </summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription" />.
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" />.<returns>The samples keyed by media type.</returns>The samples keyed by media type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,DF.Finance.Web.Areas.HelpPage.SampleDirection)"><summary>
+            Gets the request or response body samples.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param><returns>The samples keyed by media type.</returns></member><summary>
+            Gets the request or response body samples.
+            </summary>
+            Gets the request or response body samples.
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" />.<param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>The value indicating whether the sample is for a request or for a response.<returns>The samples keyed by media type.</returns>The samples keyed by media type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,DF.Finance.Web.Areas.HelpPage.SampleDirection)"><summary>
+            Search for samples that are provided directly through <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples" />.
+            </summary><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param><param name="type">The CLR type.</param><param name="formatter">The formatter.</param><param name="mediaType">The media type.</param><param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param><returns>The sample that matches the parameters.</returns></member><summary>
+            Search for samples that are provided directly through <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples" />.
+            </summary>
+            Search for samples that are provided directly through <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples" />.
+            <param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<param name="type">The CLR type.</param>The CLR type.<param name="formatter">The formatter.</param>The formatter.<param name="mediaType">The media type.</param>The media type.<param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>The value indicating whether the sample is for a request or for a response.<returns>The sample that matches the parameters.</returns>The sample that matches the parameters.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)"><summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects" />. If no sample object is found, it will try to create
+            one using <see cref="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator,System.Type)" /> (which wraps an <see cref="T:DF.Finance.Web.Areas.HelpPage.ObjectGenerator" />) and other
+            factories in <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories" />.
+            </summary><param name="type">The type.</param><returns>The sample object.</returns></member><summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects" />. If no sample object is found, it will try to create
+            one using <see cref="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator,System.Type)" /> (which wraps an <see cref="T:DF.Finance.Web.Areas.HelpPage.ObjectGenerator" />) and other
+            factories in <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories" />.
+            </summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects" />. If no sample object is found, it will try to create
+            one using <see cref="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator,System.Type)" /> (which wraps an <see cref="T:DF.Finance.Web.Areas.HelpPage.ObjectGenerator" />) and other
+            factories in <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories" />.
+            <param name="type">The type.</param>The type.<returns>The sample object.</returns>The sample object.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)"><summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><returns>The type.</returns></member><summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            </summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1" /> passed to the <see cref="T:System.Net.Http.HttpRequestMessage" /> in an action.
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" />.<returns>The type.</returns>The type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},DF.Finance.Web.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)"><summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" /> is used.
+            </summary><param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param><param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param><param name="formatters">The formatters.</param></member><summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" /> is used.
+            </summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" /> is used.
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription" />.</param>The <see cref="T:System.Web.Http.Description.ApiDescription" />.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>The value indicating whether the sample is for a request or a response.<param name="formatters">The formatters.</param>The formatters.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)"><summary>
+            Writes the sample object using formatter.
+            </summary><param name="formatter">The formatter.</param><param name="value">The value.</param><param name="type">The type.</param><param name="mediaType">Type of the media.</param><returns></returns></member><summary>
+            Writes the sample object using formatter.
+            </summary>
+            Writes the sample object using formatter.
+            <param name="formatter">The formatter.</param>The formatter.<param name="value">The value.</param>The value.<param name="type">The type.</param>The type.<param name="mediaType">Type of the media.</param>Type of the media.<returns></returns><member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes"><summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" />.
+            </summary></member><summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" />.
+            </summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage" /> or <see cref="T:System.Net.Http.HttpResponseMessage" />.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"><summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary></member><summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+            Gets the objects that are used directly as samples for certain actions.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"><summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary></member><summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"><summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null" /> object.
+            </summary><remarks>
+            Collection includes just <see cref="M:DF.Finance.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)" /> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks></member><summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null" /> object.
+            </summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null" /> object.
+            <remarks>
+            Collection includes just <see cref="M:DF.Finance.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)" /> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+            Collection includes just <see cref="M:DF.Finance.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)" /> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code>SampleObjectFactories.Insert(0, func) to provide an override and
+            <code>SampleObjectFactories.Add(func)</code>SampleObjectFactories.Add(func) to provide a fallback.<member name="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey"><summary>
+            This is used to identify the place where the sample should be applied.
+            </summary></member><summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+            This is used to identify the place where the sample should be applied.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type.
+            </summary><param name="mediaType">The media type.</param></member><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type.
+            </summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type.
+            <param name="mediaType">The media type.</param>The media type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type and CLR type.
+            </summary><param name="mediaType">The media type.</param><param name="type">The CLR type.</param></member><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type and CLR type.
+            </summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type and CLR type.
+            <param name="mediaType">The media type.</param>The media type.<param name="type">The CLR type.</param>The CLR type.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(DF.Finance.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            </summary><param name="sampleDirection">The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            </summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            <param name="sampleDirection">The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.</param>The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<member name="M:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,DF.Finance.Web.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})"><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type, <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            </summary><param name="mediaType">The media type.</param><param name="sampleDirection">The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.</param><param name="controllerName">Name of the controller.</param><param name="actionName">Name of the action.</param><param name="parameterNames">The parameter names.</param></member><summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type, <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            </summary>
+            Creates a new <see cref="T:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey" /> based on media type, <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />, controller name, action name and parameter names.
+            <param name="mediaType">The media type.</param>The media type.<param name="sampleDirection">The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.</param>The <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.<param name="controllerName">Name of the controller.</param>Name of the controller.<param name="actionName">Name of the action.</param>Name of the action.<param name="parameterNames">The parameter names.</param>The parameter names.<member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.ControllerName"><summary>
+            Gets the name of the controller.
+            </summary><value>
+            The name of the controller.
+            </value></member><summary>
+            Gets the name of the controller.
+            </summary>
+            Gets the name of the controller.
+            <value>
+            The name of the controller.
+            </value>
+            The name of the controller.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.ActionName"><summary>
+            Gets the name of the action.
+            </summary><value>
+            The name of the action.
+            </value></member><summary>
+            Gets the name of the action.
+            </summary>
+            Gets the name of the action.
+            <value>
+            The name of the action.
+            </value>
+            The name of the action.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.MediaType"><summary>
+            Gets the media type.
+            </summary><value>
+            The media type.
+            </value></member><summary>
+            Gets the media type.
+            </summary>
+            Gets the media type.
+            <value>
+            The media type.
+            </value>
+            The media type.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.ParameterNames"><summary>
+            Gets the parameter names.
+            </summary></member><summary>
+            Gets the parameter names.
+            </summary>
+            Gets the parameter names.
+            <member name="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection"><summary>
+            Gets the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.
+            </summary></member><summary>
+            Gets the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.
+            </summary>
+            Gets the <see cref="P:DF.Finance.Web.Areas.HelpPage.HelpPageSampleKey.SampleDirection" />.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.ImageSample"><summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary></member><summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.ImageSample.#ctor(System.String)"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ImageSample" /> class.
+            </summary><param name="src">The URL of an image.</param></member><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ImageSample" /> class.
+            </summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.ImageSample" /> class.
+            <param name="src">The URL of an image.</param>The URL of an image.<member name="T:DF.Finance.Web.Areas.HelpPage.InvalidSample"><summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary></member><summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.ObjectGenerator"><summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary></member><summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+            This class will create an object of a given type and populate it with sample data.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"><summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32" />, <see cref="T:System.String" />, <see cref="T:System.Enum" />, <see cref="T:System.DateTime" />, <see cref="T:System.Uri" />, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1" />.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2" />
+            Tuples: <see cref="T:System.Tuple`1" />, <see cref="T:System.Tuple`2" />, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2" /> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            Collections: <see cref="T:System.Collections.Generic.IList`1" />, <see cref="T:System.Collections.Generic.IEnumerable`1" />, <see cref="T:System.Collections.Generic.ICollection`1" />, <see cref="T:System.Collections.IList" />, <see cref="T:System.Collections.IEnumerable" />, <see cref="T:System.Collections.ICollection" /> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1" /> or <see cref="T:System.Collections.IList" />.
+            Queryables: <see cref="T:System.Linq.IQueryable" />, <see cref="T:System.Linq.IQueryable`1" />.
+            </summary><param name="type">The type.</param><returns>An object of the given type.</returns></member><summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32" />, <see cref="T:System.String" />, <see cref="T:System.Enum" />, <see cref="T:System.DateTime" />, <see cref="T:System.Uri" />, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1" />.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2" />
+            Tuples: <see cref="T:System.Tuple`1" />, <see cref="T:System.Tuple`2" />, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2" /> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            Collections: <see cref="T:System.Collections.Generic.IList`1" />, <see cref="T:System.Collections.Generic.IEnumerable`1" />, <see cref="T:System.Collections.Generic.ICollection`1" />, <see cref="T:System.Collections.IList" />, <see cref="T:System.Collections.IEnumerable" />, <see cref="T:System.Collections.ICollection" /> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1" /> or <see cref="T:System.Collections.IList" />.
+            Queryables: <see cref="T:System.Linq.IQueryable" />, <see cref="T:System.Linq.IQueryable`1" />.
+            </summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32" />, <see cref="T:System.String" />, <see cref="T:System.Enum" />, <see cref="T:System.DateTime" />, <see cref="T:System.Uri" />, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1" />.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2" />
+            Tuples: <see cref="T:System.Tuple`1" />, <see cref="T:System.Tuple`2" />, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2" /> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2" />.
+            Collections: <see cref="T:System.Collections.Generic.IList`1" />, <see cref="T:System.Collections.Generic.IEnumerable`1" />, <see cref="T:System.Collections.Generic.ICollection`1" />, <see cref="T:System.Collections.IList" />, <see cref="T:System.Collections.IEnumerable" />, <see cref="T:System.Collections.ICollection" /> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1" /> or <see cref="T:System.Collections.IList" />.
+            Queryables: <see cref="T:System.Linq.IQueryable" />, <see cref="T:System.Linq.IQueryable`1" />.
+            <param name="type">The type.</param>The type.<returns>An object of the given type.</returns>An object of the given type.<member name="T:DF.Finance.Web.Areas.HelpPage.SampleDirection"><summary>
+            Indicates whether the sample is used for request or response
+            </summary></member><summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+            Indicates whether the sample is used for request or response
+            <member name="T:DF.Finance.Web.Areas.HelpPage.TextSample"><summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary></member><summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            <member name="T:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider"><summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> that reads the API documentation from an XML documentation file.
+            </summary></member><summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> that reads the API documentation from an XML documentation file.
+            </summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider" /> that reads the API documentation from an XML documentation file.
+            <member name="M:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)"><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider" /> class.
+            </summary><param name="documentPath">The physical path to XML document.</param></member><summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider" /> class.
+            </summary>
+            Initializes a new instance of the <see cref="T:DF.Finance.Web.Areas.HelpPage.XmlDocumentationProvider" /> class.
+            <param name="documentPath">The physical path to XML document.</param>The physical path to XML document.<member name="M:DF.Finance.Web.WebApiApplication.Application_BeginRequest(System.Object,System.EventArgs)"><summary>
+            2016-04-13
+            jim 
+            1.增加获取用户信息 把用户信息放到Cache中
+            </summary><param name="sender"></param><param name="e"></param></member><summary>
+            2016-04-13
+            jim 
+            1.增加获取用户信息 把用户信息放到Cache中
+            </summary>
+            2016-04-13
+            jim 
+            1.增加获取用户信息 把用户信息放到Cache中
+            <param name="sender"></param><param name="e"></param><member name="M:DF.Finance.Web.WebApiApplication.Application_EndRequest(System.Object,System.EventArgs)"><summary>
+            2016-04-13
+            jim 
+            1.请求结束清理掉Cache
+            </summary><param name="sender"></param><param name="e"></param></member><summary>
+            2016-04-13
+            jim 
+            1.请求结束清理掉Cache
+            </summary>
+            2016-04-13
+            jim 
+            1.请求结束清理掉Cache
+            <param name="sender"></param><param name="e"></param><member name="T:DF.Finance.Web.WebApi.FinancialBusinessController"><summary>
+            金融业代
+            </summary></member><summary>
+            金融业代
+            </summary>
+            金融业代
+            <member name="M:DF.Finance.Web.WebApi.FinancialBusinessController.UserLogin(System.String,System.String)"><summary>
+            会员登录
+            </summary><param name="mobile">手机号</param><param name="pwd">登录密码</param><returns></returns></member><summary>
+            会员登录
+            </summary>
+            会员登录
+            <param name="mobile">手机号</param>手机号<param name="pwd">登录密码</param>登录密码<returns></returns><member name="M:DF.Finance.Web.WebApi.FinancialBusinessController.UserLoginOut"><summary>
+            会员注销
+            </summary><returns></returns></member><summary>
+            会员注销
+            </summary>
+            会员注销
+            <returns></returns><member name="M:DF.Finance.Web.WebApi.TestController.TestAjax"><summary>
+            测试ajax
+            </summary><returns></returns></member><summary>
+            测试ajax
+            </summary>
+            测试ajax
+            <returns></returns></doc>

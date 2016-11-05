@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>注册</title>
+    <link href="../../_R/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../_R/css/sui.css" rel="stylesheet" />
+    <link href="../../_R/css/swiper.min.css" rel="stylesheet" />
+    <link href="../../_R/css/main.css" rel="stylesheet" />
+</head>
+<body class="page page-sales-sigin">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav theme-dark">
+        <a class="icon icon-left pull-left back color-white"></a>
+        <h1 class="title">注册</h1>
+    </header>
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab">
+        <a class="tab-item external " href="index.html">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item external" href="edit.html">
+            <span class="icon icon-edit"></span>
+            <span class="tab-label">录入资料</span>
+        </a>
+        <a class="tab-item external" href="approvalList.html">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">审查核实</span>
+        </a>
+        <a class="tab-item external active" href="#">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+            <span class="badge">2</span>
+        </a>
+    </nav>
+    <!-- 这里是页面内容区 -->
+    <div class="content" id="cnt">
+        <div class="list-block m-t-0">
+            <ul>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                <img src="../../_R/images/icon/phone.jpg" style="width: 1.5rem"
+                                     alt="phone icon">
+                            </div>
+                            <div class="item-input ">
+                                <input type="number" v-model="mobile" placeholder="请输入您的手机号码" class="color-white width-full">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                <img src="../../_R/images/icon/volidCode.jpg" style="width: 1.3rem"
+                                     alt="phone icon">
+                            </div>
+                            <div class="item-input row no-gutter">
+                                <input type="number" v-model="verCode" placeholder="请输入验证码" class="color-white col-50">
+                                <a href="javascript:void(0)" v-on:click="getSmsVerCode" class="button button-fill button-big bg-purple col-50">获取验证码</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                <img src="../../_R/images/icon/lock.jpg" style="width: 1.5rem"
+                                     alt="lock icon">
+                            </div>
+                            <div class="item-input">
+                                <input type="text" v-model="pwd" placeholder="请设置您的登录密码" class="color-white width-full">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+
+                        <div class="item-inner">
+                            <div class="item-title label">
+                                <img src="../../_R/images/icon/lock.jpg" style="width: 1.5rem"
+                                     alt="lock icon">
+                            </div>
+                            <div class="item-input">
+                                <input type="text" v-model="confirmPwd" placeholder="请再次输入您的登录密码" class="color-white width-full">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-inner">
+                            <div class="item-input row no-gutter">
+                                <div class="col-25 border-right">
+                                    <span class="icon icon-caret"></span>
+                                    <select v-model="selectA">
+                                        <!--<option value="0">区域</option>-->
+                                        <option v-for="option in optionsA" v-bind:value="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-25 border-right">
+                                    <span class="icon icon-caret"></span>
+                                    <select class="" v-model="selectB">
+                                        <!--<option value="0">省份</option>-->
+                                        <option v-for="option in optionsB" v-bind:value="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-25 border-right">
+                                    <span class="icon icon-caret"></span>
+                                    <select class=" " v-model="selectC">
+                                        <!--<option value="0">城市</option>-->
+                                        <option v-for="option in optionsC" v-bind:value="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-25">
+                                    <span class="icon icon-caret"></span>
+                                    <select class=" " v-model="selectD">
+                                        <!--<option value="0">分组</option>-->
+                                        <option v-for="option in optionsD" v-bind:value="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <a href="javascript:void(0)" @click="submit" @keyup.enter="submit" class="button button-fill button-big bg-purple">提交</a>
+        </div>
+    </div>
+    <script src="../../_R/js/lib/zepto.min.js"></script>
+    <script src="../../_R/js/lib/sm.min.js"></script>
+    <script src="../../_R/js/lib/vue.min.js"></script>
+    <script src="../../_R/js/lib/storage.js"></script>
+    <script src="../../_R/js/ComData.js"></script>
+    <script>
+        //begin-------------------
+        var vue = new Vue({
+            el: "#cnt",
+            data: {
+                mobile: "",
+                verCode: "",
+                pwd: "",
+                confirmPwd: "",
+                area: "",
+                selectA: "",
+                selectB: "",
+                selectC: "",
+                selectD: "",
+                optionsA: [],
+                optionsB: [],
+                optionsC: [],
+                optionsD: []
+            },
+            methods: {
+
+                //获取手机短信验证码
+                getSmsVerCode: function () {
+                    if ($.trim(vue.mobile) == "") { popMsg("请填写注册的手机号"); return; }
+                    $.post(webapiUrl + "/api/BaseWebApi/SendSmsCode", { mobile: vue.mobile, sourceType: 1 }, function (data) {
+                        if (data.Code != 1) {
+                            $.alert(data.Msg);
+                        }
+                    }, "json");
+                },
+                getNodeList: function (id, callback) {
+                    $.get(webapiUrl + "/api/BaseWebApi/GetNodeList", { id: id }, function (data) {
+                        if (callback != null) callback(data.Data);
+                    }, "json");
+                },
+                isValid: function () {
+                    var isvaid = false;
+                    var model = vue.$data;
+                    if ($.trim(model.mobile) == "") { popMsg("注册手机号不能为空"); return isvaid; }
+                    if ($.trim(model.verCode) == "") { popMsg("手机号验证码不能为空"); return isvaid; }
+                    if ($.trim(model.pwd) == "") { popMsg("登录密码不能为空"); return isvaid; }
+                    if ($.trim(model.confirmPwd) == "") { popMsg("确认登录密码不能为空"); return isvaid; }
+                    if (model.pwd != model.confirmPwd) { popMsg("登录密码和确认登录密码不一致"); return isvaid; }
+                    if (model.selectA == "") { popMsg("请选择区域"); return isvaid; }
+                    return true;
+                },
+                submit: function () {
+                    if (vue.isValid()) {
+                        //区域
+                        vue.$data.area = vue.selectA + "," + vue.selectB + "," + vue.selectC + "," + vue.selectD;
+                        $.post(webapiUrl + "/api/FinancialBusiness/UserRegister", vue.$data, function (data) {
+                            $.hidePreloader();
+                            if (data.Code == 1) {
+                                popMsg('注册成功', 1000, function () {
+                                    window.location = webapiUrl + '/wx/FinancialBusiness/login.html';
+                                })
+                            } else {
+                                $.alert(data.Msg);
+                            }
+                        }, "json");
+                    }
+                }
+            },
+            created: function () {
+                var This = this;
+                $.get(webapiUrl + "/api/BaseWebApi/GetArea", null, function (data) {
+                    var items = data.Data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) This.selectA = items[i].Id;
+                        This.optionsA.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                }, "json");
+            }
+        });
+        vue.$watch('selectA', function (val, oldVal) {
+            if (val > 0) {
+                vue.getNodeList(val, function (data) {
+                    vue.optionsB = [];
+                    var items = data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) vue.selectB = items[i].Id;
+                        vue.optionsB.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                });
+            }
+        })
+        vue.$watch('selectB', function (val, oldVal) {
+            if (val > 0) {
+                vue.getNodeList(val, function (data) {
+                    vue.optionsC = [];
+                    var items = data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) vue.selectC = items[i].Id;
+                        vue.optionsC.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                });
+            }
+        })
+        vue.$watch('selectC', function (val, oldVal) {
+            if (val > 0) {
+                vue.getNodeList(val, function (data) {
+                    vue.optionsD = [];
+                    var items = data;
+                    for (var i = 0; i < items.length; i++) {
+                        if (i == 0) vue.selectD = items[i].Id;
+                        vue.optionsD.push({ text: items[i].Name, value: items[i].Id });
+                    }
+                });
+            }
+        })
+        //end-------------------
+    </script>
+    <script>
+        $.init();
+    </script>
+</body>
+</html>
+

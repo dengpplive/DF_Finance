@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = ViewBag.title;
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@using DF.Finance.Model
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section js
+{
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- 过滤插件 -->
+    <script src="~/_R/js/plugins/bootstrap-table//bootstrap-table-filter-control.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function submits() {
+            var postData = $("#form1").serializeObject(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model)))
+            postData.RoleValueList=[];
+            $("input[type='checkbox'][name!=ckboxAll][class=i-checks]").each(function(){
+                if($(this).is(':checked')) {
+                    var tmp = {};
+                    tmp.NavName = $(this).attr("data-navname");
+                    tmp.ActionType = $(this).val();
+                    tmp.Id=0;
+                    tmp.RoleId=0;
+                    postData.RoleValueList.push(tmp);
+                }
+            });
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEdit", "Role")",
+                data:{model: JSON.stringify( postData),Id:postData.Id},
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1){
+                        MsgBox.Success("保存成功", "","go");
+                    } else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            //初始化表单验证
+            $("#form1").initValidform(submits);
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch", successCallback, false, false);
+            oTableObj.Init();
+
+
+        });
+
+        //操作
+        function fat_ckbox(value, row, index) {
+            return String.format('<input  name="ckboxAll" data-index="{0}" class="i-checks" data-nojson="false" type="checkbox">',index);
+        }
+        var dicAction=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.DicActionType));
+        //处理权限资源
+        function fat_actiontype(value, row, index) {
+            var html = "";
+            if (row.ActionType!="") {
+                var actionArr = row.ActionType.split(",");
+                $.each(actionArr,function(a,v){
+                    $.each(dicAction, function (key, value) {
+                        if (v==key) {
+                            html += String.format('<input class="i-checks"   name="ckAction" type="checkbox" data-nojson="false" value="{0}" data-navname="{2}" >{1}&nbsp;&nbsp;&nbsp;',key,value,row.Name);;
+                        }
+                    });
+                });
+            }
+            return html;
+            // return String.format('<input id="SortId" name="SortId" class="form-control" data-id="{1}" data-value="{0}" style="width:100px;display:inherit;" type="text" value="{0}"    >', row.SortId, row.Id);
+        }
+        //处理标题
+        function fat_title(value, row, index) {
+            var litStyle = "<span style=\"display:inline-block;width:{0}px;\"></span>{1}{2}";
+            var litImg1 = "<span class=\"folder-open\"></span>";
+            var litImg2 = "<span class=\"folder-line\"></span>";
+            var html = String.format('{0}',  row.Title);
+            if (row.ClassLayer == 1) {
+                return litImg1 + html;
+            }
+            return String.format(litStyle, (row.ClassLayer - 1) * 24, litImg1, litImg2) + html ;
+        }
+        function successCallback() {
+            $("div[class=fixed-table-toolbar]").hide();
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            //处理全选
+            $('input[name=ckboxAll]').on('ifChanged',function(event){
+                var obj=  $(this).parent().parent().siblings("td").find("div").find("input[type='checkbox']");
+                if (!$(this).parent().is(".checked")) {
+                    obj.iCheck('check');
+                }else{
+                    obj.iCheck('uncheck');
+                }
+
+            });
+            //如果为超级管理员 禁止所有的多选
+            if ($("#RoleType").val()==1) {
+                $('.i-checks').iCheck('disable');
+            }
+            $("#RoleType").change(function(){
+                if ($(this).val()==1) {
+                    $('.i-checks').iCheck('disable');
+                }else{
+                    $('.i-checks').iCheck('enable');
+                }
+            });
+            var roleValueList=@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.RoleValueList));
+            //开始设置权限选中
+            if (roleValueList!=null&&$("#RoleType").val()!=1) {
+                $.each(roleValueList,function(key,obj){
+                    $(String.format("input[data-navname='{0}'][value='{1}']",obj.NavName,obj.ActionType)).iCheck('check');
+                });
+            }
+
+
+        }
+    </script>
+
+}
+<form class="form-horizontal m-t" id="form1">
+    <div class="panel-body" style="padding:0px;margin:5px;">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">@(ViewBag.title)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+
+                        @*<div class="form-group">
+                                <label class="col-sm-2 control-label">是否系统默认：</label>
+                                <div class="col-sm-2  radio i-checks">
+                                    <label>
+                                        <input type="checkbox" value="@Model.IsSys" name="IsSys" @(Model.IsSys == 0 || Model.Id == 0 ? "checked=checked" : "")> <i></i>默认
+                                    </label>
+                                </div>
+                            </div>*@
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label">角色类型：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="RoleType" id="RoleType" data-selval="@Model.RoleType">
+                                    <option value="1">超级管理员</option>
+                                    <option value="2">系统管理员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">角色名称：</label>
+                            <div class="col-sm-3">
+                                <input id="RoleName" name="RoleName" class="form-control" type="text" value="@Model.RoleName" datatype="*1-50">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">管理权限：</label>
+                            <div class="col-sm-9 ">
+
+
+                                <table id="tb_roles" data-filter-control="false">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="Title" data-halign="center" data-align="left" data-formatter="fat_title">导航名称</th>
+                                            <th data-field="ActionType" data-halign="center" data-align="left" data-formatter="fat_actiontype">权限分配</th>
+                                            <th data-formatter="fat_ckbox" data-halign="center" data-align="center">全选</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+        </div>
+    </div>
+</form>
+<form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetAjaxList", "SysNavigation")" data-query="#btn_query" data-table="#tb_roles"></form>

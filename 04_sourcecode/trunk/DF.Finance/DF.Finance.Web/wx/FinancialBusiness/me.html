@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../../_R/css/font-awesome.css">
+    <link rel="stylesheet" href="../../_R/css/sui.css">
+    <link rel="stylesheet" href="../../_R/css/main.css">
+</head>
+<body class="page page-sales-me">
+    <!-- 标题栏 -->
+    <header class="bar bar-nav theme-dark">
+        <a class="icon icon-left pull-left back color-white"></a>
+        <h1 class="title">个人中心</h1>
+    </header>
+    <!-- 工具栏 -->
+    <nav class="bar bar-tab">
+        <a class="tab-item external active" href="index.html">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item external" href="edit.html">
+            <span class="icon icon-edit"></span>
+            <span class="tab-label">录入资料</span>
+        </a>
+        <a class="tab-item external" href="approvalList.html">
+            <span class="icon icon-search"></span>
+            <span class="tab-label">审查核实</span>
+        </a>
+        <a class="tab-item external" href="me.html">
+            <span class="icon icon-me"></span>
+            <span class="tab-label">个人中心</span>
+            <span class="badge">2</span>
+        </a>
+    </nav>
+    <!-- 这里是页面内容区 -->
+    <div class="content" id="cnt">
+        <div class="p-t-1 " style="background: url('../../_R/images/bg/me_bg_purple.jpg');background-size: 100% 100%">
+            <img src="../../_R/images/icon/me.png" class="center-block round bg-white " style="width: 4rem;height: 4rem">
+            <div class="text-center color-white mt-0-5">
+                {{username}}
+            </div>
+            <div class="text-center bold color-purple">
+                {{address}}
+            </div>
+        </div>
+        <div class="list-block m-t-1">
+            <ul>
+                <li class="item-content item-link" data-url="messageList.html">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title"><img src="../../_R/images/icon/horn_on.jpg"> 提示消息</div>
+                        <div class="item-after"><span class="badge-lg">{{remindcount}}</span></div>
+                    </div>
+                </li>
+                <li class="item-content item-link" data-url="accomplish.html">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title"><img src="../../_R/images/icon/buliding_on.jpg"> 我的业绩</div>
+                        <div class="item-after">详细</div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="m-t-1">
+                <li class="item-content item-link">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title"><img src="../../_R/images/icon/buliding_on.jpg"> 我的分组</div>
+                        <div class="item-after">{{address}}</div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="m-t-1">
+                <li class="item-content item-link" data-url="changeMobile.html">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title"><img src="../../_R/images/icon/phone_on.png"> 已绑定手机</div>
+                        <div class="item-after">{{mobile}}</div>
+                    </div>
+                </li>
+                <li class="item-content item-link" data-url="changePwd.html">
+                    <div class="item-media"><i class="icon icon-f7"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title"><img src="../../_R/images/icon/lock_on.jpg"> 修改密码</div>
+                        <div class="item-after"></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="../../_R/js/lib/zepto.js"></script>
+    <script src="../../_R/js/lib/sm.js"></script>
+    <script src="../../_R/js/lib/vue.min.js"></script>
+    <script src="../../_R/js/ComData.js"></script>
+    <script>
+        //begin-------------------
+        var vue = new Vue({
+            el: "#cnt",
+            data: {
+                username: "",
+                address: "",
+                remindcount: 0,
+                mobile: ""
+            },
+            methods: {
+                initData: function () {
+                    $("li[data-url]").click(function () {
+                        var url = $(this).attr("data-url");
+                        $.router.load(url, true);
+                    });
+                    this.getData();
+                },
+                getData: function () {
+                    $.get(webapiUrl + "/api/FinancialBusiness/PersonCenter", null, function (data) {
+                        if (data.Code == 1) {
+                            var model = data.Data;
+                            //console.log(model);
+                            this.username = model.UserName;
+                            this.address = model.Address;
+                            this.remindcount = model.RemindCount;
+                            this.mobile = model.Mobile;
+                        } else {
+                            $.alert(data.Msg);
+                        }
+                    }, "json");
+                }
+            },
+            created: function () {
+                this.initData();
+            }
+        });
+        //end-------------------
+    </script>
+    <script>
+        (function ($) {
+            CheckLogin();
+        })(Zepto);
+        //初始化sui组件
+        $.init();
+    </script>
+</body>
+</html>

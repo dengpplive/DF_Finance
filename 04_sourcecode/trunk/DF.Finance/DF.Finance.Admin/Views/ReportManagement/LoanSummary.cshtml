@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "LoanSummary";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- excel导出插件 -->
+    <script src="~/_R/js/plugins/export/bootstrap-table-export.min.js"></script>
+    <script src="~/_R/js/plugins/export/tableExport.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init({              
+                showExport: true,//显示导出按钮
+                exportDataType: "selected",//选择的列导出
+                exportTypes: ['excel']//导出类型
+            });
+            //日期框
+            //laydate({
+            //    elem: '#last_starttime',
+            //    event: 'focus'
+            //});
+            //laydate({
+            //    elem: '#last_endtime',
+            //    event: 'focus'
+            //});
+        });
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetLoanSummaryList", "ReportManagement")" data-query="#btn_query" data-table="#tb_ReportManagement">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="txt_search_companyname">实际交易方名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="companyname" id="txt_search_companyname">
+                    </div>
+                    @*<label class="control-label col-sm-1">放款时间</label>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <input name="last_starttime" id="last_starttime" class="laydate-icon form-control layer-date">
+                                </div>
+                                <div class="col-sm-5">
+                                    <input name="last_endtime" id="last_endtime" class="laydate-icon form-control layer-date">
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>*@
+                    <div class="control-label col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table id="tb_ReportManagement" data-detail-view="false">
+        <thead>
+            <tr>
+                <th data-field="CompanyName" data-halign="center" data-align="center">实际交易方名称</th>
+                <th data-field="IssueOrderCount" data-halign="center" data-align="center">出单数</th>
+                <th data-field="TotalLoanAmount" data-halign="center" data-align="center">贷款总金额</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+

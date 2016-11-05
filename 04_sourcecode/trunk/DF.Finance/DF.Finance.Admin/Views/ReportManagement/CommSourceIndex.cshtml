@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "公共资源库";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- excel导出插件 -->
+    <script src="~/_R/js/plugins/export/bootstrap-table-export.min.js"></script>
+    <script src="~/_R/js/plugins/export/tableExport.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init({                            
+                showExport: true,//显示导出按钮
+                exportDataType: "selected",//选择的列导出
+                exportTypes: ['excel']//导出类型
+            });
+        });
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetCommSourceList", "ReportManagement")" data-query="#btn_query" data-table="#tb_ReportManagement">
+                @*<div class="form-group">
+                        <label class="control-label col-sm-1" for="txt_search_adduser">公司名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="adduser" id="txt_search_adduser">
+                        </div>
+                        <label class="control-label col-sm-1" for="txt_search_adduser">公司电话</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="adduser" id="txt_search_adduser">
+                        </div>
+                        <label class="control-label col-sm-1" for="txt_search_adduser">联系人</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="adduser" id="txt_search_adduser">
+                        </div>
+                        <label class="control-label col-sm-1" ></label>
+                        <div class="col-sm-2">
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    @*<label class="control-label col-sm-1" for="txt_search_adduser">公司地址</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="adduser" id="txt_search_adduser">
+                        </div>*@
+                    <label class="control-label col-sm-2">最后放款日期间隔月数</label>
+                    <div class="col-sm-2">
+                        <select class="form-control m-b" name="month" id="selmonth">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected="selected">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table id="tb_ReportManagement" data-detail-view="false">
+        <thead>
+            <tr>
+                <th data-field="CompanyName" data-halign="center" data-align="center">公司名称</th>
+                <th data-field="Address" data-halign="center" data-align="center">公司地址</th>
+                <th data-field="CompanyPhone" data-halign="center" data-align="center">公司联系电话</th>
+                <th data-field="Contacts" data-halign="center" data-align="center">联系人</th>
+                <th data-field="LastLoanTime" data-halign="center" data-align="center">最后放款日期</th>
+            </tr>
+        </thead>
+    </table>
+</div>

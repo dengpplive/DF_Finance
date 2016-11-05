@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = ViewBag.title;
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "SysManagerList";
+}
+@using DF.Finance.Model
+@section css
+{
+    <link href="~/_R/css/plugins/iCheck/custom.css" rel="stylesheet">
+}
+@section js
+{       
+    <script src="~/_R/js/plugins/iCheck/icheck.min.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function submits() {
+            //console.log("ok");
+            var postData =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))           
+            postData = $("#form1").serializeObject(postData);
+            //console.log(postData);
+            //return false;
+            DFCommon.ajax({
+                type: 'POST',
+                url: "@Url.Action("AddOrEdit", "SysAdmin")",
+                data: postData,
+                dataType: "json",
+                success: function (data, res) {
+                    if (res.Code == 1)
+                        MsgBox.Success("保存成功", "");
+                    else {
+                        MsgBox.Error("错误", res);
+                    }
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            //初始化表单验证
+            $("#form1").initValidform(submits);
+        });
+    </script>
+}
+<form class="form-horizontal m-t" id="form1">
+    <div class="panel-body" style="padding:0px;margin:5px;">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab-1" aria-expanded="true">@(ViewBag.title)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+
+                        <div class="form-group ">
+                            <label class="col-sm-2 control-label">角色：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="RoleId" id="RoleId" datatype="*" nullmsg="请选择角色" data-selval="@Model.RoleId">
+                                    <option value="">--请选择角色--</option>
+                                    @{
+                                        foreach (SysManagerRole item in ViewBag.roleList)
+                                        {
+                                            <option value="@item.Id">@item.RoleName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        @*<div class="form-group ">
+                            <label class="col-sm-2 control-label">管理员类型：</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="RoleType" id="RoleType" datatype="*" nullmsg="请选择管理员类型" data-selval="@Model.RoleType">
+                                    <option value="">--管理员类型--</option>
+                                    @{
+                                        foreach (SysDictionary item in ViewBag.dicModel)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }    
+                                </select>
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">状态：</label>
+                            <div class="col-sm-2  radio i-checks">
+                                <label>
+                                    <input type="radio" value="1" name="IsLock" @(Model.IsLock == 1 || Model.Id == 0 ? "checked=checked" : "")> <i></i>锁定
+                                    <input type="radio" value="0" name="IsLock" @(Model.IsLock == 0 ? "checked=checked" : "")> <i></i>正常
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名：</label>
+                            <div class="col-sm-3">
+                                <input id="UserName" name="UserName" class="form-control" type="text" ajaxurl="@Url.Action("Exist", "SysAdmin", new { Id=Model.Id})" value="@Model.UserName" datatype="*1-50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">登录密码：</label>
+                            <div class="col-sm-3">
+                                <input id="PassWord" name="PassWord" class="form-control" type="password" value="@Model.PassWord" datatype="*1-50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话：</label>
+                            <div class="col-sm-3">
+                                <input id="TelePhone" name="TelePhone" class="form-control" type="text" value="@Model.TelePhone" datatype="m">
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <label class="col-sm-2 control-label">姓名：</label>
+                                <div class="col-sm-3">
+                                    <input id="password" name="password" class="form-control" type="password">
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">昵称：</label>
+                            <div class="col-sm-3">
+                                <input id="RealName" name="RealName" class="form-control" type="text" datatype="*1-50" value="@Model.RealName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱：</label>
+                            <div class="col-sm-3">
+                                <input id="Email" name="Email" class="form-control" type="email" value="@Model.Email" datatype="e">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <div class="btn-wrap" style="position: fixed;">
+            <button class="btn btn-primary" type="submit" id="btnSave">&nbsp;&nbsp;&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回上一级</button>
+        </div>
+    </div>
+</form>

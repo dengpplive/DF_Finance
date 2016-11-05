@@ -1,0 +1,2 @@
+net stop DF_Task_Service
+pause

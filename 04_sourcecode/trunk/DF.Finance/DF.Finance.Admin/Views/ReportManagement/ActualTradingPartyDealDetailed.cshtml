@@ -1,0 +1,280 @@
+﻿@{
+    ViewBag.Title = "ActualTradingPartyDealDetailed";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="~/_R/js/jQuery.dateformat.js"></script>
+    <!-- excel导出插件 -->
+    <script src="~/_R/js/plugins/export/bootstrap-table-export.min.js"></script>
+    <script src="~/_R/js/plugins/export/tableExport.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init({
+                expandRow: expandRow,//展开
+                showExport: true,//显示导出按钮
+                exportDataType: "selected",//选择的列导出
+                exportTypes: ['excel']//导出类型
+            });
+            //日期框
+            laydate({
+                elem: '#loan_starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#loan_endtime',
+                event: 'focus'
+            });
+        });
+        //展开行事件
+        function expandRow(index, row, $detail) {
+            if (row.OrderId > 0) {
+                var cur_table = $detail.html("<table></table>").find('table');
+                $(cur_table).bootstrapTable({
+                    url: '@Url.Action("GetOrder", "ReportManagement")' + "?Id=" + row.OrderId,
+                    method: 'get',
+                    striped: false,
+                    cache: false,
+                    pagination: false,
+                    sortable: false,
+                    detailView: false,//父子表
+                    sidePagination: "server",
+                    pageSize: 5,
+                    pageList: [10, 25, 50, 100],
+                    columns: [{
+                        field: 'LCName',
+                        title: '放款金融公司',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'OldCar',
+                        title: '新车/二手车',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'AcquirerTime',
+                        title: '收单日期',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'ApplicantName',
+                        title: '申请人姓名',
+                        align: "center",
+                        halign: "center"
+                    }, {
+                        field: 'ApplicantPhone',
+                        title: '申请人电话',
+                        align: "center",
+                        halign: "center"
+                    }
+                    , {
+                        field: 'ApplicantIDCard',
+                        title: '申请人身份证号码',
+                        align: "center",
+                        halign: "center"
+                    },
+                     {
+                         field: 'GuarantorName',
+                         title: '担保人姓名',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'GuarantorPhone',
+                         title: '担保人电话',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'CoApplicantName',
+                         title: '共申人姓名',
+                         align: "center",
+                         halign: "center"
+                     }
+                     ,
+                     {
+                         field: 'CoApplicantPhone',
+                         title: '共申人电话',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'LoanProducts',
+                         title: '贷款产品',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'LoanInterest',
+                         title: '贷款利息类型',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'DealersName',
+                         title: '实际交易方',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'LoanLink',
+                         title: '放款环节',
+                         align: "center",
+                         halign: "center"
+                     }
+                      ,
+                     {
+                         field: 'SalesName',
+                         title: '销售顾问姓名',
+                         align: "center",
+                         halign: "center"
+                     }
+                      ,
+                     {
+                         field: 'SalesPhone',
+                         title: '销售顾问电话',
+                         align: "center",
+                         halign: "center"
+                     }
+                      ,
+                     {
+                         field: 'CarBrand',
+                         title: '汽车品牌',
+                         align: "center",
+                         halign: "center"
+                     }
+                      ,
+                     {
+                         field: 'Models',
+                         title: '车型',
+                         align: "center",
+                         halign: "center"
+                     },
+                     {
+                         field: 'CarWorth',
+                         title: '车身价',
+                         align: "center",
+                         halign: "center"
+                     }
+                     ,
+                    {
+                        field: 'LoanAmount',
+                        title: '贷款金额',
+                        align: "center",
+                        halign: "center"
+                    },
+                    {
+                        field: 'LoanTerm',
+                        title: '贷款期限',
+                        align: "center",
+                        halign: "center",
+                        //visible:false,
+                        //,formatter: function (value, row, index) {
+                        //    return $.formatDate("yyyy-MM-dd", value);
+                        //}
+                    }]
+                });
+            }
+        }
+        function fat_fDate(value, row, index) {
+            return $.formatDate("yyyy-MM-dd", value);
+        }
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetActualTradingPartyDetailList", "ReportManagement")" data-query="#btn_query" data-table="#tb_ReportManagement">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="txt_search_agantname">金融业代姓名</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="agantname" id="txt_search_agantname">
+                    </div>
+
+                    <label class="control-label col-sm-1">放款日期</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="loan_starttime" id="loan_starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="loan_endtime" id="loan_endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <label class="col-sm-1"></label>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="txt_search_companyname">实际交易方名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="companyname" id="txt_search_companyname">
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_dkusername">贷款用户名</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="dkusername" id="txt_search_dkusername">
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                    <div class="col-sm-2">
+
+                    </div>
+                    <label class="control-label col-sm-1" for="txt_search_NumberOfAwards"></label>
+                    <div class="col-sm-2 ">
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <table id="tb_ReportManagement" data-detail-view="true">
+        <thead>
+            <tr>
+                <th data-field="LoanTime" data-formatter="fat_fDate" data-halign="center" data-align="center" data-switchable="false" data-visible="true">放款日期</th>
+                <th data-field="AgentUserName" data-halign="center" data-align="center" data-switchable="false" data-visible="true">金融业代姓名</th>
+                <th data-field="DealersName" data-halign="center" data-align="center" data-switchable="false" data-visible="true">实际交易方名称</th>
+                <th data-field="ApplicantName" data-halign="center" data-align="center"  data-visible="true">贷款用户</th>
+                <th data-field="ApplicantPhone" data-halign="center" data-align="center"  data-visible="true">贷款用户电话</th>
+                <th data-field="ApplicantIDCard" data-halign="center" data-align="center"  data-visible="true">贷款用户身份证</th>
+                <th data-field="ApprovalAmount" data-halign="center" data-align="center" data-switchable="false" data-visible="true">贷款审批金额</th>
+                <th data-field="LCName" data-halign="center" data-align="center" data-visible="false">放款金融公司</th>
+                <th data-field="OldCar" data-halign="center" data-align="center" data-visible="false">新车/二手车</th>
+                <th data-field="AcquirerTime" data-halign="center" data-align="center" data-visible="false">收单日期</th>
+                <th data-field="GuarantorName" data-halign="center" data-align="center" data-visible="false">担保人姓名</th>
+                <th data-field="GuarantorPhone" data-halign="center" data-align="center" data-visible="false">担保人电话</th>
+                <th data-field="CoApplicantName" data-halign="center" data-align="center" data-visible="false">共申人姓名</th>
+                <th data-field="CoApplicantPhone" data-halign="center" data-align="center" data-visible="false">共申人电话</th>
+                <th data-field="LoanProducts" data-halign="center" data-align="center" data-visible="false">贷款产品</th>
+                <th data-field="LoanInterest" data-halign="center" data-align="center" data-visible="false">贷款利息类型</th>
+                <th data-field="LoanLink" data-halign="center" data-align="center" data-visible="false">放款环节</th>
+                <th data-field="SalesName" data-halign="center" data-align="center" data-visible="false">销售顾问姓名</th>
+                <th data-field="SalesPhone" data-halign="center" data-align="center" data-visible="false">销售顾问电话</th>
+                <th data-field="CarBrand" data-halign="center" data-align="center" data-visible="false">汽车品牌</th>
+                <th data-field="Models" data-halign="center" data-align="center" data-visible="false">车型</th>
+                <th data-field="CarWorth" data-halign="center" data-align="center" data-visible="false">车身价</th>
+                <th data-field="LoanAmount" data-halign="center" data-align="center" data-visible="false">贷款金额</th>
+                <th data-field="LoanTerm" data-halign="center" data-align="center" data-visible="false">贷款期限</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+

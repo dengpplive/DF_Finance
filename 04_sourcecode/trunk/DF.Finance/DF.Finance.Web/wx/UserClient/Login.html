@@ -1,0 +1,138 @@
+﻿<style>
+    .content {
+        background: url(/_R/images/bg/bg_login.jpg) no-repeat;
+        background-size: cover;
+    }
+
+    .list-block ul {
+        background: 0 0;
+    }
+
+    input.color-white::-webkit-input-placeholder {
+        color: #fff;
+    }
+
+    .list-block .item-title.label {
+        width: 20%;
+    }
+</style>
+<div class="content ">
+    <div class="content-padded" v-if="prize!=null">
+        <h3 style="color: #fff100">参与抽奖请先登录</h3>
+        <p class="color-white">
+            {{prize.Remark}}
+        </p>
+    </div>
+
+    <div class="list-block">
+        <ul>
+            <!-- Text inputs -->
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label"><img src="/_R/images/icon/phone.png" width="20"> </div>
+                        <div class="item-input">
+                            <input style="color: white" type="text" v-model="mobile" placeholder="请输入您的手机号码" class="color-white width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label"><img src="/_r/images/icon/identity_card.png" width="30"> </div>
+                        <div class="item-input">
+                            <input type="password" v-model="pwd" maxlength="6" minlength="6" placeholder="请输入您的身份证后六位" class="color-white width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content-block">
+        <p><a href="#" id="login" v-tap="submit" style="background-color: #898BFF" class="button button-fill button-big">登录 </a></p>
+        <!--<label class="label-checkbox">
+            <i class="fa" v-bind:class="css: {'fa-square-o':autoLogin,'fa-check-square-o':autoLogin }" aria-hidden="true"></i>
+            <input style="font-size: large" v-model="autoLogin" type="checkbox">
+            自动登录
+        </label>-->
+    </div>
+</div>
+<script>
+    //begin-------------------
+    $(function () {
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                mobile: "",
+                pwd: "",              
+                remember: false,
+                autoLogin: false,
+                prize: null//抽奖的备注信息
+            },
+            methods: {
+                init: function () {
+                    //$("#login").on("tap", this.submit);
+                    //自动登录
+                    var autoLogin = storage.getItem("autoLogin");
+                    if (autoLogin != null && autoLogin != "") {
+                        var data = JSON.parse(autoLogin);
+                        if (data.autoLogin) {
+                            vue.$data = data;
+                            this.submit();
+                        }
+                    }
+                    this.getPriceData();
+                },
+                getPriceData: function () {
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/UserClient/GetPrizeInfo",
+                        success: function (data) {
+                            vue.$data.prize = data;
+                        }
+                    });
+                },
+                submit: function () {
+                    if ($.trim(this.mobile) == "") {
+                        if (!this.autoLogin) $.alert("请输入手机号码");
+                        return;
+                    }
+                    var reg = /^1(3|4|5|7|8)\d{9}$/ig;
+                    if (!reg.test($.trim(this.mobile))) { if (!this.autoLogin) $.alert("请填写正确的手机号"); return; }
+                    if ($.trim(this.pwd) == "") {
+                        if (!this.autoLogin) $.alert("请填写密码");
+                        return;
+                    }
+                 
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/BaseWebApi/UserLogin",
+                        isShowLoading: true,
+                        data: {mobile:vue.mobile,pwd:vue.pwd,groupId:3},
+                        success: function (data) {
+                            storage.setItem("userId", data.Id);
+                            if (this.autoLogin) storage.setItem("autoLogin", JSON.stringify(vue.$data));
+                            else storage.setItem("autoLogin", "");
+                            DFCommon.Vue = new Vue({
+                                el: "#body",
+                                data: {
+                                    userModel: data
+                                }
+                            });
+                            $.router.load("#UserClientIndex",true);
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+    });   
+    //end-------------------
+</script>
+

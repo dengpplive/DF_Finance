@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "Remind";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var oTableObj;
+        $(function () {
+            //1.初始化Table
+            oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init();
+
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "Remind")");
+            });
+
+
+            //日期框
+            laydate({
+                elem: '#starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#endtime',
+                event: 'focus'
+            });
+        });
+
+        function fat_FilterReminder(value, row, index) {
+            if (row.SourceType == 1) {
+                return String.format('<a data-href="/Orders/Edit?Id={0}" class="J_menuItem"  data-name="订单管理">{1}</a>', row.ViewId, value);
+            }
+            return String.format('<a data-href="/CustomerManagement/Edit?Id={0}" class="J_menuItem"  data-name="实际交易方管理">{1}</a>', row.ViewId, value);;
+        }
+        function fat_oper(value, row, index) {
+            var viewUrl = "/CustomerManagement/Edit?Id=" + row.ViewId;
+            var viewTitle = "实际交易方管理";
+            if (row.SourceType==1) {
+                viewUrl = "/Orders/Edit?Id=" + row.ViewId;
+                var viewTitle = "订单管理";
+            }
+            var html = String.format('<a data-href="{0}" class="J_menuItem "  data-name="{1}">查看数据</a>&nbsp;&nbsp;&nbsp;', viewUrl, viewTitle);
+            if (row.SourceType == 2) {
+                return html;
+            }
+             html += String.format('<a href="#" class=" btn btn-xs btn-primary" onclick="oper({0},{1},{2})">立即处理</a>', row.ViewId, row.SourceType, row.RemindType);
+            return html;
+        }
+        function oper(ViewId, SourceType, RemindType) {
+            var s = ViewId + "," + RemindType;
+            if (SourceType == 1) {
+                if (RemindType == 3) {
+                    var content = '<div class="form-group col-sm-12">' +
+                          '<label class="control-label col-sm-4" for="txt_Node2sptgrq">保险到期日期</label>' +
+                          '<div class="col-sm-7"><input data-val="' + s + '" type="text" value="" class="laydate-icon form-control layer-date" id="txtInsuranceTime" name="Node2sptgrq" onclick="laydate()"></div>' +
+                          '</div>' +
+                        '<div class="form-group col-sm-12">' +
+                             '<label class="control-label col-sm-4" for="txt_Node1remark">备注原因</label>' +
+                             '<div class="col-sm-7">' +
+                             '<textarea class="form-control" id="txtRemark" rows="2" cols="20" class="input"></textarea>' +
+                             '</div></div>';
+                    //弹出对话框
+                    Dialog.Content('更新保险到期日期', content, '保存', Insurance, 450, 100, null);
+                } else {
+                    var content = '<div class="form-group col-sm-12">' +
+                             '<label class="control-label col-sm-4" for="txt_Node1remark">备注原因</label>' +
+                             '<div class="col-sm-7">' +
+                             '<textarea class="form-control" data-val="' + s + '" id="txtRemark" rows="2" cols="20" class="input"></textarea>' +
+                             '</div></div>';
+                    //弹出对话框
+                    Dialog.Content('备注', content, '保存', OrderRemark, 450, 100, null);
+                }
+            }
+        }
+        //保险设置操作
+        function Insurance() {
+            if ($("#txtInsuranceTime").val() == "") {
+                MsgBox.Error('请选择保险日期');
+                return;
+            }
+            var param = $("#txtInsuranceTime").attr("data-val").split(",");
+            Remark = $("#txtRemark").val();
+            PostUrl = '/Remind/UpdateInsuranceTime';
+            Postdata = { OrderId: param[0], Remark: Remark, MaturityTime: $("#txtInsuranceTime").val(), RemindType: param[1] };
+            Post(PostUrl, Postdata, "备注成功");
+
+        }
+        //设置订单备注
+        function OrderRemark() {
+            if ($("#txtRemark").val() == "") {
+                MsgBox.Error('请备注原因');
+                return;
+            }
+            var param = $("#txtRemark").attr("data-val").split(",");
+            Remark = $("#txtRemark").val();
+            PostUrl = '/Remind/UpdateOrderRemark';
+            Postdata = { OrderId: param[0], Remark: Remark, RemindType: param[1] };
+            Post(PostUrl, Postdata, "备注成功");
+        }
+
+        //修改数据
+        function Post(Url, Postdata, msg) {
+            DFCommon.ajax({
+                type: 'POST',
+                url: Url,
+                dataType: "json",
+                data: Postdata,
+                success: function (data, res) {
+                    if (res.Code == 1) {
+                        MsgBox.Success(msg);
+                        DFCommon.ajax({
+                            type: 'POST',
+                            url: '/Remind/RemindDelete',
+                            dataType: "json",
+                            data: { ViewId: Postdata.OrderId, RemindType: Postdata.RemindType },
+                            success: function (data, res) {
+                                oTableObj.refresh();
+                            }
+                        });
+                    }
+
+                }
+            });
+        }
+
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetAjaxList", "Remind")" data-query="#btn_query" data-table="#tb_roles">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">提醒类型：</label>
+                    <div class="col-sm-3">
+                        <select class="form-control m-b" name="RemindType" data-selval="@Request.QueryString["RemindType"]">
+                            <option value="">--所有类型--</option>
+                            <option value="1">审批通过未放款提醒</option>
+                            <option value="21">放款后未收回登记证</option>
+                            <option value="22">放款后未邮寄登记证</option>
+                            <option value="3">保险快到期提醒</option>
+                            <option value="4">放款为0的实际交易方</option>
+                        </select>
+                    </div>
+
+                    <label class="control-label col-sm-1">添加日期</label>
+                    <div class="col-sm-5">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="starttime" id="starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="endtime" id="endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+    <table id="tb_roles" class="table table-hover editable">
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="RemindTypeName" data-halign="center" data-align="center">提醒类型</th>
+                <th data-field="AddTime" data-halign="center" data-align="center">添加时间</th>
+                <th data-field="Reminder" data-halign="left" data-align="left" data-formatter="fat_FilterReminder">添加内容</th>
+                <th data-formatter="fat_oper" data-events="actionEvents" data-halign="left" data-align="left">操作</th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+

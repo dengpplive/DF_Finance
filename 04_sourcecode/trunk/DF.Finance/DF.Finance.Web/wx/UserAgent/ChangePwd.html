@@ -1,0 +1,116 @@
+﻿<div class="content">
+    <!-- 这里是页面内容区 -->
+    <img src="/_R/images/shield.png" class="img-size-4 center-block m-t-2">
+    <p class="text-center">修改登录密码</p>
+
+    <div class="list-block">
+        <ul>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="password" v-model="oldPwd" placeholder="请输入原登录密码"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="password" v-model="newPwd" placeholder="请输入新登录密码"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                        <div class="item-title label">
+                            <img src="/_R/images/icon/lock.jpg"
+                                 alt="lock icon">
+                        </div>
+                        <div class="item-input">
+                            <input type="password" v-model="confirmPwd" placeholder="请再次输入新登录密码"
+                                   class=" width-full">
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <div class="content-block">
+        <p>
+            <a href="javascript:void(0)" id="btnbubmit" v-tap="submit" class="button button-fill button-big bg-purple">确定</a>
+        </p>
+    </div>
+</div>
+<script>
+    $(function () {
+        //begin-------------------
+        var vue = new Vue({
+            el: "#" + template.PageId,
+            data: {
+                oldPwd: "",
+                newPwd: "",
+                confirmPwd: ""
+            },
+            methods: {
+                init: function () {
+                    var This = this;
+                    //$("#btnbubmit").on("tap", This.submit);
+                },
+                submit: function () {
+                    var This = this;
+                    if ($.trim(This.oldPwd) == "") {
+                        $.alert("请输入原密码");
+                        return;
+                    }
+                    if ($.trim(This.newPwd) == "") {
+                        $.alert("请输入新密码");
+                        return;
+                    }
+                    if ($.trim(This.newPwd) != $.trim(This.confirmPwd)) {
+                        $.alert("两次输入密码不一致");
+                        return;
+                    }
+                    DFCommon.ajax({
+                        type: 'get',
+                        url: "/api/BaseWebApi/UpdatePwd",
+                        isShowLoading: true,
+                        data: vue.$data,
+                        success: function (data) {
+                            //console.log(data);
+                            if (data) {
+                                $.toast("修改登录密码成功");
+                            }
+                            else {
+                                $.toast("修改登录密码失败");
+                            }
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.init();
+            }
+        });
+    });
+    //$(function () {
+    //    CheckLogin();
+    //});
+</script>

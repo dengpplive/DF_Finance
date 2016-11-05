@@ -1,0 +1,90 @@
+@using System.Web.Http
+@using System.Web.Http.Controllers
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using DF.Finance.Web.Areas.HelpPage.Models
+@model Collection<ApiDescription>
+
+@{
+    ViewBag.Title = "东富金融管理系统API";
+
+    // Group APIs by controller
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+}
+
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+<header class="help-page">
+    <div class="content-wrapper">
+        <div class="float-left">
+            <h1>@ViewBag.Title</h1>
+        </div>
+    </div>
+</header>
+<div id="body" class="help-page">
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>说明</h2>
+            <style>
+                #pSummary b{
+                    font-size:18px;
+                }
+            </style>
+            <p id="pSummary">
+                所有接口返回的数据格式统一：
+                {"<b>Success</b>":true,"<b>Message</b>":"操作成功！","<b>Count</b>":0,"<b>Object</b>":[],"<b>Code</b>":0,"<b>Contents</b>":null}
+            </p>
+            <style>
+               
+            </style>
+            <table class="help-page-table">
+                <thead>
+                    <tr>
+                        <th>属性</th>
+                        <th>类型</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Success</th>
+                        <td>bool</td>
+                        <td>true:请求成功，false:请求失败</td>
+                    </tr>
+                    <tr>
+                        <th>Message</th>
+                        <td>string</td>
+                        <td>Success为false时，返回错误信息</td>
+                    </tr>
+                    <tr>
+                        <th>Count</th>
+                        <td>int</td>
+                        <td>分页查询时，返回所有条数</td>
+                    </tr>
+                    <tr>
+                        <th>Object</th>
+                        <td>object</td>
+                        <td>
+                            获取数据列表时，返回Json数组<br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Code</th>
+                        <td>int</td>
+                        <td>响应码（一般用不到，特定场景用到时自有说明）</td>
+                    </tr>
+                    <tr>
+                        <th>Contents</th>
+                        <td>object</td>
+                        <td>其它信息（一般用不到，特定场景用到时自有说明）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        @foreach (var group in apiGroups)
+        {
+            @Html.DisplayFor(m => group, "ApiGroup")
+        }
+    </section>
+</div>

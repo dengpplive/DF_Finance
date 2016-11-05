@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "UserLoginLog";
+}
+@section css{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5>会员登录日志列表</h5>
+    </div>
+    <div lass="panel-body">
+        <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("Search", "UserLoginLog")" data-query="#btn_query" data-table="#tb_UserLoginLogs">
+            <div class="ibox-content">
+                <div class="row">
+                    <label class="col-md-1 text-right">用户名：</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="txtUserName" name="UserName" />
+                    </div>
+                    <label class="col-md-1 text-right">查询日期：</label>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="txtS_Time" name="S_Time" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-md-6">
+                                <input id="txtE_Time" name="E_Time" class="laydate-icon form-control layer-date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-1">
+                            <button class="btn btn-primary" type="button" id="btn_query">查询</button>
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-lg" style="margin-top: 10px;">
+                    <div class="col-md-12">
+                        <div class="example-wrap">
+                            <div class="example">
+                                <table id="tb_UserLoginLogs" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="User.UserName" data-halign="center" data-align="center">用户名</th>
+                                            <th data-field="UserId" data-halign="center" data-align="center">用户Id</th>
+                                            <th data-field="LoginIP" data-halign="center" data-align="center">IP</th>
+                                            <th data-field="LoginTime" data-halign="center" data-formatter="fot_LoginTime" data-align="center">登录日期</th>
+                                            <th data-field="Remark" data-halign="center" data-align="center">备注</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section js{
+    <script src="~/_R/js/content.js?v=1.0.0"></script>
+
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <!-- Peity -->
+    <script src="~/_R/js/demo/bootstrap-table-demo.js"></script>
+
+    <!-- layerDate plugin javascript -->
+    <script src="~/_R/js/plugins/layer/laydate/laydate.js"></script>
+}
+
+@section scripts{
+<script>
+    var tableInit = DFCommon.TableInit("#formSearch");
+    $(function () {
+        //1.初始化Table
+        tableInit.Init();
+
+        //2.外部js调用
+        laydate({
+            elem: '#txtS_Time', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+        laydate({
+            elem: '#txtE_Time', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+    });
+
+    //3.日期格式化
+    function fot_LoginTime(value, row, index) {
+        return "2016-5-12";
+    }
+
+    //4.刷新表格
+    function refresh() {
+        tableInit.refresh();
+    }
+</script>
+
+<script>
+        
+</script>
+}

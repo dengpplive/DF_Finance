@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewBag.NavName = "BillingManagementt";
+}
+@section css
+{
+    <link href="~/_R/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="~/_R/js/plugins/editable/bootstrap-editable.css" rel="stylesheet" />
+}
+@section js
+{
+    <!-- Bootstrap table -->
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="~/_R/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!-- editable -->
+    <script src="~/_R/js/plugins/editable/bootstrap-editable.js"></script>
+    <script src="~/_R/js/plugins/editable/bootstrap-table-editable.js"></script>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTableObj = DFCommon.TableInit("#formSearch");
+            oTableObj.Init({
+                editableSave: editableSave
+            });
+            //编辑单元格数据 1.编辑的字段名 2.修改后的最新行数据 3.该单元格修改之前的数据 4.单元格对象
+            function editableSave(field, row, oldValue, $el) {
+                if ($.trim(row[field]) != "")
+                    submits(row);
+            }
+
+            //新增数据click事件注册
+            $("#btn_add").click(function () {
+                $("#form2").initValue({ CompanyName: "", Id: 0 });
+                $('#myModal').modal({
+                    toggle: true
+                })
+            });
+            //删除数据click事件注册
+            $("#btn_delete").click(function () {
+                oTableObj.Delete("@Url.Action("Delete", "BillingManagementt")");
+            });
+
+            function submits(data) {
+                DFCommon.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("AddOrEdit", "BillingManagementt")",
+                    data: data,
+                    dataType: "json",
+                    success: function (data, res) {
+                        if (res.Code == 1)
+                            MsgBox.Success("保存成功", "", true);
+                        else {
+                            MsgBox.Error("错误", res);
+                        }
+                    }
+                });
+            }
+            $("#form2").initValidform(function () {
+                var postData = $("#form2").data("row");
+                postData = $("#form2").serializeObject(postData);
+                submits(postData);
+            });
+            //日期框
+            laydate({
+                elem: '#starttime',
+                event: 'focus'
+            });
+            laydate({
+                elem: '#endtime',
+                event: 'focus'
+            });
+        });
+
+        window.actionEvents = {
+            'click .edit': function (e, value, row, index) {
+                $("#form2").initValue(row);
+                $("#form2").data("row", row);
+            }
+        };
+        function fat_FilterTime(value, row, index) {
+            return value.indexOf("1900-01-01") != -1 ? '' : value;
+        }
+        function fat_oper(value, row, index) {
+            var html = '<a  data-toggle="modal" data-target="#myModal" class="edit btn btn-link " data-role="Edit">编辑</a>';
+            return html;
+        }
+    </script>
+}
+<div class="panel-body" style="padding:0px;margin:5px;">
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal" method="post" action="@Url.Action("GetBillingManagementtList", "BillingManagementt")" data-query="#btn_query" data-table="#tb_roles">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">公司名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="companyname">
+                    </div>
+
+                    <label class="control-label col-sm-1">添加人名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" name="addname">
+                    </div>
+                    <label class="control-label col-sm-1">添加日期</label>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <input name="starttime" id="starttime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-5">
+                                <input name="endtime" id="endtime" class="laydate-icon form-control layer-date">
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4"></div>
+                    <div class="col-sm-1">
+                        <input type="hidden" name="state" value="0" />
+                        <button type="button" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-primary" data-role="Add">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-warning" data-role="Delete">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+    <table id="tb_roles" class="table table-hover editable">
+        <thead>
+            <tr>
+                <th data-checkbox="true"></th>
+                <th data-field="CompanyName" data-halign="center" data-align="center" data-editable="true">开票公司名称</th>
+                <th data-field="AddName" data-halign="center" data-align="center">添加人</th>
+                <th data-field="UpdateName" data-halign="center" data-align="center">修改人</th>
+                <th data-field="AddTime" data-halign="center" data-align="center" data-formatter="fat_FilterTime">添加时间</th>
+                <th data-field="UpdateTime" data-halign="center" data-align="center" data-formatter="fat_FilterTime">修改时间</th>
+                @*<th data-formatter="fat_oper" data-events="actionEvents" data-halign="center" data-align="center">操作</th>*@
+            </tr>
+        </thead>
+    </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="form2" class="form-horizontal" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h5>开票方信息</h5>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">公司名称</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="CompanyName" ajaxurl="@Url.Action("ExistCompany", "BillingManagementt", new { Id=Model.Id})" datatype="*1-50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-md-10 text-center">
+                                <div>
+                                    <input type="hidden" name="Id" value="0" />
+                                    <button type="submit" class="btn btn-primary" id="btnsave" data-role="Add">保存</button>
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

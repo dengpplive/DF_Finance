@@ -1,0 +1,264 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="/_r/css/sui.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.css">-->
+    <link rel="stylesheet" href="/_r/css/main.css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        .img-response {
+            max-width: 100%;
+            display: block;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .title-banner {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+            .title-banner span {
+                background-color: #ffb700;
+                color: black;
+                display: inline-block;
+                height: 1.5rem;
+                line-height: 1.5rem;
+            }
+
+        .triangle-right {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 1.5rem 0 1.5rem 1.5rem;
+            border-color: transparent transparent transparent #007bff;
+        }
+
+        #btn_playVideo {
+            display: block;
+            position: relative;
+            bottom: 60vw;
+            left: 20%;
+            width: 50%;
+            float: left;
+            height: 30%;
+            height: 40vw;
+            width: 50vw;
+            opacity: 0;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        .mt1 {
+            margin-top: 1rem;
+        }
+
+        .mt-0-5 {
+            margin-top: 0.5rem;
+        }
+
+        .bg-color-yellow {
+            background-color: #FFB700;
+        }
+
+        .bg-color-ligthOrange {
+            background-color: #FEF2E5;
+        }
+
+        .color-orange {
+            color: #8e5315;
+        }
+
+        .color-black {
+            color: #3d4145;
+        }
+
+        .p-y-0-5 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <header class="bar bar-nav theme-dark">
+                <a class="button button-link button-nav pull-left" href="/demos/card" data-transition='slide-out'>
+                    <span class="icon icon-left color-white"></span>
+                </a>
+                <h1 class="title">中奖名单公布</h1>
+            </header>
+            <nav class="bar bar-tab">
+                <a class="tab-item active" href="/Customers/index">
+                    <span class="icon icon-home"></span>
+                    <span class="tab-label">首页</span>
+                </a>
+                <a class="tab-item" href="#">
+                    <img class="icon" src="/_r/images/icon/dollar.jpg">
+                    <span class="tab-label">我的贷款</span>
+                </a>
+                <a class="tab-item" href="#">
+                    <img class="icon" src="/_r/images/icon/rmb.jpg">
+                    <span class="tab-label">抽奖记录</span>
+                </a>
+                <a class="tab-item" href="/Customers/login">
+                    <span class="icon icon-me"></span>
+                    <span class="tab-label">个人中心</span>
+                </a>
+            </nav>
+
+            <div class="content bg-color-ligthOrange">
+                <!--头部视频播放--begin-->
+                <img src="/_r/images/bg/bg_home.jpg" class="img-response">
+                <video class="hidden" id="video"
+                       src="http://img.xuecheyi.com/Mokao/Videos/201602/29/k2pdddtcyqb.mp4"></video>
+                <button id="btn_playVideo" onclick="document.getElementById('video').play()"></button>
+                <!--头部视频播放--end-->
+                <!--中奖名单公布--begin-->
+                <div class="content-padded absolute ">
+                    <div class="" style="margin-left: 0;margin-right: -1px">
+                        <img class="img-response" src="/_r/images/home/banner1.jpg">
+                    </div>
+                    <div class="color-white"
+                         style="background-color:#f14400;height: 500px;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px ">
+                        <div class="row">
+                            <div class="col-33" style="padding: 0.5rem">
+                                <img src="/_r/images/home/cry.png" class="img-response">
+                            </div>
+                            <div class="col-66">
+                                <p class="mt1">很遗憾！本次活动您没中奖！<br>感谢您对奇瑞金融的支持！</p>
+                            </div>
+                        </div>
+                        <div class="content-padded ">
+                            <div class="row">
+                                <div class="col-75 " style="background-color: white;padding: 0.5rem;border-radius: 4px">
+                                    <input type="text"
+                                           style="border: none;width: 100%;height: 1.5rem;line-height: 1.5rem; color: black"
+                                           placeholder="输入手机号查询中奖结果">
+                                </div>
+                                <div class="col-5">
+                                    <span style="visibility: hidden">1</span>
+                                </div>
+                                <div class="col-20 bg-color-yellow"
+                                     style="height: 2.5rem;line-height: 2.5rem;text-align: center;border-radius: 4px">
+                                    搜索
+                                </div>
+                            </div>
+                            <div style="min-height: 30vh;border-radius: 4px" class="bg-color-ligthOrange mt-0-5">
+                                <div class="color-orange text-center p-y-0-5 row"
+                                     style="background-color: #E4D9CD;border-top-left-radius: 4px;border-top-right-radius: 4px;margin-left: 0">
+                                    <label class="col-20 ">
+                                        序号
+                                    </label>
+                                    <label class="col-20">
+                                        奖项
+                                    </label>
+                                    <label class="col-20">
+                                        姓名
+                                    </label>
+                                    <label class="col-40">
+                                        手机号码
+                                    </label>
+                                </div>
+                                <div class="text-center mt1" data-bind="foreach:">
+                                    <div class="bg-color-yellow color-orange"
+                                         style="border-radius: 30px;display: inline-block;padding: 0.4rem 1rem;text-indent: 0.5rem"
+                                         data-bind="text:">
+                                        特等奖（8名）
+                                    </div>
+
+                                    <div class="row mt1 color-orange text-center" style="margin-left:0" data-bind="foreach:currentPrize().winners">
+                                        <div class="col-20 ">
+                                            1.
+                                        </div>
+                                        <div class="col-20">
+                                            特等奖
+                                        </div>
+                                        <div class="col-20">
+                                            刘**
+                                        </div>
+                                        <div class="col-40">
+                                            13574000000
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--中奖名单公布--end-->
+                    <!--活动说明--end-->
+                    <div class="mt1" style="margin-left: 0;margin-right: -1px">
+                        <img class="img-response" src="/_r/images/home/banner2.jpg">
+                    </div>
+                    <div style="background-color:#f14400; padding-bottom: 0.2rem; border-bottom-left-radius: 4px;border-bottom-right-radius: 4px">
+                        <div style="height: 1rem"></div>
+                        <div style="border-radius: 4px;padding:0.5rem;" class="bg-color-ligthOrange mt-0-5 content-padded">
+                            <p>
+                                奇瑞金融五月钜惠大抽奖：凡在4月28日-5
+                                月31日期间，申请奇瑞金融贷款业务，并且
+                                通过审批流程的车主，均有机会参加钜惠大
+                                抽奖活动。
+                            </p>
+                            <p>
+                                特等奖：最新款苹果手机 IPHONE SE （8部）<br>
+                                一等奖：冰箱（10台）<br>
+                                二等奖：微波炉（20台）<br>
+                                三等奖：土豪金车载手机支架（200份）
+                            </p>
+                            <p>
+                                活动最终解释权归奇瑞金融所有 学车易提供技术支持
+                            </p>
+                        </div>
+                    </div>
+                    <!--活动说明--end-->
+
+                    <div class="mt1 text-center" style="background-color:#f14400; height: 3rem; line-height: 3rem;border-radius: 4px">
+                        <a class="color-white" href="#">点击查看&lt;活动详细页面&gt;</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+    <script>
+        $.config = {router: false}
+    </script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+    <script src="/_r/js/lib/knockout-3.4.0.js"></script>
+    <script>
+
+
+        var LoginViewModel = function () {
+            var self = this;
+            self.autoLogin = ko.observable(false);
+
+        }
+    </script>
+</body>
+</html>
+
